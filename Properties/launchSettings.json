@@ -1,0 +1,26 @@
+﻿{
+  //ESTE ARCHIVO FUNCIONA ÚNICAMENTE DE FORMA LOCAL. No se subirá cuando la app este en producción.
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:5283",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DB_PASSWORD": "{contraseña-postrgesSQL}" //Remplazar por contraseña real.
+      }
+    },
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "https://localhost:7295;http://localhost:5283",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DB_PASSWORD": "{contraseña-postrgesSQL}" //Remplazar por contraseña real.
+      }
+    }
+  }
+}

@@ -1,0 +1,468 @@
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\appsettings.Development.json
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\appsettings.json
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\KPIBackend.staticwebassets.endpoints.json
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\KPIBackend.exe
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\KPIBackend.deps.json
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\KPIBackend.runtimeconfig.json
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\KPIBackend.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\KPIBackend.pdb
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\BCrypt.Net-Next.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Humanizer.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.Build.Locator.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Microsoft.OpenApi.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Mono.TextTemplating.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Namotion.Reflection.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\NJsonSchema.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\NJsonSchema.Annotations.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\NJsonSchema.NewtonsoftJson.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\NJsonSchema.Yaml.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Npgsql.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\NSwag.Annotations.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\NSwag.AspNetCore.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\NSwag.Core.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\NSwag.Core.Yaml.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\NSwag.Generation.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\NSwag.Generation.AspNetCore.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\System.CodeDom.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\System.Composition.AttributedModel.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\System.Composition.Convention.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\System.Composition.Hosting.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\System.Composition.Runtime.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\System.Composition.TypedParts.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\YamlDotNet.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\KPIBackend.csproj.AssemblyReference.cache
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\KPIBackend.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\KPIBackend.AssemblyInfoInputs.cache
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\KPIBackend.AssemblyInfo.cs
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\KPIBackend.csproj.CoreCompileInputs.cache
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\KPIBackend.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\KPIBackend.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\rjimswa.dswa.cache.json
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\scopedcss\bundle\KPIBackend.styles.css
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\staticwebassets.build.json.cache
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\staticwebassets.development.json
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\KPIBackend.csproj.Up2Date
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\KPIBackend.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\refint\KPIBackend.dll
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\KPIBackend.pdb
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\KPIBackend.genruntimeconfig.cache
+C:\Users\burbu\Documents\ULSB\Servicio profesional\KPIBackend\obj\Debug\net9.0\ref\KPIBackend.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\appsettings.Development.json
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\appsettings.json
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\KPIBackend.staticwebassets.endpoints.json
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\KPIBackend.exe
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\KPIBackend.deps.json
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\KPIBackend.runtimeconfig.json
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\KPIBackend.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\KPIBackend.pdb
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\BCrypt.Net-Next.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Humanizer.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Build.Locator.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.InMemory.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.OpenApi.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Mono.TextTemplating.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Namotion.Reflection.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Newtonsoft.Json.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\NJsonSchema.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\NJsonSchema.Annotations.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\NJsonSchema.NewtonsoftJson.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\NJsonSchema.Yaml.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Npgsql.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\NSwag.Annotations.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\NSwag.AspNetCore.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\NSwag.Core.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\NSwag.Core.Yaml.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\NSwag.Generation.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\NSwag.Generation.AspNetCore.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\System.CodeDom.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\System.Composition.AttributedModel.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\System.Composition.Convention.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\System.Composition.Hosting.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\System.Composition.Runtime.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\System.Composition.TypedParts.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\System.Text.Json.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\YamlDotNet.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.csproj.AssemblyReference.cache
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\rpswa.dswa.cache.json
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.GeneratedMSBuildEditorConfig.editorconfig
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.AssemblyInfoInputs.cache
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.AssemblyInfo.cs
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.csproj.CoreCompileInputs.cache
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.MvcApplicationPartsAssemblyInfo.cs
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.MvcApplicationPartsAssemblyInfo.cache
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\rjimswa.dswa.cache.json
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\scopedcss\bundle\KPIBackend.styles.css
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\staticwebassets.build.json
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\staticwebassets.build.json.cache
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\staticwebassets.development.json
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.csproj.Up2Date
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.dll
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\refint\KPIBackend.dll
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.pdb
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.genruntimeconfig.cache
+D:\KPIBackend\KPIBackend\obj\Debug\net9.0\ref\KPIBackend.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\appsettings.Development.json
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\appsettings.json
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\KPIBackend.staticwebassets.endpoints.json
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\KPIBackend.exe
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\KPIBackend.deps.json
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\KPIBackend.runtimeconfig.json
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\KPIBackend.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\KPIBackend.pdb
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\BCrypt.Net-Next.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Humanizer.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Build.Locator.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Microsoft.OpenApi.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Mono.TextTemplating.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Namotion.Reflection.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\NJsonSchema.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\NJsonSchema.Annotations.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\NJsonSchema.NewtonsoftJson.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\NJsonSchema.Yaml.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Npgsql.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\NSwag.Annotations.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\NSwag.AspNetCore.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\NSwag.Core.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\NSwag.Core.Yaml.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\NSwag.Generation.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\NSwag.Generation.AspNetCore.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\System.CodeDom.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\System.Composition.AttributedModel.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\System.Composition.Convention.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\System.Composition.Hosting.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\System.Composition.Runtime.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\System.Composition.TypedParts.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\System.Text.Json.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\YamlDotNet.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.csproj.AssemblyReference.cache
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.AssemblyInfoInputs.cache
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.AssemblyInfo.cs
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.csproj.CoreCompileInputs.cache
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\rjimswa.dswa.cache.json
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\scopedcss\bundle\KPIBackend.styles.css
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\staticwebassets.build.json.cache
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\staticwebassets.development.json
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.csproj.Up2Date
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\refint\KPIBackend.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.pdb
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\KPIBackend.genruntimeconfig.cache
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\ref\KPIBackend.dll
+C:\Users\rogel\Downloads\todo\Indicadores_Salle_Conexión_Back_Front\KPIBackend\KPIBackend\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
