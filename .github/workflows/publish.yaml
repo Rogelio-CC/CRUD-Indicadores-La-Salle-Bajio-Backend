@@ -25,7 +25,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_REPO }}:latest
+          tags: ${{ secrets.DOCKERHUB_REPO }}:v1.0
 
   deploy-to-azure:
     needs: build-and-push
@@ -36,4 +36,4 @@ jobs:
         with:
           app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          images: ${{ secrets.DOCKERHUB_REPO }}:latest
+          images: ${{ secrets.DOCKERHUB_REPO }}:v1.0

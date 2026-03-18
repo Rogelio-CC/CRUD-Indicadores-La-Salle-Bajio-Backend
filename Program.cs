@@ -10,8 +10,8 @@ using Microsoft.OpenApi.Models;
 using Npgsql;
 using System.Text;
 
-
-DotNetEnv.Env.Load();
+//Lectura local del archivo .env (no es necesario en entorno de producción)
+// DotNetEnv.Env.Load();
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
