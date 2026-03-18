@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  web:
+    build:
+      context: KPIBackend .
+      dockerfile: Dockerfile
+    image: kpibackend:latest
+    container_name: indicadores_Salle_Logica
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"  # mapa local 8080 -> contenedor 8080
+    restart: always
+    volumes:
+      - /root/.aspnet/DataProtection-Keys
