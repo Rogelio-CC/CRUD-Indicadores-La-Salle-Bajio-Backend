@@ -1,5 +1,4 @@
 using KPIBackend.Application.DTOs.Actividad;
-using KPIBackend.Application.DTOs.ListaCombos;
 using KPIBackend.Data;
 using KPIBackend.Models;
 using KPIBackend.Repositories;
@@ -10,6 +9,14 @@ using System.Security.Claims;
 
 namespace KPIBackend.Controllers
 {
+    /// <summary>
+    /// Controlador encargado de gestionar las operaciones relacionadas
+    /// con las actividades del sistema.
+    /// </summary>
+    /// <remarks>
+    /// Permite consultar, crear y actualizar actividades asociadas
+    /// a estrategias, periodos escolares y carreras.
+    /// </remarks>
     [Authorize]
     [ApiController]
     [Route("api/actividades")]
@@ -17,11 +24,20 @@ namespace KPIBackend.Controllers
     {
         private readonly AppDbContext _context;
 
+        /// <summary>
+        /// Constructor del controlador de actividad.
+        /// </summary>
+        /// <param name="repository">Repositorio de la actividad.</param>
+        /// <param name="context">Configuración para uso de la base de datos.</param>
         public ActividadesController(IActividadRepository repository, AppDbContext context) : base(repository) {
 
             _context = context;
         }
 
+        /// <summary>
+        /// Obtiene todas las actividades en formato DTO.
+        /// </summary>
+        /// <returns>Lista de actividades con información relacionada.</returns>
         [HttpGet("dto")]
         public async Task<ActionResult<List<ActividadDto>>> GetAllDto()
         {
@@ -52,6 +68,11 @@ namespace KPIBackend.Controllers
             return Ok(data);
         }
 
+        /// <summary>
+        /// Obtiene una actividad específica en formato DTO.
+        /// </summary>
+        /// <param name="id">Identificador de la actividad.</param>
+        /// <returns>Actividad encontrada.</returns>
         [HttpGet("dto/{id}")]
         public async Task<IActionResult> GetDtoById(Guid id)
         {
@@ -86,11 +107,15 @@ namespace KPIBackend.Controllers
             return Ok(dto);
         }
 
-
+        /// <summary>
+        /// Crea una nueva actividad.
+        /// </summary>
+        /// <param name="dto">Datos necesarios para crear la actividad.</param>
+        /// <returns>Resultado de la operación.</returns>
         [HttpPost("dto")]
         public async Task<IActionResult> Create(ActividadCreateUpdateDto dto)
         {
-            // Validaciones explícitas (muy importante)
+            // Validaciones explícitas para errores de estado HTTP.
             if (string.IsNullOrWhiteSpace(dto.DescripcionActividad))
                 return BadRequest("La descripción de la actividad es obligatoria");
 
@@ -152,12 +177,18 @@ namespace KPIBackend.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Actualiza una actividad existente.
+        /// </summary>
+        /// <param name="id">Identificador de la actividad.</param>
+        /// <param name="dto">Datos actualizados.</param>
+        /// <returns>Resultado de la actualización.</returns>
         [HttpPut("dto/{id}")]
         public async Task<IActionResult> Update(Guid id, ActividadCreateUpdateDto dto)
         {
             var actividad = await _context.actividades.FindAsync(id);
-            
-            // Validaciones explícitas (muy importante)
+
+            // Validaciones explícitas para errores de estado HTTP.
             if (actividad == null)
                 return NotFound("La actividad no existe");
 
@@ -209,7 +240,6 @@ namespace KPIBackend.Controllers
             if (await _context.actividades.AnyAsync(e => e.DescripcionActividad.ToLower() == dto.DescripcionActividad.ToLower() && e.Id != id))
                 return Conflict("Ya existe otra actividad con esa descripción");
 
-            // Actualización
             actividad.DescripcionActividad = dto.DescripcionActividad;
             actividad.CantidadLograda = dto.CantidadLograda;
             actividad.FechaCumplimiento = dto.FechaCumplimiento?.ToUniversalTime();

@@ -1,15 +1,18 @@
+# Versión del formato de Docker Compose (compatible con motores modernos).
 version: "3.8"
 services:
-  web:
-    build:
-      context: KPIBackend .
-      dockerfile: Dockerfile
-    image: kpibackend:latest
-    container_name: indicadores_Salle_Logica
+  web: # Nombre del servicio dentro de la red de Docker. No solo configura variables, es la definición del servidor web.
+    build: # Instrucciones para construir la imagen desde el código fuente.
+      context: KPIBackend . # El "contexto de construcción". Indica que Docker leerá los archivos de la raíz del proyecto.
+      dockerfile: Dockerfile # Nombre del archivo con las instrucciones de compilación (capas de la imagen).
+    image: kpibackend:latest # Nombre que se le asignará a la imagen una vez construida o la que se descargará de Docker Hub.
+    container_name: indicadores_Salle_Logica # Nombre fijo para el contenedor al estar en ejecución.
     env_file:
-      - .env
+      - .env # Carga variables de entorno.
     ports:
-      - "8080:8080"  # mapa local 8080 -> contenedor 8080
-    restart: always
+      - "8080:8080"  # Mapeo de puertos: [Puerto en tu PC] : [Puerto dentro del contenedor].
+    restart: always # Política de reinicio: Si el contenedor falla o el servidor se reinicia, Docker lo levantará automáticamente.
     volumes:
+    # PERSISTENCIA: Se usa para guardar las claves de protección de datos de ASP.NET. 
+    # Esto evita que se cierren las sesiones de usuario cada vez que reinicias el contenedor.
       - /root/.aspnet/DataProtection-Keys

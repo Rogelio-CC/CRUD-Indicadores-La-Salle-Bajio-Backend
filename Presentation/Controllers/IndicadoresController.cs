@@ -1,4 +1,3 @@
-using KPIBackend.Application.DTOs.Directriz;
 using KPIBackend.Application.DTOs.Indicador;
 using KPIBackend.Application.DTOs.ListaCombos;
 using KPIBackend.Data;
@@ -11,18 +10,38 @@ using System.Security.Claims;
 
 namespace KPIBackend.Controllers
 {
+    /// <summary>
+    /// Controlador encargado de gestionar los indicadores del sistema.
+    /// </summary>
+    /// <remarks>
+    /// Los indicadores representan métricas de seguimiento asociadas
+    /// a directrices, grupos de indicadores, periodos escolares y carreras.
+    /// </remarks>
     [Authorize]
-    [ApiController] 
+    [ApiController]
     [Route("api/indicadores")]
     public class IndicadoresController : BaseController<Indicador>
     {
         private readonly AppDbContext _context;
 
-        public IndicadoresController(IIndicadorRepository repository, AppDbContext context) : base(repository) {
+        /// <summary>
+        /// Constructor del controlador de actividad.
+        /// </summary>
+        /// <param name="repository">Repositorio del indicador.</param>
+        /// <param name="context">Configuración para uso de la base de datos.</param>
+        public IndicadoresController(IIndicadorRepository repository, AppDbContext context) : base(repository)
+        {
 
             _context = context;
         }
 
+        /// <summary>
+        /// Obtiene todos los indicadores del sistema en formato DTO.
+        /// </summary>
+        /// <returns>
+        /// Lista de indicadores con información relacionada
+        /// como directriz, grupo, creador, periodo y carrera.
+        /// </returns>
         [HttpGet("dto")]
         public async Task<ActionResult<List<IndicadorDto>>> GetAllDto()
         {
@@ -63,6 +82,15 @@ namespace KPIBackend.Controllers
             return Ok(data);
         }
 
+        /// <summary>
+        /// Obtiene un indicador específico por su identificador.
+        /// </summary>
+        /// <param name="id">
+        /// Identificador único del indicador.
+        /// </param>
+        /// <returns>
+        /// Indicador encontrado con información relacionada.
+        /// </returns>
         [HttpGet("dto/{id}")]
         public async Task<IActionResult> GetDtoById(Guid id)
         {
@@ -106,20 +134,32 @@ namespace KPIBackend.Controllers
             return Ok(dto);
         }
 
-
+        /// <summary>
+        /// Crea un nuevo indicador en el sistema.
+        /// </summary>
+        /// <param name="dto">
+        /// Datos necesarios para registrar el indicador.
+        /// </param>
+        /// <returns>
+        /// Indicador creado.
+        /// </returns>
+        /// <remarks>
+        /// Se realizan validaciones sobre la descripción,
+        /// frecuencia de control, fechas y relaciones con otras entidades.
+        /// </remarks>
         [HttpPost("dto")]
         public async Task<IActionResult> Create(IndicadorCreateUpdateDto dto)
         {
-            // Validaciones explícitas (muy importante)
+            // Validaciones explícitas para errores de estado HTTP.
             if (string.IsNullOrWhiteSpace(dto.DescripcionIndicador))
                 return BadRequest("La descripción del indicador es obligatoria");
 
-            if(dto.DescripcionIndicador.Length <= 3 || dto.DescripcionIndicador.Length > 50)
+            if (dto.DescripcionIndicador.Length <= 3 || dto.DescripcionIndicador.Length > 50)
                 return BadRequest("La descripción del indicador debe tener al menos un carácter y no puede exceder los 50 caracteres");
 
             if (string.IsNullOrWhiteSpace(dto.FrecuenciaControl))
                 return BadRequest("La frecuencia de control del indicador es obligatoria");
-            
+
             if (dto.FrecuenciaControl != "Anual" && dto.FrecuenciaControl != "Mensual" && dto.FrecuenciaControl != "Semanal" && dto.FrecuenciaControl != "Diario")
                 return BadRequest("El tipo de frecuencia debe ser 'Anual', 'Mensual', 'Semanal' o 'Diario'");
 
@@ -202,16 +242,31 @@ namespace KPIBackend.Controllers
                 ResponsableAccionCorrectivaId = dto.ResponsableAccionCorrectivaId,
                 PeriodoId = indicador.PeriodoId,
                 CarreraId = indicador.CarreraId,
-               
+
             });
         }
 
+        /// <summary>
+        /// Actualiza un indicador existente.
+        /// </summary>
+        /// <param name="id">
+        /// Identificador del indicador.
+        /// </param>
+        /// <param name="dto">
+        /// Datos actualizados del indicador.
+        /// </param>
+        /// <returns>
+        /// Resultado de la operación de actualización.
+        /// </returns>
+        /// <remarks>
+        /// Solo el creador del indicador o un administrador puede modificarlo.
+        /// </remarks>
         [HttpPut("dto/{id}")]
         public async Task<IActionResult> Update(Guid id, IndicadorCreateUpdateDto dto)
         {
             var indicador = await _context.indicadores.FindAsync(id);
 
-            // Validaciones explícitas (muy importante)
+            // Validaciones explícitas para errores de estado HTTP.
             if (indicador == null)
                 return NotFound("El indicador no existe");
 
@@ -224,12 +279,12 @@ namespace KPIBackend.Controllers
             if (string.IsNullOrWhiteSpace(dto.DescripcionIndicador))
                 return BadRequest("La descripción del indicador es obligatoria");
 
-            if(dto.DescripcionIndicador.Length <= 3 || dto.DescripcionIndicador.Length > 50)
+            if (dto.DescripcionIndicador.Length <= 3 || dto.DescripcionIndicador.Length > 50)
                 return BadRequest("La descripción del indicador debe tener al menos un carácter y no puede exceder los 50 caracteres");
 
             if (string.IsNullOrWhiteSpace(dto.FrecuenciaControl))
                 return BadRequest("La frecuencia de control del indicador es obligatoria");
-            
+
             if (dto.FrecuenciaControl != "Anual" && dto.FrecuenciaControl != "Mensual" && dto.FrecuenciaControl != "Semanal" && dto.FrecuenciaControl != "Diario")
                 return BadRequest("El tipo de frecuencia debe ser 'Anual', 'Mensual', 'Semanal' o 'Diario'");
 
@@ -275,7 +330,6 @@ namespace KPIBackend.Controllers
             if (await _context.indicadores.AnyAsync(e => e.DescripcionIndicador.ToLower() == dto.DescripcionIndicador.ToLower() && e.Id != id))
                 return Conflict("Ya existe otro indicador con esa descripción");
 
-            // Actualización
             indicador.DescripcionIndicador = dto.DescripcionIndicador;
             indicador.Estandar = dto.Estandar;
             indicador.FrecuenciaControl = dto.FrecuenciaControl;
@@ -294,6 +348,12 @@ namespace KPIBackend.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Obtiene una lista simplificada de indicadores.
+        /// </summary>
+        /// <returns>
+        /// Lista de indicadores con identificador y descripción.
+        /// </returns>
         [HttpGet("combo")]
         public async Task<IActionResult> GetCombo()
         {

@@ -1,5 +1,4 @@
 using KPIBackend.Application.DTOs.Comentario;
-using KPIBackend.Application.DTOs.ListaCombos;
 using KPIBackend.Data;
 using KPIBackend.Models;
 using KPIBackend.Repositories;
@@ -10,17 +9,31 @@ using System.Security.Claims;
 
 namespace KPIBackend.Controllers
 {
+    /// <summary>
+    /// Controlador encargado de gestionar los comentarios del sistema.
+    /// </summary>
     [Authorize]
     [ApiController]
     [Route("api/comentarios")]
     public class ComentariosController : BaseController<Comentario>
     {
         private readonly AppDbContext _context;
-        public ComentariosController(IComentarioRepository repository, AppDbContext context) : base(repository) { 
-        
+
+        /// <summary>
+        /// Constructor del controlador de actividad.
+        /// </summary>
+        /// <param name="repository">Repositorio del comentario.</param>
+        /// <param name="context">Configuración para uso de la base de datos.</param>
+        public ComentariosController(IComentarioRepository repository, AppDbContext context) : base(repository)
+        {
+
             _context = context;
         }
 
+        /// <summary>
+        /// Obtiene todos los comentarios con información del usuario creador.
+        /// </summary>
+        /// <returns>Lista de comentarios.</returns>
         [HttpGet("dto")]
         public async Task<ActionResult<List<ComentarioDto>>> GetAllDto()
         {
@@ -41,6 +54,11 @@ namespace KPIBackend.Controllers
             return Ok(data);
         }
 
+        /// <summary>
+        /// Obtiene un comentario específico por su identificador.
+        /// </summary>
+        /// <param name="id">Identificador del comentario.</param>
+        /// <returns>Comentario encontrado.</returns>
         [HttpGet("dto/{id}")]
         public async Task<IActionResult> GetDtoById(Guid id)
         {
@@ -67,15 +85,19 @@ namespace KPIBackend.Controllers
             return Ok(dto);
         }
 
-
+        /// <summary>
+        /// Crea un nuevo comentario en el sistema.
+        /// </summary>
+        /// <param name="dto">Datos del comentario.</param>
+        /// <returns>Resultado de la operación.</returns>
         [HttpPost("dto")]
         public async Task<IActionResult> Create(ComentarioCreateUpdateDto dto)
         {
-            // Validaciones explícitas (muy importante)
+            // Validaciones explícitas para errores de estado HTTP.
             if (dto == null)
                 return BadRequest("Los datos del comentario no pueden estar vacíos");
 
-            if(dto.Contenido.Length <= 3 || dto.Contenido.Length > 200)
+            if (dto.Contenido.Length <= 3 || dto.Contenido.Length > 200)
                 return BadRequest("El contenido del comentario debe tener al menos un carácter y no puede exceder los 200 caracteres");
 
             if (dto.TipoObjetivo != "Directriz" && dto.TipoObjetivo != "Actividad" && dto.TipoObjetivo != "Estrategia")
@@ -92,7 +114,7 @@ namespace KPIBackend.Controllers
                 Contenido = dto.Contenido,
                 TipoObjetivo = dto.TipoObjetivo,
                 CreadorId = dto.CreadorId,
-                
+
             };
 
             _context.comentarios.Add(comentario);
@@ -101,12 +123,19 @@ namespace KPIBackend.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Actualiza un comentario existente.
+        /// Solo el creador o un administrador puede modificarlo.
+        /// </summary>
+        /// <param name="id">Identificador del comentario.</param>
+        /// <param name="dto">Datos actualizados.</param>
+        /// <returns>Resultado de la operación.</returns>
         [HttpPut("dto/{id}")]
         public async Task<IActionResult> Update(Guid id, ComentarioCreateUpdateDto dto)
         {
             var comentario = await _context.comentarios.FindAsync(id);
 
-            // Validaciones explícitas (muy importante)
+            // Validaciones explícitas para errores de estado HTTP.
             if (comentario == null)
                 return NotFound("El comentario no existe");
 
@@ -119,7 +148,7 @@ namespace KPIBackend.Controllers
             if (dto == null)
                 return BadRequest("Los datos del comentario no pueden estar vacíos");
 
-             if(dto.Contenido.Length <= 3 || dto.Contenido.Length > 200)
+            if (dto.Contenido.Length <= 3 || dto.Contenido.Length > 200)
                 return BadRequest("El contenido del comentario debe tener al menos un carácter y no puede exceder los 200 caracteres");
 
             if (dto.TipoObjetivo != "Directriz" && dto.TipoObjetivo != "Actividad" && dto.TipoObjetivo != "Estrategia")
@@ -127,13 +156,13 @@ namespace KPIBackend.Controllers
 
             if (!await _context.usuarios.AnyAsync(f => f.Id == dto.CreadorId))
                 return BadRequest("El ID del usuario especificado no existe");
-            
+
             if (await _context.comentarios.AnyAsync(d => d.Contenido.ToLower() == dto.Contenido.ToLower() && d.Id != id))
                 return Conflict("Ya existe un comentario con ese contenido");
 
             // Actualización
-            comentario.Contenido  = dto.Contenido;
-            comentario.TipoObjetivo  = dto.TipoObjetivo;
+            comentario.Contenido = dto.Contenido;
+            comentario.TipoObjetivo = dto.TipoObjetivo;
             comentario.CreadorId = dto.CreadorId;
 
             await _context.SaveChangesAsync();

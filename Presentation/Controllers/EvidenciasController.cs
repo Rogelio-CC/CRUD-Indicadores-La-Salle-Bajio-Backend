@@ -1,7 +1,5 @@
 ﻿using KPIBackend.Application.DTOs.Evidencia;
-using KPIBackend.Controllers;
 using KPIBackend.Data;
-using KPIBackend.Infrastructure.Repositories;
 using KPIBackend.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +8,13 @@ using Microsoft.AspNetCore.StaticFiles;
 
 namespace KPIBackend.Presentation.Controllers
 {
+    /// <summary>
+    /// Controlador encargado de gestionar las evidencias asociadas a un indicador.
+    /// </summary>
+    /// <remarks>
+    /// Permite subir, consultar, descargar y eliminar archivos de evidencia
+    /// asociados a indicadores específicos.
+    /// </remarks>
     [Authorize]
     [ApiController]
     [Route("api/indicadores/{indicadorId}/evidencias")]
@@ -18,35 +23,62 @@ namespace KPIBackend.Presentation.Controllers
     {
         private readonly AppDbContext _context;
 
+        /// <summary>
+        /// Constructor del controlador de actividad.
+        /// </summary>
+        /// <param name="context">Configuración para uso de la base de datos.</param>
         public EvidenciasController(AppDbContext context)
         {
 
             _context = context;
         }
 
-        [HttpGet] 
-        public async Task<ActionResult<List<EvidenciaDto>>> GetAllDto(Guid indicadorId) 
-        { 
+        /// <summary>
+        /// Obtiene todas las evidencias asociadas a un indicador.
+        /// </summary>
+        /// <param name="indicadorId">
+        /// Identificador del indicador al que pertenecen las evidencias.
+        /// </param>
+        /// <returns>
+        /// Lista de evidencias asociadas al indicador.
+        /// </returns>
+        [HttpGet]
+        public async Task<ActionResult<List<EvidenciaDto>>> GetAllDto(Guid indicadorId)
+        {
             var data = await _context.evidencias
                 .Include(d => d.Indicador)
                 .Where(e => e.IndicadorId == indicadorId)
-                .Select(d => new EvidenciaDto 
-                { 
-                    Id = d.Id, 
-                    NombreArchivo = d.NombreArchivo, 
-                    Tipo = d.Tipo, 
-                    Contenido = d.Contenido, 
-                    IndicadorId = d.IndicadorId, 
-                    Indicador = d.Indicador.DescripcionIndicador 
-                }).ToListAsync(); 
+                .Select(d => new EvidenciaDto
+                {
+                    Id = d.Id,
+                    NombreArchivo = d.NombreArchivo,
+                    Tipo = d.Tipo,
+                    Contenido = d.Contenido,
+                    IndicadorId = d.IndicadorId,
+                    Indicador = d.Indicador.DescripcionIndicador
+                }).ToListAsync();
 
-                if (!await _context.indicadores.AnyAsync(i => i.Id == indicadorId))
-                    return BadRequest("El ID del indicador especificado no existe");
-            
-            return Ok(data); 
+            if (!await _context.indicadores.AnyAsync(i => i.Id == indicadorId))
+                return BadRequest("El ID del indicador especificado no existe");
+
+            return Ok(data);
         }
 
-
+        /// <summary>
+        /// Sube una nueva evidencia para un indicador.
+        /// </summary>
+        /// <param name="indicadorId">
+        /// Identificador del indicador al que se asociará la evidencia.
+        /// </param>
+        /// <param name="request">
+        /// Archivo enviado desde el cliente.
+        /// </param>
+        /// <returns>
+        /// Resultado de la operación de carga.
+        /// </returns>
+        /// <remarks>
+        /// El archivo se almacena en la base de datos como contenido binario.
+        /// </remarks>
         [HttpPost]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> Upload([FromRoute] Guid indicadorId, [FromForm] UploadEvidenciaRequest request)
@@ -56,8 +88,8 @@ namespace KPIBackend.Presentation.Controllers
             if (file == null || file.Length == 0)
                 return BadRequest("Archivo inválido");
 
-/*             if (file.Length > 10 * 1024 * 1024) // 10 MB
-                return BadRequest("El archivo excede el tamaño máximo permitido de 10 MB"); */
+            if (file.Length > 10 * 1024 * 1024) // 10 MB
+                return BadRequest("El archivo excede el tamaño máximo permitido de 10 MB");
 
             if (!await _context.indicadores.AnyAsync(i => i.Id == indicadorId))
                 return BadRequest("El ID del indicador especificado no existe");
@@ -90,6 +122,18 @@ namespace KPIBackend.Presentation.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Elimina una evidencia específica de un indicador.
+        /// </summary>
+        /// <param name="indicadorId">
+        /// Identificador del indicador al que pertenece la evidencia.
+        /// </param>
+        /// <param name="evidenciaId">
+        /// Identificador de la evidencia a eliminar.
+        /// </param>
+        /// <returns>
+        /// Resultado de la operación de eliminación.
+        /// </returns>
         [HttpDelete("{evidenciaId}")]
         public async Task<IActionResult> Delete(Guid indicadorId, Guid evidenciaId)
         {
@@ -108,6 +152,18 @@ namespace KPIBackend.Presentation.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Descarga una evidencia específica asociada a un indicador.
+        /// </summary>
+        /// <param name="indicadorId">
+        /// Identificador del indicador.
+        /// </param>
+        /// <param name="evidenciaId">
+        /// Identificador de la evidencia.
+        /// </param>
+        /// <returns>
+        /// Archivo almacenado como evidencia.
+        /// </returns>
         [HttpGet("{evidenciaId}/download")]
         public async Task<IActionResult> Download(Guid indicadorId, Guid evidenciaId)
         {
@@ -126,6 +182,16 @@ namespace KPIBackend.Presentation.Controllers
             );
         }
 
+        /// <summary>
+        /// Recalcula el estado del indicador después de agregar o eliminar evidencias.
+        /// </summary>
+        /// <param name="indicadorId">
+        /// Identificador del indicador a recalcular.
+        /// </param>
+        /// <remarks>
+        /// Calcula el porcentaje de cumplimiento del indicador en función
+        /// del número de evidencias registradas.
+        /// </remarks>
         private async Task RecalcularIndicador(Guid indicadorId)
         {
             var indicador = await _context.indicadores

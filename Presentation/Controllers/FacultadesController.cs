@@ -4,22 +4,41 @@ using KPIBackend.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PruebaAutenticador2.Shared.DTOS.ListaCombos;
+using KPIBackend.Application.DTOs.ListaCombos;
 
 namespace KPIBackend.Controllers
 {
+    /// <summary>
+    /// Controlador encargado de gestionar las facultades del sistema.
+    /// </summary>
+    /// <remarks>
+    /// Permite realizar operaciones CRUD sobre las facultades
+    /// y obtener datos simplificados para listas desplegables.
+    /// </remarks>
     [Authorize]
-    [ApiController] 
+    [ApiController]
     [Route("api/facultades")]
     public class FacultadesController : BaseController<Facultad>
     {
         private readonly AppDbContext _context;
 
-        public FacultadesController(IFacultadRepository repository, AppDbContext context) : base(repository) {
+        /// <summary>
+        /// Constructor del controlador de actividad.
+        /// </summary>
+        /// <param name="repository">Repositorio de la actividad.</param>
+        /// <param name="context">Configuración para uso de la base de datos.</param>
+        public FacultadesController(IFacultadRepository repository, AppDbContext context) : base(repository)
+        {
 
             _context = context;
         }
 
+        /// <summary>
+        /// Obtiene una lista simplificada de facultades para utilizar en combos del frontend.
+        /// </summary>
+        /// <returns>
+        /// Lista de facultades con identificador y nombre.
+        /// </returns>
         [HttpGet("combo")]
         public async Task<IActionResult> GetCombo()
         {

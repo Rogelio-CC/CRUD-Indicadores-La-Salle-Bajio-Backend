@@ -6,11 +6,17 @@ using KPIBackend.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PruebaAutenticador2.Shared.DTOS.ListaCombos;
 using System.Security.Claims;
 
 namespace KPIBackend.Controllers
 {
+    /// <summary>
+    /// Controlador encargado de gestionar las directrices del sistema.
+    /// Permite crear, consultar y actualizar directrices académicas.
+    /// </summary>
+    /// <remarks>
+    /// Las directrices están asociadas a una facultad, un periodo escolar y un usuario creador.
+    /// </remarks>
     [Authorize]
     [ApiController]
     [Route("api/directrices")]
@@ -18,11 +24,22 @@ namespace KPIBackend.Controllers
     {
         private readonly AppDbContext _context;
 
+        /// <summary>
+        /// Constructor del controlador de actividad.
+        /// </summary>
+        /// <param name="repository">Repositorio de la directriz.</param>
+        /// <param name="context">Configuración para uso de la base de datos.</param>
         public DirectricesController(IDirectrizRepository repository, AppDbContext context) : base(repository) {
 
             _context = context;
         }
 
+        /// <summary>
+        /// Obtiene todas las directrices del sistema en formato DTO.
+        /// </summary>
+        /// <returns>
+        /// Lista de directrices con información de facultad, creador y periodo escolar.
+        /// </returns>
         [HttpGet("dto")]
         public async Task<ActionResult<List<DirectrizDto>>> GetAllDto()
         {
@@ -46,6 +63,11 @@ namespace KPIBackend.Controllers
             return Ok(data);
         }
 
+        /// <summary>
+        /// Obtiene una directriz específica por su identificador.
+        /// </summary>
+        /// <param name="id">Identificador único de la directriz.</param>
+        /// <returns>Directriz encontrada con información relacionada.</returns>
         [HttpGet("dto/{id}")]
         public async Task<IActionResult> GetDtoById(Guid id)
         {
@@ -74,11 +96,19 @@ namespace KPIBackend.Controllers
             return Ok(dto);
         }
 
-
+        /// <summary>
+        /// Crea una nueva directriz en el sistema.
+        /// </summary>
+        /// <param name="dto">
+        /// Objeto que contiene la descripción, facultad, creador y periodo escolar de la directriz.
+        /// </param>
+        /// <returns>
+        /// Resultado de la operación de creación.
+        /// </returns>
         [HttpPost("dto")]
         public async Task<IActionResult> Create(DirectrizCreateUpdateDto dto)
         {
-            // Validaciones explícitas (muy importante)
+            // Validaciones explícitas para errores de estado HTTP.
             if (dto == null)
                 return BadRequest("Los datos de la directriz no pueden estar vacíos");
 
@@ -111,12 +141,23 @@ namespace KPIBackend.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Actualiza una directriz existente.
+        /// </summary>
+        /// <param name="id">Identificador de la directriz.</param>
+        /// <param name="dto">Datos actualizados de la directriz.</param>
+        /// <returns>
+        /// Resultado de la operación de actualización.
+        /// </returns>
+        /// <remarks>
+        /// Solo el creador de la directriz o un administrador pueden modificarla.
+        /// </remarks>
         [HttpPut("dto/{id}")]
         public async Task<IActionResult> Update(Guid id, DirectrizCreateUpdateDto dto)
         {
             var directriz = await _context.directrices.FindAsync(id);
 
-            // Validaciones explícitas (muy importante)
+            // Validaciones explícitas para errores de estado HTTP.
             if (directriz == null)
                 return NotFound("La directriz no existe");
 
@@ -144,7 +185,6 @@ namespace KPIBackend.Controllers
             if (await _context.directrices.AnyAsync(d => d.Descripcion.ToLower() == dto.Descripcion.ToLower() && d.Id != id))
                 return Conflict("Ya existe otra directriz con esa descripción");
 
-            // Actualización
             directriz.Descripcion = dto.Descripcion;
             directriz.FacultadId = dto.FacultadId;
             directriz.CreadorId = dto.CreadorId;
@@ -154,6 +194,12 @@ namespace KPIBackend.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Obtiene una lista simplificada de directrices para llenar combos en el frontend.
+        /// </summary>
+        /// <returns>
+        /// Lista con identificador y nombre de la directriz.
+        /// </returns>
         [HttpGet("combo")]
         public async Task<IActionResult> GetCombo()
         {

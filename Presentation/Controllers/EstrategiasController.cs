@@ -10,18 +10,36 @@ using System.Security.Claims;
 
 namespace KPIBackend.Controllers
 {
+    /// <summary>
+    /// Controlador encargado de gestionar las estrategias del sistema.
+    /// </summary>
+    /// <remarks>
+    /// Las estrategias están asociadas a un indicador, periodo escolar, carrera y usuario creador.
+    /// </remarks>
     [Authorize]
-    [ApiController] 
+    [ApiController]
     [Route("api/estrategias")]
     public class EstrategiasController : BaseController<Estrategia>
     {
         private readonly AppDbContext _context;
 
-        public EstrategiasController(IEstrategiaRepository repository, AppDbContext context) : base(repository) {
-        
+        /// <summary>
+        /// Constructor del controlador de actividad.
+        /// </summary>
+        /// <param name="repository">Repositorio de la estrategia.</param>
+        /// <param name="context">Configuración para uso de la base de datos.</param>
+        public EstrategiasController(IEstrategiaRepository repository, AppDbContext context) : base(repository)
+        {
+
             _context = context;
         }
 
+        /// <summary>
+        /// Obtiene todas las estrategias registradas en el sistema.
+        /// </summary>
+        /// <returns>
+        /// Lista de estrategias con información de indicador, creador, periodo y carrera.
+        /// </returns>
         [HttpGet("dto")]
         public async Task<ActionResult<List<EstrategiaDto>>> GetAllDto()
         {
@@ -49,6 +67,13 @@ namespace KPIBackend.Controllers
             return Ok(data);
         }
 
+        /// <summary>
+        /// Obtiene una estrategia específica por su identificador.
+        /// </summary>
+        /// <param name="id">Identificador único de la estrategia.</param>
+        /// <returns>
+        /// Estrategia encontrada con información relacionada.
+        /// </returns>
         [HttpGet("dto/{id}")]
         public async Task<IActionResult> GetDtoById(Guid id)
         {
@@ -80,15 +105,23 @@ namespace KPIBackend.Controllers
             return Ok(dto);
         }
 
-
+        /// <summary>
+        /// Crea una nueva estrategia en el sistema.
+        /// </summary>
+        /// <param name="dto">
+        /// Datos necesarios para registrar una estrategia.
+        /// </param>
+        /// <returns>
+        /// Resultado de la operación.
+        /// </returns>
         [HttpPost("dto")]
         public async Task<IActionResult> Create(EstrategiaCreateUpdateDto dto)
         {
             // Validaciones explícitas (muy importante)
-           if (dto == null)
+            if (dto == null)
                 return BadRequest("Los datos de la estrategia no pueden estar vacíos");
 
-            if(dto.DescripcionEstrategia.Length <= 3 || dto.DescripcionEstrategia.Length > 50)
+            if (dto.DescripcionEstrategia.Length <= 3 || dto.DescripcionEstrategia.Length > 50)
                 return BadRequest("La descripción de la estrategia debe tener al menos un carácter y no puede exceder los 50 caracteres");
 
             if (!await _context.indicadores.AnyAsync(f => f.Id == dto.IndicadorId))
@@ -121,6 +154,17 @@ namespace KPIBackend.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Actualiza una estrategia existente.
+        /// </summary>
+        /// <param name="id">Identificador de la estrategia.</param>
+        /// <param name="dto">Datos actualizados de la estrategia.</param>
+        /// <returns>
+        /// Resultado de la operación de actualización.
+        /// </returns>
+        /// <remarks>
+        /// Solo el creador de la estrategia o un administrador pueden modificarla.
+        /// </remarks>
         [HttpPut("dto/{id}")]
         public async Task<IActionResult> Update(Guid id, EstrategiaCreateUpdateDto dto)
         {
@@ -139,7 +183,7 @@ namespace KPIBackend.Controllers
             if (dto == null)
                 return BadRequest("Los datos de la estrategia no pueden estar vacíos");
 
-            if(dto.DescripcionEstrategia.Length <= 3 || dto.DescripcionEstrategia.Length > 50)
+            if (dto.DescripcionEstrategia.Length <= 3 || dto.DescripcionEstrategia.Length > 50)
                 return BadRequest("La descripción de la estrategia debe tener al menos un carácter y no puede exceder los 50 caracteres");
 
             if (!await _context.indicadores.AnyAsync(f => f.Id == dto.IndicadorId))
@@ -168,6 +212,12 @@ namespace KPIBackend.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Obtiene una lista simplificada de estrategias para usar en listas desplegables del frontend.
+        /// </summary>
+        /// <returns>
+        /// Lista de estrategias con identificador y nombre.
+        /// </returns>
         [HttpGet("combo")]
         public async Task<IActionResult> GetCombo()
         {

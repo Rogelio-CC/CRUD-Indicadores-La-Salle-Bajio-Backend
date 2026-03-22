@@ -3,29 +3,94 @@ using KPIBackend.Models;
 
 namespace KPIBackend.Data
 {
+    /// <summary>
+    /// Contexto de base de datos principal para la aplicación KPI Backend de La Salle Bajío.
+    /// Gestiona las entidades relacionadas con indicadores clave de rendimiento (KPIs),
+    /// usuarios, facultades, carreras, actividades y otros componentes del sistema.
+    /// </summary>
     public class AppDbContext : DbContext
     {
+        /// <summary>
+        /// Constructor del contexto de base de datos.
+        /// </summary>
+        /// <param name="options">Opciones de configuración para el DbContext.</param>
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
+        /// <summary>
+        /// Conjunto de entidades para roles de usuario.
+        /// </summary>
         public DbSet<Rol> roles { get; set; }
+        /// <summary>
+        /// Conjunto de entidades para facultades académicas.
+        /// </summary>
         public DbSet<Facultad> facultades { get; set; }
+
+        /// <summary>
+        /// Conjunto de entidades para usuarios del sistema.
+        /// </summary>
         public DbSet<Usuario> usuarios { get; set; }
+
+        /// <summary>
+        /// Conjunto de entidades para grupos de indicadores.
+        /// </summary>
         public DbSet<GrupoIndicadores> grupo_indicadores { get; set; }
+
+        /// <summary>
+        /// Conjunto de entidades para periodos escolares.
+        /// </summary>
         public DbSet<PeriodoEscolar> periodos_escolares { get; set; }
+
+        /// <summary>
+        /// Conjunto de entidades para directrices institucionales.
+        /// </summary>
         public DbSet<Directriz> directrices { get; set; }
+
+        /// <summary>
+        /// Conjunto de entidades para indicadores de rendimiento.
+        /// </summary>
         public DbSet<Indicador> indicadores { get; set; }
+
+        /// <summary>
+        /// Conjunto de entidades para estrategias de mejora.
+        /// </summary>
         public DbSet<Estrategia> estrategias { get; set; }
+
+        /// <summary>
+        /// Conjunto de entidades para actividades relacionadas con indicadores.
+        /// </summary>
         public DbSet<Actividad> actividades { get; set; }
+
+        /// <summary>
+        /// Conjunto de entidades para comentarios en el sistema.
+        /// </summary>
         public DbSet<Comentario> comentarios { get; set; }
+
+        /// <summary>
+        /// Conjunto de entidades para carreras académicas.
+        /// </summary>
         public DbSet<Carrera> carreras { get; set; }
+
+        /// <summary>
+        /// Conjunto de entidades para evidencias de indicadores.
+        /// </summary>
         public DbSet<Evidencia> evidencias { get; set; }
+
+        /// <summary>
+        /// Conjunto de entidades para eventos del calendario.
+        /// </summary>
         public DbSet<EventoCalendario> eventosCalendario { get; set; }
 
+        /// <summary>
+        /// Configura el modelo de datos al crear el contexto.
+        /// Establece valores predeterminados para IDs usando UUIDs generados aleatoriamente,
+        /// configura relaciones entre entidades y define comportamientos de eliminación.
+        /// </summary>
+        /// <param name="modelBuilder">Constructor del modelo para configurar entidades.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            //Nuevo código agregado por mí
+            // Configura valores predeterminados para IDs de entidades usando UUIDs aleatorios.
             modelBuilder.Entity<Actividad>()
             .Property(r => r.Id)
             .HasDefaultValueSql("gen_random_uuid()");
@@ -82,24 +147,22 @@ namespace KPIBackend.Data
             .Property(r => r.Id)
             .HasDefaultValueSql("gen_random_uuid()");
 
-            //modelBuilder.Entity<Usuario>()
-            //    .Property(u => u.TipoUsuario)
-            //    .HasConversion<string>();
-
+            // Configura la relación entre Evidencia e Indicador con eliminación en cascada.
             modelBuilder.Entity<Evidencia>()
             .HasOne(e => e.Indicador)
             .WithMany(i => i.Evidencias)
             .HasForeignKey(e => e.IndicadorId)
     .OnDelete(DeleteBehavior.Cascade);
 
-
+            // Establece comportamiento de eliminación restrictiva para todas las claves foráneas.
             foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
 
-            //Se añaden datos inciales para la tabla "eventosCalendario". 
-            //Esta misma estrctura de código se puede usar para añadir cualquier dato inicial requerido sin necesidad de añadirlo mnualmente a la base de datos.
+            // Se añaden datos iniciales para la tablas como Rol, Facultad, Carrera, Usuario y EventoCalendario.
+            // Esta misma estructura de código se puede usar para añadir cualquier dato inicial
+            // requerido sin necesidad de insertarlo manualmente en la base de datos.
             modelBuilder.Entity<Rol>().HasData(
                 new Rol
                 {
@@ -174,6 +237,11 @@ namespace KPIBackend.Data
             );
         }
 
+        /// <summary>
+        /// Configura la inserción de fechas automáticamente cuando se crea o se edita una entidad.
+        /// Esto aplica a entidades como Facultad, Indicador, Estrategia, Actividad y Comentario por manejar atributos
+        /// como fecha de emisión o edición.
+        /// </summary>
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries())

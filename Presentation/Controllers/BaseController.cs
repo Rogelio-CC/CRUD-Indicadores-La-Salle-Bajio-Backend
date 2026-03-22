@@ -5,24 +5,44 @@ using System.Security.Claims;
 
 namespace KPIBackend.Controllers
 {
+    /// <summary>
+    /// Controlador base genérico que proporciona operaciones CRUD estándar
+    /// para cualquier entidad que implemente <see cref="IEntity"/>.
+    /// </summary>
+    /// <typeparam name="TEntity">Tipo de entidad que manejará el controlador.</typeparam>
     [ApiController]
     [Route("api/[controller]")]
     public class BaseController<TEntity> : ControllerBase where TEntity : class, IEntity
     {
+        /// <summary>
+        /// Repositorio genérico utilizado para acceder a los datos.
+        /// </summary>
         protected readonly IBaseRepository<TEntity> _repository;
 
+        /// <summary>
+        /// Constructor del controlador base.
+        /// </summary>
+        /// <param name="repository">Repositorio de la entidad.</param>
         public BaseController(IBaseRepository<TEntity> repository)
         {
             _repository = repository;
         }
 
+        /// <summary>
+        /// Obtiene todos los registros de la entidad.
+        /// </summary>
+        /// <returns>Lista de entidades.</returns>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var entities = await _repository.GetAllAsync();
             return Ok(entities);
         }
-
+        /// <summary>
+        /// Obtiene un registro específico mediante su identificador.
+        /// </summary>
+        /// <param name="id">Identificador único de la entidad.</param>
+        /// <returns>Entidad encontrada o error 404.</returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
@@ -30,6 +50,11 @@ namespace KPIBackend.Controllers
             return entity == null ? NotFound($"No se encontró la entidad con ID {id}.") : Ok(entity);
         }
 
+        /// <summary>
+        /// Crea un nuevo registro en la base de datos.
+        /// </summary>
+        /// <param name="entity">Entidad a crear.</param>
+        /// <returns>Entidad creada.</returns>
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] TEntity entity)
         {
@@ -44,7 +69,7 @@ namespace KPIBackend.Controllers
 
             if (entity is IUniqueNumber groupNumber)
             {
-                var exists = await _repository.ExistsByGroupNumberAsync(groupNumber.numeroGrupo, groupNumber.DescripcionGrupo);
+                var exists = await _repository.ExistsByGroupNumberAsync(groupNumber.NumeroGrupo, groupNumber.DescripcionGrupo);
                 if (exists)
                     return Conflict("Ya existe un registro con ese número de grupo de indicadores o con esa descripción del grupo.");
             }
@@ -53,6 +78,12 @@ namespace KPIBackend.Controllers
             return CreatedAtAction(nameof(GetById), new { id = GetId(created) }, created);
         }
 
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="id">Identificador de la entidad.</param>
+        /// <param name="entity">Entidad con los datos actualizados.</param>
+        /// <returns>Resultado de la operación.</returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] TEntity entity)
         {
@@ -71,7 +102,7 @@ namespace KPIBackend.Controllers
 
             if (entity is IUniqueNumber groupNumber)
             {
-                var exists = await _repository.ExistsByGroupNumberAsyncExceptId(groupNumber.numeroGrupo, id, groupNumber.DescripcionGrupo);
+                var exists = await _repository.ExistsByGroupNumberAsyncExceptId(groupNumber.NumeroGrupo, id, groupNumber.DescripcionGrupo);
                 if (exists)
                     return Conflict("Ya existe otro registro con ese número de grupo de indicadores con esa descripción del grupo.");
             }
@@ -80,6 +111,11 @@ namespace KPIBackend.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Elimina un registro de la base de datos.
+        /// </summary>
+        /// <param name="id">Identificador de la entidad.</param>
+        /// <returns>Resultado de la operación.</returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {

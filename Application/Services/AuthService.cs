@@ -7,17 +7,30 @@ using System.Text;
 
 namespace KPIBackend.Application.Services
 {
+    /// <summary>
+    /// Servicio para autenticación de usuarios.
+    /// </summary>
     public class AuthService
     {
         private readonly IUsuarioRepository _usuarioRepo;
         private readonly IConfiguration _config;
 
+        /// <summary>
+        /// Inicializa una nueva instancia del servicio de autenticación.
+        /// </summary>
+        /// <param name="usuarioRepo">Repositorio de usuarios.</param>
+        /// <param name="config">Configuración de la aplicación.</param>
         public AuthService(IUsuarioRepository usuarioRepo, IConfiguration config)
         {
             _usuarioRepo = usuarioRepo;
             _config = config;
         }
 
+        /// <summary>
+        /// Realiza el login del usuario y genera un token JWT.
+        /// </summary>
+        /// <param name="request">Datos de la solicitud de login.</param>
+        /// <returns>Respuesta con el token de autenticación.</returns>
         public LoginResponseDto Login(LoginRequestDto request)
         {
             var usuario = _usuarioRepo.GetByCorreoAsync(request.Email).Result;

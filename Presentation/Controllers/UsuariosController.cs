@@ -1,16 +1,21 @@
-using KPIBackend.Application.DTOs.Directriz;
 using KPIBackend.Application.DTOs.Usuarios;
 using KPIBackend.Data;
 using KPIBackend.Models;
 using KPIBackend.Repositories;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PruebaAutenticador2.Shared.DTOS.ListaCombos;
+using KPIBackend.Application.DTOs.ListaCombos;
 
 namespace KPIBackend.Controllers
 {
+    /// <summary>
+    /// Controlador encargado de gestionar los usuarios del sistema.
+    /// </summary>
+    /// <remarks>
+    /// Permite consultar, registrar y actualizar usuarios.
+    /// Cada usuario está asociado a un rol, facultad y carrera.
+    /// </remarks>
     [Authorize]
     [ApiController]
     [Route("api/usuarios")]
@@ -18,12 +23,23 @@ namespace KPIBackend.Controllers
     {
         private readonly AppDbContext _context;
 
-        public UsuariosController(IUsuarioRepository repository, AppDbContext context) : base(repository) {
+        /// <summary>
+        /// Constructor del controlador de actividad.
+        /// </summary>
+        /// <param name="repository">Repositorio del usuario.</param>
+        /// <param name="context">Configuración para uso de la base de datos.</param>
+        public UsuariosController(IUsuarioRepository repository, AppDbContext context) : base(repository)
+        {
 
             _context = context;
         }
 
-        
+        /// <summary>
+        /// Obtiene todos los usuarios registrados en el sistema.
+        /// </summary>
+        /// <returns>
+        /// Lista de usuarios con información de rol, facultad y carrera.
+        /// </returns>
         [HttpGet("dto")]
         public async Task<ActionResult<List<UsuarioDto>>> GetAllDto()
         {
@@ -49,6 +65,15 @@ namespace KPIBackend.Controllers
             return Ok(data);
         }
 
+        /// <summary>
+        /// Obtiene un usuario específico por su identificador.
+        /// </summary>
+        /// <param name="id">
+        /// Identificador único del usuario.
+        /// </param>
+        /// <returns>
+        /// Información del usuario.
+        /// </returns>
         [HttpGet("dto/{id}")]
         public async Task<IActionResult> GetDtoById(Guid id)
         {
@@ -79,21 +104,36 @@ namespace KPIBackend.Controllers
             return Ok(dto);
         }
 
-
+        /// <summary>
+        /// Registra un nuevo usuario en el sistema.
+        /// </summary>
+        /// <param name="dto">
+        /// Datos necesarios para crear el usuario.
+        /// </param>
+        /// <returns>
+        /// Resultado de la operación.
+        /// </returns>
+        /// <remarks>
+        /// Se validan campos como:
+        /// - nombre de usuario
+        /// - correo institucional
+        /// - tipo de usuario
+        /// - relaciones con rol, facultad y carrera
+        /// </remarks>
         [HttpPost("dto")]
         public async Task<IActionResult> Create(UsuarioCreateUpdateDto dto)
         {
-            // Validaciones explícitas (muy importante)
+            // Validaciones explícitas para errores de estado HTTP.
             if (dto == null)
                 return BadRequest("Los datos del usuario no pueden estar vacíos");
 
-            if(dto.NombreUsuario.Length <= 3 || dto.NombreUsuario.Length > 100)
+            if (dto.NombreUsuario.Length <= 3 || dto.NombreUsuario.Length > 100)
                 return BadRequest("El nombre de usuario debe tener al menos un carácter y no puede exceder los 100 caracteres");
 
-            if(dto.CorreoInstitucional.Length <= 3 || dto.CorreoInstitucional.Length > 100)
+            if (dto.CorreoInstitucional.Length <= 3 || dto.CorreoInstitucional.Length > 100)
                 return BadRequest("El correo institucional debe tener al menos un carácter y no puede exceder los 100 caracteres");
 
-            if(!dto.CorreoInstitucional.Contains("@"))
+            if (!dto.CorreoInstitucional.Contains("@"))
                 return BadRequest("El correo institucional debe ser una dirección de correo electrónico válida");
 
             if (dto.TipoUsuario != "Administrador" && dto.TipoUsuario != "Jefe_de_Pregrado" && dto.TipoUsuario != "Director" && dto.TipoUsuario != "Investigador" && dto.TipoUsuario != "Maestro")
@@ -130,25 +170,37 @@ namespace KPIBackend.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Actualiza la información de un usuario existente.
+        /// </summary>
+        /// <param name="id">
+        /// Identificador del usuario.
+        /// </param>
+        /// <param name="dto">
+        /// Datos actualizados del usuario.
+        /// </param>
+        /// <returns>
+        /// Resultado de la operación de actualización.
+        /// </returns>
         [HttpPut("dto/{id}")]
         public async Task<IActionResult> Update(Guid id, UsuarioCreateUpdateDto dto)
         {
             var usuario = await _context.usuarios.FindAsync(id);
 
-             // Validaciones explícitas (muy importante)
+            // Validaciones explícitas para errores de estado HTTP.
             if (usuario == null)
                 return NotFound("El usuario no existe");
 
             if (dto == null)
                 return BadRequest("Los datos del usuario no pueden estar vacíos");
 
-            if(dto.NombreUsuario.Length <= 3 || dto.NombreUsuario.Length > 100)
+            if (dto.NombreUsuario.Length <= 3 || dto.NombreUsuario.Length > 100)
                 return BadRequest("El nombre de usuario debe tener al menos un carácter y no puede exceder los 100 caracteres");
 
-            if(dto.CorreoInstitucional.Length <= 3 || dto.CorreoInstitucional.Length > 100)
+            if (dto.CorreoInstitucional.Length <= 3 || dto.CorreoInstitucional.Length > 100)
                 return BadRequest("El correo institucional debe tener al menos un carácter y no puede exceder los 100 caracteres");
 
-            if(!dto.CorreoInstitucional.Contains("@"))
+            if (!dto.CorreoInstitucional.Contains("@"))
                 return BadRequest("El correo institucional debe ser una dirección de correo electrónico válida");
 
             if (dto.TipoUsuario != "Administrador" && dto.TipoUsuario != "Jefe_de_Pregrado" && dto.TipoUsuario != "Director" && dto.TipoUsuario != "Investigador" && dto.TipoUsuario != "Maestro")
@@ -169,7 +221,6 @@ namespace KPIBackend.Controllers
             if (await _context.usuarios.AnyAsync(e => e.NombreUsuario.ToLower() == dto.NombreUsuario.ToLower() && e.Id != id))
                 return Conflict("Ya existe otro usuario con ese nombre de usuario");
 
-            // Actualización
             usuario.NombreUsuario = dto.NombreUsuario;
             usuario.CorreoInstitucional = dto.CorreoInstitucional;
             usuario.TipoUsuario = dto.TipoUsuario;
@@ -181,6 +232,12 @@ namespace KPIBackend.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Obtiene una lista simplificada de usuarios.
+        /// </summary>
+        /// <returns>
+        /// Lista con identificador y nombre del usuario.
+        /// </returns>
         [HttpGet("combo")]
         public async Task<IActionResult> GetCombo()
         {
@@ -195,6 +252,15 @@ namespace KPIBackend.Controllers
             return Ok(usuarios);
         }
 
+        /// <summary>
+        /// Obtiene un usuario mediante su correo institucional.
+        /// </summary>
+        /// <param name="email">
+        /// Correo institucional del usuario.
+        /// </param>
+        /// <returns>
+        /// Información del usuario encontrado.
+        /// </returns>
         [HttpGet("dto/email/{email}")]
         public async Task<IActionResult> GetByEmail(string email)
         {

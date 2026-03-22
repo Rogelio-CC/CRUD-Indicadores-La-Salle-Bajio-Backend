@@ -1,39 +1,48 @@
+# Nombre del flujo de trabajo que aparecerá en la pestaña "Actions" de GitHub.
 name: CI - Build & Publish Docker image
 
+# Define el disparador (trigger) del workflow.
 on:
   push:
-    branches: [ main ]
+    branches: [ main ] # Se ejecuta automáticamente cuando haces un 'push' a la rama main.
 
 jobs:
+  # Primer trabajo: Construir la imagen y subirla a Docker Hub.
   build-and-push:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Usa una máquina virtual con la última versión de Ubuntu.
     steps:
+      # 1. Descarga el código fuente de tu repositorio en la máquina virtual.
       - uses: actions/checkout@v4
 
+      # 2. Configura Docker Buildx, que permite construir imágenes para distintas arquitecturas.
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
+      # 3. Inicia sesión en tu cuenta de Docker Hub usando secretos guardados en GitHub.
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
+      # 4. Construye la imagen a partir de tu Dockerfile y la sube al repositorio.
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKERHUB_REPO }}:v1.0
+          context: .               # Usa la raíz del proyecto como contexto.
+          file: ./Dockerfile      # Ruta del archivo de instrucciones de Docker.
+          push: true               # Indica que debe subir la imagen tras construirla.
+          tags: ${{ secrets.DOCKERHUB_REPO }}:v1.1 # Etiqueta la imagen con el nombre del repo y la versión.
 
-  deploy-to-azure:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy container image to Azure Web App
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          images: ${{ secrets.DOCKERHUB_REPO }}:v1.0
+  # Segundo trabajo: Desplegar la imagen en Azure.
+  # deploy-to-azure:
+  #   needs: build-and-push # Este trabajo solo inicia si el anterior (build-and-push) terminó con éxito.
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # 1. Toma la imagen recién subida a Docker Hub y la despliega en una Web App de Azure.
+  #     - name: Deploy container image to Azure Web App
+  #       uses: azure/webapps-deploy@v2
+  #       with:
+  #         app-name: ${{ secrets.AZURE_WEBAPP_NAME }} # Nombre de tu servicio en Azure.
+  #         publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }} # Credenciales de publicación seguras.
+  #         images: ${{ secrets.DOCKERHUB_REPO }}:v1.0 # La imagen exacta que se va a desplegar.

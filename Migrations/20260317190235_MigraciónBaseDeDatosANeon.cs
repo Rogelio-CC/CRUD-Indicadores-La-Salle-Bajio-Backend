@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
+// Esta migración sirvió para crear todas las tablas, relaciones entre entidades y creación de datos iniciales y referentes a Rol, Facultad, Carrera, Usuario y EventoCalendario.
+
 namespace KPIBackend.Migrations
 {
     /// <inheritdoc />

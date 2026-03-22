@@ -1,5 +1,4 @@
 using KPIBackend.Application.DTOs.Carrera;
-using KPIBackend.Application.DTOs.Directriz;
 using KPIBackend.Application.DTOs.ListaCombos;
 using KPIBackend.Data;
 using KPIBackend.Models;
@@ -10,6 +9,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KPIBackend.Controllers
 {
+    /// <summary>
+    /// Controlador encargado de gestionar las carreras del sistema.
+    /// </summary>
+    /// 
     [Authorize]
     [ApiController]
     [Route("api/carreras")]
@@ -17,11 +20,22 @@ namespace KPIBackend.Controllers
     {
         private readonly AppDbContext _context;
 
-        public CarrerasController(ICarreraRepository repository, AppDbContext context) : base(repository) {
-        
+        /// <summary>
+        /// Constructor del controlador de actividad.
+        /// </summary>
+        /// <param name="repository">Repositorio de la carreras.</param>
+        /// <param name="context">Configuración para uso de la base de datos.</param>
+        public CarrerasController(ICarreraRepository repository, AppDbContext context) : base(repository)
+        {
+
             _context = context;
         }
 
+        /// <summary>
+        /// Obtiene la lista de carreras en formato DTO.
+        /// Incluye información de la facultad asociada.
+        /// </summary>
+        /// <returns>Lista de carreras.</returns>
         [HttpGet("dto")]
         public async Task<ActionResult<List<CarreraDto>>> GetAllDto()
         {
@@ -39,6 +53,11 @@ namespace KPIBackend.Controllers
             return Ok(data);
         }
 
+        /// <summary>
+        /// Obtiene una carrera específica en formato DTO.
+        /// </summary>
+        /// <param name="id">Identificador de la carrera.</param>
+        /// <returns>Carrera encontrada.</returns>
         [HttpGet("dto/{id}")]
         public async Task<IActionResult> GetDtoById(Guid id)
         {
@@ -61,15 +80,19 @@ namespace KPIBackend.Controllers
             return Ok(dto);
         }
 
-
+        /// <summary>
+        /// Crea una nueva carrera.
+        /// </summary>
+        /// <param name="dto">Datos de la carrera a crear.</param>
+        /// <returns>Resultado de la operación.</returns>
         [HttpPost("dto")]
         public async Task<IActionResult> Create(CarreraCreateUpdateDto dto)
         {
-            // Validaciones explícitas (muy importante)
+            // Validaciones explícitas para errores de estado HTTP.
             if (dto == null)
                 return BadRequest("Los datos de la carrera no pueden estar vacíos");
 
-            if(dto.NombreCarrera.Length <= 3 || dto.NombreCarrera.Length > 50)
+            if (dto.NombreCarrera.Length <= 3 || dto.NombreCarrera.Length > 50)
                 return BadRequest("El nombre de la carrera debe tener al menos un carácter y no puede exceder los 50 caracteres");
 
             if (!await _context.facultades.AnyAsync(f => f.Id == dto.FacultadId))
@@ -90,28 +113,33 @@ namespace KPIBackend.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Actualiza una carrera existente.
+        /// </summary>
+        /// <param name="id">Identificador de la carrera.</param>
+        /// <param name="dto">Datos actualizados.</param>
+        /// <returns>Resultado de la operación.</returns>   
         [HttpPut("dto/{id}")]
         public async Task<IActionResult> Update(Guid id, CarreraCreateUpdateDto dto)
         {
             var carrera = await _context.carreras.FindAsync(id);
 
-            // Validaciones explícitas (muy importante)
+            // Validaciones explícitas para errores de estado HTTP.
             if (carrera == null)
                 return NotFound("La carrera no existe");
 
             if (dto == null)
                 return BadRequest("Los datos de la carrera no pueden estar vacíos");
 
-            if(dto.NombreCarrera.Length <= 3 || dto.NombreCarrera.Length > 50)
+            if (dto.NombreCarrera.Length <= 3 || dto.NombreCarrera.Length > 50)
                 return BadRequest("El nombre de la carrera debe tener al menos un carácter y no puede exceder los 50 caracteres");
 
             if (!await _context.facultades.AnyAsync(f => f.Id == dto.FacultadId))
                 return BadRequest("El ID de la facultad especificada no existe");
 
-             if (await _context.carreras.AnyAsync(c => c.NombreCarrera.ToLower() == dto.NombreCarrera.ToLower() && c.Id != id))
+            if (await _context.carreras.AnyAsync(c => c.NombreCarrera.ToLower() == dto.NombreCarrera.ToLower() && c.Id != id))
                 return Conflict("Ya existe otra carrera con ese nombre");
 
-            // Actualización
             carrera.NombreCarrera = dto.NombreCarrera;
             carrera.FacultadId = dto.FacultadId;
 
@@ -119,6 +147,10 @@ namespace KPIBackend.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Obtiene una lista simplificada de carreras para llenar combos en el frontend.
+        /// </summary>
+        /// <returns>Lista de carreras con Id y Nombre.</returns>
         [HttpGet("combo")]
         public async Task<IActionResult> GetCombo()
         {
@@ -129,7 +161,7 @@ namespace KPIBackend.Controllers
                     Nombre = u.NombreCarrera
                 })
                 .ToListAsync();
-                
+
             return Ok(carreras);
         }
     }
