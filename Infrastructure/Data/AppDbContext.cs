@@ -1,5 +1,6 @@
-using Microsoft.EntityFrameworkCore;
 using KPIBackend.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace KPIBackend.Data
 {
@@ -155,8 +156,12 @@ namespace KPIBackend.Data
     .OnDelete(DeleteBehavior.Cascade);
 
             // Establece comportamiento de eliminación restrictiva para todas las claves foráneas.
-            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-            {
+            foreach(var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+{
+                // ❗ NO tocar la relación Evidencia → Indicador
+                if (foreignKey.DeclaringEntityType.ClrType == typeof(Evidencia))
+                    continue;
+
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
 
