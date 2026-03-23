@@ -49,6 +49,16 @@ namespace KPIBackend.Models
         public PeriodoEscolar Periodo { get; set; } = null!;
 
         /// <summary>
+        /// Clave foránea del comentario vinculado.
+        /// </summary>
+        public Guid? ComentarioId { get; set; }
+
+        /// <summary>
+        /// Navegación al comentario vinculado.
+        /// </summary>
+        public Comentario? Comentario { get; set; }
+
+        /// <summary>
         /// Obtiene o establece la colección de indicadores asociados a la directriz.
         /// </summary>
         /// <remarks>
@@ -57,15 +67,5 @@ namespace KPIBackend.Models
         /// </remarks>
         [JsonIgnore]
         public ICollection<Indicador>? Indicadores { get; set; }
-
-        /// <summary>
-        /// Obtiene o establece la colección de comentarios asociados a la directriz.
-        /// </summary>
-        /// <remarks>
-        /// El atributo [JsonIgnore] es crítico para evitar ciclos infinitos durante la 
-        /// serialización a JSON (Circular Reference) y visualización de datos sensibles.
-        /// </remarks>
-        [JsonIgnore]
-        public ICollection<Comentario>? Comentarios { get; set; }
     }
 }

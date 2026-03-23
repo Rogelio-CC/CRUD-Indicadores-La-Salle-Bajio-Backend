@@ -32,7 +32,7 @@ jobs:
           context: .               # Usa la raíz del proyecto como contexto.
           file: ./Dockerfile      # Ruta del archivo de instrucciones de Docker.
           push: true               # Indica que debe subir la imagen tras construirla.
-          tags: ${{ secrets.DOCKERHUB_REPO }}:v1.1 # Etiqueta la imagen con el nombre del repo y la versión.
+          tags: "${{ secrets.DOCKERHUB_REPO }}:${{ secrets.IMAGE_TAG }}" # Etiqueta la imagen con el nombre del repo y la versión.
 
   # Segundo trabajo: Desplegar la imagen en Azure.
   # deploy-to-azure:

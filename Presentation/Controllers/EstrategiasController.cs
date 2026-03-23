@@ -61,6 +61,8 @@ namespace KPIBackend.Controllers
                     Periodo = d.Periodo.Nombre,
                     CarreraId = d.CarreraId,
                     Carrera = d.Carrera.NombreCarrera,
+                    ComentarioId = d.ComentarioId,
+                    Comentario = d.Comentario!.Contenido,
                 })
                 .ToListAsync();
 
@@ -96,6 +98,8 @@ namespace KPIBackend.Controllers
                     Periodo = d.Periodo.Nombre,
                     CarreraId = d.CarreraId,
                     Carrera = d.Carrera.NombreCarrera,
+                    ComentarioId = d.ComentarioId,
+                    Comentario = d.Comentario!.Contenido,
                 })
                 .FirstOrDefaultAsync();
 
@@ -146,6 +150,7 @@ namespace KPIBackend.Controllers
                 CreadorId = dto.CreadorId,
                 PeriodoId = dto.PeriodoId,
                 CarreraId = dto.CarreraId,
+                ComentarioId = dto.ComentarioId,
             };
 
             _context.estrategias.Add(estrategia);
@@ -201,12 +206,12 @@ namespace KPIBackend.Controllers
             if (await _context.estrategias.AnyAsync(e => e.DescripcionEstrategia.ToLower() == dto.DescripcionEstrategia.ToLower() && e.Id != id))
                 return Conflict("Ya existe otra estrategia con esa descripción");
 
-            // Actualización
             estrategia.DescripcionEstrategia = dto.DescripcionEstrategia;
             estrategia.IndicadorId = dto.IndicadorId;
             estrategia.CreadorId = dto.CreadorId;
             estrategia.PeriodoId = dto.PeriodoId;
             estrategia.CarreraId = dto.CarreraId;
+            estrategia.ComentarioId = dto.ComentarioId;
 
             await _context.SaveChangesAsync();
             return NoContent();

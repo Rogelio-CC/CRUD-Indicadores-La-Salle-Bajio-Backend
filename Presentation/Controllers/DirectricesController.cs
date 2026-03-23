@@ -56,7 +56,9 @@ namespace KPIBackend.Controllers
                     CreadorId = d.CreadorId,
                     Creador = d.Creador.NombreUsuario,
                     PeriodoId = d.PeriodoId,
-                    Periodo = d.Periodo.Nombre
+                    Periodo = d.Periodo.Nombre,
+                    ComentarioId = d.ComentarioId,
+                    Comentario = d.Comentario!.Contenido,
                 })
                 .ToListAsync();
 
@@ -86,7 +88,9 @@ namespace KPIBackend.Controllers
                 CreadorId = d.CreadorId,
                 Creador = d.Creador.NombreUsuario,
                 PeriodoId = d.PeriodoId,
-                Periodo = d.Periodo.Nombre
+                Periodo = d.Periodo.Nombre,
+                ComentarioId = d.ComentarioId,
+                Comentario = d.Comentario!.Contenido,
             })
             .FirstOrDefaultAsync();
 
@@ -132,7 +136,8 @@ namespace KPIBackend.Controllers
                 Descripcion = dto.Descripcion,
                 FacultadId = dto.FacultadId,
                 CreadorId = dto.CreadorId,
-                PeriodoId = dto.PeriodoId
+                PeriodoId = dto.PeriodoId,
+                ComentarioId = dto.ComentarioId,
             };
 
             _context.directrices.Add(directriz);
@@ -189,6 +194,7 @@ namespace KPIBackend.Controllers
             directriz.FacultadId = dto.FacultadId;
             directriz.CreadorId = dto.CreadorId;
             directriz.PeriodoId = dto.PeriodoId;
+            directriz.ComentarioId = dto.ComentarioId;
 
             await _context.SaveChangesAsync();
             return NoContent();

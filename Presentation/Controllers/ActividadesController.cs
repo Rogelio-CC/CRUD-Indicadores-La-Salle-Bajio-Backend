@@ -62,6 +62,8 @@ namespace KPIBackend.Controllers
                     Periodo = d.Periodo.Nombre,
                     CarreraId = d.CarreraId,
                     Carrera = d.Carrera.NombreCarrera,
+                    ComentarioId = d.ComentarioId,
+                    Comentario = d.Comentario!.Contenido,
                 })
                 .ToListAsync();
 
@@ -98,6 +100,8 @@ namespace KPIBackend.Controllers
                     Periodo = d.Periodo.Nombre,
                     CarreraId = d.CarreraId,
                     Carrera = d.Carrera.NombreCarrera,
+                    ComentarioId = d.ComentarioId,
+                    Comentario = d.Comentario!.Contenido,
                 })
                 .FirstOrDefaultAsync();
 
@@ -169,6 +173,7 @@ namespace KPIBackend.Controllers
                 CreadorId = dto.CreadorId,
                 PeriodoId = dto.PeriodoId,
                 CarreraId = dto.CarreraId,
+                ComentarioId = dto.ComentarioId,
             };
 
             _context.actividades.Add(actividad);
@@ -248,6 +253,7 @@ namespace KPIBackend.Controllers
             actividad.CreadorId = dto.CreadorId;
             actividad.PeriodoId = dto.PeriodoId;
             actividad.CarreraId = dto.CarreraId;
+            actividad.ComentarioId = dto.ComentarioId;
 
             await _context.SaveChangesAsync();
             return NoContent();

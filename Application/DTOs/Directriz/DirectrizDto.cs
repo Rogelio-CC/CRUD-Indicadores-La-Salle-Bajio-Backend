@@ -26,7 +26,7 @@
         public string Facultad { get; set; } = string.Empty;
 
         /// <summary>
-        /// Indetificador del usuario que creó la directriz.
+        /// Identificador del usuario que creó la directriz.
         /// </summary>
         public Guid CreadorId { get; set; }
 
@@ -44,5 +44,15 @@
         /// Nombre de período escolar.
         /// </summary>
         public string Periodo { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Identificador del del comentario vinculado.
+        /// </summary>
+        public Guid? ComentarioId { get; set; }
+
+        /// <summary>
+        /// Nombre o descripción del comentario vinculado.
+        /// </summary>
+        public string? Comentario { get; set; }
     }
 }

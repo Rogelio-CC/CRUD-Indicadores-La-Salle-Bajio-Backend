@@ -16,7 +16,7 @@
         public string TipoObjetivo { get; set; } = null!;
 
         /// <summary>
-        /// Usuario que creó el comentario.
+        /// Identificador del usuario que creó el comentario.
         /// </summary>
         public Guid CreadorId { get; set; }
     }

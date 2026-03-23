@@ -59,5 +59,15 @@
         /// Nombre de la carrera.
         /// </summary>
         public string Carrera { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Identificador del del comentario vinculado.
+        /// </summary>
+        public Guid? ComentarioId { get; set; }
+
+        /// <summary>
+        /// Nombre o descripción del comentario vinculado.
+        /// </summary>
+        public string? Comentario { get; set; }
     }
 }

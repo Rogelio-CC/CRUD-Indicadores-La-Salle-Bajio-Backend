@@ -32,7 +32,7 @@ namespace KPIBackend.Models
         public Guid IdObjetivo { get; set; }
 
         /// <summary>
-        /// Clave foránea que creó el comentario.
+        /// Clave foránea del usuario que creó el comentario.
         /// </summary>
         public Guid CreadorId { get; set; }
 

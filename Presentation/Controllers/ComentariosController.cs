@@ -1,4 +1,5 @@
 using KPIBackend.Application.DTOs.Comentario;
+using KPIBackend.Application.DTOs.ListaCombos;
 using KPIBackend.Data;
 using KPIBackend.Models;
 using KPIBackend.Repositories;
@@ -160,13 +161,30 @@ namespace KPIBackend.Controllers
             if (await _context.comentarios.AnyAsync(d => d.Contenido.ToLower() == dto.Contenido.ToLower() && d.Id != id))
                 return Conflict("Ya existe un comentario con ese contenido");
 
-            // Actualización
             comentario.Contenido = dto.Contenido;
             comentario.TipoObjetivo = dto.TipoObjetivo;
             comentario.CreadorId = dto.CreadorId;
 
             await _context.SaveChangesAsync();
             return NoContent();
+        }
+
+        /// <summary>
+        /// Obtiene una lista simplificada de comentarios para llenar combos en el frontend.
+        /// </summary>
+        /// <returns>Lista de carreras con Id (objetivo, no del comentario) y Nombre.</returns>
+        [HttpGet("combo")]
+        public async Task<IActionResult> GetCombo()
+        {
+            var objetivosComentarios = await _context.comentarios
+                .Select(u => new ComentarioComboDTO
+                {
+                    Id = u.Id,
+                    Nombre = u.Contenido
+                })
+                .ToListAsync();
+
+            return Ok(objetivosComentarios);
         }
     }
 }

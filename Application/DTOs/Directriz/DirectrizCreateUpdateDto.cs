@@ -16,7 +16,7 @@
         public Guid FacultadId { get; set; }
 
         /// <summary>
-        /// Indetificador del usuario que creó la directriz.
+        /// Identificador del usuario que creó la directriz.
         /// </summary>
         public Guid CreadorId { get; set; }
 
@@ -24,6 +24,11 @@
         /// Identificador del período escolar en el que aplica la directriz.
         /// </summary>
         public Guid PeriodoId { get; set; }
+
+        /// <summary>
+        /// Identificador del del comentario vinculado.
+        /// </summary>
+        public Guid? ComentarioId { get; set; }
     }
 
 

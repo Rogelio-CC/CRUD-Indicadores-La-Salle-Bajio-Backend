@@ -11,7 +11,7 @@ using System.Reflection;
 using System.Text;
 
 //Lectura local del archivo .env (no es necesario en entorno de producción)
-DotNetEnv.Env.Load();
+//DotNetEnv.Env.Load();
 
 // Punto de entrada de la API.
 // Este archivo configura los servicios principales de la aplicación,

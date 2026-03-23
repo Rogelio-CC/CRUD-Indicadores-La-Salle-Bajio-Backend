@@ -21,7 +21,7 @@ namespace KPIBackend.Models
         public int NumeroGrupo { get; set; }
 
         /// <summary>
-        /// Descripción del grupo de indicadores
+        /// Descripción del grupo de indicadores.
         /// </summary>
         [Required(ErrorMessage = "La descripción es obligatorio")]
         [MinLength(5, ErrorMessage = "Debe tener al menos 5 caracteres")]

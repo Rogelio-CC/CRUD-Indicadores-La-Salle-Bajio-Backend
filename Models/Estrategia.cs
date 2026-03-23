@@ -63,6 +63,16 @@ namespace KPIBackend.Models
         public Carrera Carrera { get; set; } = null!;
 
         /// <summary>
+        /// Clave foránea del comentario vinculado.
+        /// </summary>
+        public Guid? ComentarioId { get; set; }
+
+        /// <summary>
+        /// Navegación al comentario vinculado.
+        /// </summary>
+        public Comentario? Comentario { get; set; }
+
+        /// <summary>
         /// Obtiene o establece la colección de actividades asociados a la estrategia.
         /// </summary>
         /// <remarks>
@@ -71,15 +81,5 @@ namespace KPIBackend.Models
         /// </remarks>
         [JsonIgnore]
         public ICollection<Actividad>? Actividades { get; set; }
-
-        /// <summary>
-        /// Obtiene o establece la colección de comentarios asociados a la estrategia.
-        /// </summary>
-        /// <remarks>
-        /// El atributo [JsonIgnore] es crítico para evitar ciclos infinitos durante la 
-        /// serialización a JSON (Circular Reference) y visualización de datos sensibles.
-        /// </remarks>
-        [JsonIgnore]
-        public ICollection<Comentario>? Comentarios { get; set; }
     }
 }

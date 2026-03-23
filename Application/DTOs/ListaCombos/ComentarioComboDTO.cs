@@ -1,17 +1,17 @@
 ﻿namespace KPIBackend.Application.DTOs.ListaCombos
 {
     /// <summary>
-    /// DTO para opciones de combo de estrategias.
+    /// DTO para opciones de combo de comenatrios por medio del Id del objetivo.
     /// </summary>
-    public class EstrategiaComboDTO
+    public class ComentarioComboDTO
     {
         /// <summary>
-        /// Identificador de la estrategia.
+        /// Identificador del objetivo del comentario.
         /// </summary>
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Nombre de la estrategia.
+        /// Nombre o descripción del comentario vinculado.
         /// </summary>
         public string Nombre { get; set; } = string.Empty;
     }

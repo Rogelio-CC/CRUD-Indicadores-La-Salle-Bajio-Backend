@@ -34,5 +34,10 @@
         /// Identificador de la carrera al que aplica la estrategia.
         /// </summary>
         public Guid CarreraId { get; set; }
+
+        /// <summary>
+        /// Identificador del del comentario vinculado.
+        /// </summary>
+        public Guid? ComentarioId { get; set; }
     }
 }
