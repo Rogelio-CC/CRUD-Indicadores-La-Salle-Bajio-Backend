@@ -126,6 +126,7 @@ namespace KPIBackend.Models
         /// El atributo [JsonIgnore] es crítico para evitar ciclos infinitos durante la 
         /// serialización a JSON (Circular Reference) y visualización de datos sensibles.
         /// </remarks>
+        [JsonIgnore]
         public ICollection<Evidencia> Evidencias { get; set; } = new List<Evidencia>();
 
         /// <summary>

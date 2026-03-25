@@ -23,14 +23,6 @@ namespace KPIBackend.Models
         public string Nombre { get; set; } = null!;
 
         /// <summary>
-        /// Permisos del rol (ejemplo: agregar únicamente actividades).
-        /// </summary>
-        [Required(ErrorMessage = "Los permisos son obligatorios")]
-        [MinLength(5, ErrorMessage = "Debe tener al menos 5 caracteres")]
-        [MaxLength(100, ErrorMessage = "No puede exceder 100 caracteres")]
-        public string Permisos { get; set; } = null!;
-
-        /// <summary>
         /// Obtiene o establece la colección de usuarios asociados al rol.
         /// </summary>
         /// <remarks>

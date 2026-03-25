@@ -3,6 +3,7 @@ using System;
 using KPIBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KPIBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260324172959_EliminacionDeLaTablaEventosCalendarioYAumentoDeNumeroDecaracteresParaMisionYVisionDeLaFacultad")]
+    partial class EliminacionDeLaTablaEventosCalendarioYAumentoDeNumeroDecaracteresParaMisionYVisionDeLaFacultad
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,35 +76,6 @@ namespace KPIBackend.Migrations
                     b.HasIndex("PeriodoId");
 
                     b.ToTable("actividades");
-                });
-
-            modelBuilder.Entity("KPIBackend.Models.ArchivoPoliticas", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("gen_random_uuid()");
-
-                    b.Property<byte[]>("Contenido")
-                        .IsRequired()
-                        .HasColumnType("bytea");
-
-                    b.Property<Guid>("FacultadId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("NombreArchivo")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FacultadId");
-
-                    b.ToTable("archivoPoliticas");
                 });
 
             modelBuilder.Entity("KPIBackend.Models.Carrera", b =>
@@ -282,6 +256,9 @@ namespace KPIBackend.Migrations
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("gen_random_uuid()");
 
+                    b.Property<DateTime?>("FechaEdicion")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<DateTime>("FechaEmision")
                         .HasColumnType("timestamp with time zone");
 
@@ -291,6 +268,11 @@ namespace KPIBackend.Migrations
                         .HasColumnType("character varying(1000)");
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("PoliticaAsociada")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
@@ -314,6 +296,7 @@ namespace KPIBackend.Migrations
                             FechaEmision = new DateTime(2026, 3, 17, 6, 0, 0, 0, DateTimeKind.Utc),
                             Mision = "Buscar la mejora tecnológica.",
                             Nombre = "Facultad de Tecnología",
+                            PoliticaAsociada = "Política 1: uso ético de la tecnología.",
                             Slogan = "Un mundo mejor con tecnología.",
                             Vision = "En 2030, ser una facultad lider en avances tecnológicos."
                         });
@@ -552,17 +535,6 @@ namespace KPIBackend.Migrations
                     b.Navigation("Periodo");
                 });
 
-            modelBuilder.Entity("KPIBackend.Models.ArchivoPoliticas", b =>
-                {
-                    b.HasOne("KPIBackend.Models.Facultad", "Facultad")
-                        .WithMany("ArchivoPoliticas")
-                        .HasForeignKey("FacultadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Facultad");
-                });
-
             modelBuilder.Entity("KPIBackend.Models.Carrera", b =>
                 {
                     b.HasOne("KPIBackend.Models.Facultad", "Facultad")
@@ -772,8 +744,6 @@ namespace KPIBackend.Migrations
 
             modelBuilder.Entity("KPIBackend.Models.Facultad", b =>
                 {
-                    b.Navigation("ArchivoPoliticas");
-
                     b.Navigation("Carreras");
 
                     b.Navigation("Directrices");

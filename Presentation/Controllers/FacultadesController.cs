@@ -1,10 +1,10 @@
+using KPIBackend.Application.DTOs.ListaCombos;
 using KPIBackend.Data;
 using KPIBackend.Models;
 using KPIBackend.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using KPIBackend.Application.DTOs.ListaCombos;
 
 namespace KPIBackend.Controllers
 {
@@ -51,6 +51,40 @@ namespace KPIBackend.Controllers
                 .ToListAsync();
 
             return Ok(facultades);
+        }
+
+        /// <summary>
+        /// Crea una nueva facultad en el sistema.
+        /// </summary>
+        /// <param name="facultad">
+        /// Datos necesarios para registrar la facultad.
+        /// </param>
+        /// <returns>
+        /// Facultad creada.
+        /// </returns>
+        [HttpPost("crear")]
+        public new async Task<IActionResult> Create(Facultad facultad)
+        {
+            var facultadcreado = new Facultad
+            {
+                Nombre = facultad.Nombre,
+                Mision = facultad.Mision,
+                Vision = facultad.Vision,
+                Slogan = facultad.Slogan,
+            };
+
+            _context.facultades.Add(facultadcreado);
+            await _context.SaveChangesAsync();
+
+
+            return Ok(new Facultad
+            {
+                Id = facultadcreado.Id,
+                Nombre = facultadcreado.Nombre,
+                Mision = facultadcreado.Mision,
+                Vision = facultadcreado.Vision,
+                Slogan = facultadcreado.Slogan,
+            });
         }
     }
 }

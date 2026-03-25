@@ -202,8 +202,8 @@ namespace KPIBackend.Controllers
             if (!await _context.directrices.AnyAsync(p => p.Id == dto.DirectrizId))
                 return BadRequest("El ID de la directriz especificada no existe");
 
-            if (await _context.indicadores.AnyAsync(e => e.DescripcionIndicador.ToLower() == dto.DescripcionIndicador.ToLower()))
-                return Conflict("Ya existe otro indicador con esa descripción");
+            if (await _context.indicadores.AnyAsync(e => e.CarreraId == dto.CarreraId && e.DescripcionIndicador == dto.DescripcionIndicador))
+                return Conflict("Esta carrera ya cuenta con este indicador");
 
 
             var indicador = new Indicador
@@ -327,8 +327,8 @@ namespace KPIBackend.Controllers
             if (!await _context.directrices.AnyAsync(p => p.Id == dto.DirectrizId))
                 return BadRequest("El ID de la directriz especificada no existe");
 
-            if (await _context.indicadores.AnyAsync(e => e.DescripcionIndicador.ToLower() == dto.DescripcionIndicador.ToLower() && e.Id != id))
-                return Conflict("Ya existe otro indicador con esa descripción");
+            if (await _context.indicadores.AnyAsync(e => e.CarreraId == dto.CarreraId && e.DescripcionIndicador == dto.DescripcionIndicador && e.Id != id))
+                return Conflict("Esta carrera ya cuenta con este indicador");
 
             indicador.DescripcionIndicador = dto.DescripcionIndicador;
             indicador.Estandar = dto.Estandar;

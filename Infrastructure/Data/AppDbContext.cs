@@ -1,6 +1,5 @@
 using KPIBackend.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace KPIBackend.Data
 {
@@ -77,9 +76,9 @@ namespace KPIBackend.Data
         public DbSet<Evidencia> evidencias { get; set; }
 
         /// <summary>
-        /// Conjunto de entidades para eventos del calendario.
+        /// Conjunto de entidades para archivo de politicas de una facultad.
         /// </summary>
-        public DbSet<EventoCalendario> eventosCalendario { get; set; }
+        public DbSet<ArchivoPoliticas> archivoPoliticas { get; set; }
 
         /// <summary>
         /// Configura el modelo de datos al crear el contexto.
@@ -144,9 +143,9 @@ namespace KPIBackend.Data
             .Property(r => r.Id)
             .HasDefaultValueSql("gen_random_uuid()");
 
-            modelBuilder.Entity<EventoCalendario>()
-            .Property(r => r.Id)
-            .HasDefaultValueSql("gen_random_uuid()");
+            modelBuilder.Entity<ArchivoPoliticas>()
+           .Property(r => r.Id)
+           .HasDefaultValueSql("gen_random_uuid()");
 
             // Configura la relación entre Evidencia e Indicador con eliminación en cascada.
             modelBuilder.Entity<Evidencia>()
@@ -155,11 +154,22 @@ namespace KPIBackend.Data
             .HasForeignKey(e => e.IndicadorId)
     .OnDelete(DeleteBehavior.Cascade);
 
+            // Configura la relación entre ArchivoPoliticas y Facultad con eliminación en cascada
+            modelBuilder.Entity<ArchivoPoliticas>()
+            .HasOne(e => e.Facultad)
+            .WithMany(i => i.ArchivoPoliticas)
+            .HasForeignKey(e => e.FacultadId)
+    .OnDelete(DeleteBehavior.Cascade);
+
             // Establece comportamiento de eliminación restrictiva para todas las claves foráneas.
-            foreach(var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
 {
                 // ❗ NO tocar la relación Evidencia → Indicador
                 if (foreignKey.DeclaringEntityType.ClrType == typeof(Evidencia))
+                    continue;
+
+                // ❗ NO tocar la relación ArchivoPoliticas → Facultad
+                if (foreignKey.DeclaringEntityType.ClrType == typeof(ArchivoPoliticas))
                     continue;
 
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
@@ -173,13 +183,11 @@ namespace KPIBackend.Data
                 {
                     Id = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d473"),
                     Nombre = "Administrador",
-                    Permisos = "Puede modificar todas las tablas."
                 },
                 new Rol
                 {
                     Id = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d481"),
                     Nombre = "Maestro",
-                    Permisos = "Puede crear actividades."
                 }
             );
 
@@ -191,9 +199,7 @@ namespace KPIBackend.Data
                     Mision = "Buscar la mejora tecnológica.",
                     Vision = "En 2030, ser una facultad lider en avances tecnológicos.",
                     Slogan = "Un mundo mejor con tecnología.",
-                    PoliticaAsociada = "Política 1: uso ético de la tecnología.",
                     FechaEmision = new DateTime(2026, 3, 17).ToUniversalTime(),
-                    FechaEdicion = null
 
                 }
             );
@@ -219,27 +225,6 @@ namespace KPIBackend.Data
                     CarreraId = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d488")
                 }
             );
-
-            modelBuilder.Entity<EventoCalendario>().HasData(
-                new EventoCalendario
-                {
-                    Id = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d475"),
-                    Titulo = "Inicio del semestre escolar",
-                    FechaInicio = new DateTime(2026, 2, 9).ToUniversalTime(),
-                    FechaFin = new DateTime(2026, 6, 27).ToUniversalTime(),
-                    TipoEvento = "Académico",
-                    Color = "#BFBFBF"
-                },
-                new EventoCalendario
-                {
-                    Id = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d480"),
-                    Titulo = "Semana sin actividad",
-                    FechaInicio = new DateTime(2026, 3, 20).ToUniversalTime(),
-                    FechaFin = new DateTime(2026, 3, 27).ToUniversalTime(),
-                    TipoEvento = "Académico",
-                    Color = null
-                }
-            );
         }
 
         /// <summary>
@@ -256,11 +241,6 @@ namespace KPIBackend.Data
                     if (entry.State == EntityState.Added)
                     {
                         entity.FechaEmision = DateTime.Now.Date.ToUniversalTime();
-                    }
-
-                    if (entry.State == EntityState.Modified)
-                    {
-                        entity.FechaEdicion = DateTime.Now.Date.ToUniversalTime();
                     }
                 }
 

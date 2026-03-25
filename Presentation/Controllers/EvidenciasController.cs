@@ -24,7 +24,7 @@ namespace KPIBackend.Presentation.Controllers
         private readonly AppDbContext _context;
 
         /// <summary>
-        /// Constructor del controlador de actividad.
+        /// Constructor del controlador de evidencias.
         /// </summary>
         /// <param name="context">Configuración para uso de la base de datos.</param>
         public EvidenciasController(AppDbContext context)
@@ -84,11 +84,11 @@ namespace KPIBackend.Presentation.Controllers
         public async Task<IActionResult> Upload([FromRoute] Guid indicadorId, [FromForm] UploadEvidenciaRequest request)
         {
             var file = request?.File;
-            // Validaciones explícitas (muy importante)
+            // Validaciones explícitas para estados de error HTTP.
             if (file == null || file.Length == 0)
                 return BadRequest("Archivo inválido");
 
-            if (file.Length > 10 * 1024 * 1024) // 10 MB
+            if (file.Length > 10 * 1024 * 1024)
                 return BadRequest("El archivo excede el tamaño máximo permitido de 10 MB");
 
             if (!await _context.indicadores.AnyAsync(i => i.Id == indicadorId))

@@ -3,6 +3,7 @@ using System;
 using KPIBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KPIBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260324164945_EliminaciónCampoPermisosEnRolYConvertirAValorOpcionalASloganDeLaFacultad")]
+    partial class EliminaciónCampoPermisosEnRolYConvertirAValorOpcionalASloganDeLaFacultad
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,35 +76,6 @@ namespace KPIBackend.Migrations
                     b.HasIndex("PeriodoId");
 
                     b.ToTable("actividades");
-                });
-
-            modelBuilder.Entity("KPIBackend.Models.ArchivoPoliticas", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("gen_random_uuid()");
-
-                    b.Property<byte[]>("Contenido")
-                        .IsRequired()
-                        .HasColumnType("bytea");
-
-                    b.Property<Guid>("FacultadId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("NombreArchivo")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FacultadId");
-
-                    b.ToTable("archivoPoliticas");
                 });
 
             modelBuilder.Entity("KPIBackend.Models.Carrera", b =>
@@ -246,6 +220,54 @@ namespace KPIBackend.Migrations
                     b.ToTable("estrategias");
                 });
 
+            modelBuilder.Entity("KPIBackend.Models.EventoCalendario", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("FechaFin")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("FechaInicio")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("TipoEvento")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("eventosCalendario");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f47ac10b-58cc-4372-a567-0e02b2c3d475"),
+                            Color = "#BFBFBF",
+                            FechaFin = new DateTime(2026, 6, 27, 6, 0, 0, 0, DateTimeKind.Utc),
+                            FechaInicio = new DateTime(2026, 2, 9, 6, 0, 0, 0, DateTimeKind.Utc),
+                            TipoEvento = "Académico",
+                            Titulo = "Inicio del semestre escolar"
+                        },
+                        new
+                        {
+                            Id = new Guid("f47ac10b-58cc-4372-a567-0e02b2c3d480"),
+                            FechaFin = new DateTime(2026, 3, 27, 6, 0, 0, 0, DateTimeKind.Utc),
+                            FechaInicio = new DateTime(2026, 3, 20, 6, 0, 0, 0, DateTimeKind.Utc),
+                            TipoEvento = "Académico",
+                            Titulo = "Semana sin actividad"
+                        });
+                });
+
             modelBuilder.Entity("KPIBackend.Models.Evidencia", b =>
                 {
                     b.Property<Guid>("Id")
@@ -282,15 +304,23 @@ namespace KPIBackend.Migrations
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("gen_random_uuid()");
 
+                    b.Property<DateTime?>("FechaEdicion")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<DateTime>("FechaEmision")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Mision")
                         .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("PoliticaAsociada")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
@@ -300,8 +330,8 @@ namespace KPIBackend.Migrations
 
                     b.Property<string>("Vision")
                         .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.HasKey("Id");
 
@@ -314,6 +344,7 @@ namespace KPIBackend.Migrations
                             FechaEmision = new DateTime(2026, 3, 17, 6, 0, 0, 0, DateTimeKind.Utc),
                             Mision = "Buscar la mejora tecnológica.",
                             Nombre = "Facultad de Tecnología",
+                            PoliticaAsociada = "Política 1: uso ético de la tecnología.",
                             Slogan = "Un mundo mejor con tecnología.",
                             Vision = "En 2030, ser una facultad lider en avances tecnológicos."
                         });
@@ -552,17 +583,6 @@ namespace KPIBackend.Migrations
                     b.Navigation("Periodo");
                 });
 
-            modelBuilder.Entity("KPIBackend.Models.ArchivoPoliticas", b =>
-                {
-                    b.HasOne("KPIBackend.Models.Facultad", "Facultad")
-                        .WithMany("ArchivoPoliticas")
-                        .HasForeignKey("FacultadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Facultad");
-                });
-
             modelBuilder.Entity("KPIBackend.Models.Carrera", b =>
                 {
                     b.HasOne("KPIBackend.Models.Facultad", "Facultad")
@@ -772,8 +792,6 @@ namespace KPIBackend.Migrations
 
             modelBuilder.Entity("KPIBackend.Models.Facultad", b =>
                 {
-                    b.Navigation("ArchivoPoliticas");
-
                     b.Navigation("Carreras");
 
                     b.Navigation("Directrices");

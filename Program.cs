@@ -11,7 +11,7 @@ using System.Reflection;
 using System.Text;
 
 //Lectura local del archivo .env (no es necesario en entorno de producción)
-//DotNetEnv.Env.Load();
+DotNetEnv.Env.Load();
 
 // Punto de entrada de la API.
 // Este archivo configura los servicios principales de la aplicación,
@@ -127,7 +127,7 @@ builder.Services.AddScoped<IComentarioRepository, ComentarioRepository>();
 builder.Services.AddScoped<IBaseRepository<Rol>, BaseRepository<Rol>>();
 builder.Services.AddScoped<IBaseRepository<GrupoIndicadores>, BaseRepository<GrupoIndicadores>>();
 builder.Services.AddScoped<IEvidenciaRepository, EvidenciaRepository>();
-builder.Services.AddScoped<IBaseRepository<EventoCalendario>, BaseRepository<EventoCalendario>>();
+builder.Services.AddScoped<IArchivoPoliticasRepository, ArchivoPoliticasRepository>();
 
 
 // Configura la política CORS para permitir la comunicación
