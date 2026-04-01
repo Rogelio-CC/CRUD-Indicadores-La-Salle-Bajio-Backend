@@ -23,6 +23,11 @@ namespace KPIBackend.Controllers
         private readonly AppDbContext _context;
 
         /// <summary>
+        /// La variable EntityDisplayName de BaseController tomará el nombre colocado para los mensajes.
+        /// </summary>
+        protected override string EntityDisplayName => "La facultad";
+
+        /// <summary>
         /// Constructor del controlador de actividad.
         /// </summary>
         /// <param name="repository">Repositorio de la actividad.</param>
@@ -51,40 +56,6 @@ namespace KPIBackend.Controllers
                 .ToListAsync();
 
             return Ok(facultades);
-        }
-
-        /// <summary>
-        /// Crea una nueva facultad en el sistema.
-        /// </summary>
-        /// <param name="facultad">
-        /// Datos necesarios para registrar la facultad.
-        /// </param>
-        /// <returns>
-        /// Facultad creada.
-        /// </returns>
-        [HttpPost("crear")]
-        public new async Task<IActionResult> Create(Facultad facultad)
-        {
-            var facultadcreado = new Facultad
-            {
-                Nombre = facultad.Nombre,
-                Mision = facultad.Mision,
-                Vision = facultad.Vision,
-                Slogan = facultad.Slogan,
-            };
-
-            _context.facultades.Add(facultadcreado);
-            await _context.SaveChangesAsync();
-
-
-            return Ok(new Facultad
-            {
-                Id = facultadcreado.Id,
-                Nombre = facultadcreado.Nombre,
-                Mision = facultadcreado.Mision,
-                Vision = facultadcreado.Vision,
-                Slogan = facultadcreado.Slogan,
-            });
         }
     }
 }

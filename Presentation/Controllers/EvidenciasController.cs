@@ -59,7 +59,7 @@ namespace KPIBackend.Presentation.Controllers
                 }).ToListAsync();
 
             if (!await _context.indicadores.AnyAsync(i => i.Id == indicadorId))
-                return BadRequest("El ID del indicador especificado no existe");
+                return BadRequest("El ID del indicador especificado no existe.");
 
             return Ok(data);
         }
@@ -84,15 +84,21 @@ namespace KPIBackend.Presentation.Controllers
         public async Task<IActionResult> Upload([FromRoute] Guid indicadorId, [FromForm] UploadEvidenciaRequest request)
         {
             var file = request?.File;
+
             // Validaciones explícitas para estados de error HTTP.
             if (file == null || file.Length == 0)
                 return BadRequest("Archivo inválido");
 
-            if (file.Length > 10 * 1024 * 1024)
-                return BadRequest("El archivo excede el tamaño máximo permitido de 10 MB");
+            // Validación de múltiples archivos para las evidencias. Ayuda a que no se acepten carpetas comprimidas u otra clase de archivo no válido.
+            var allowedExtensions = new[] { ".pdf", ".jpg", ".png", ".jpeg", ".doc", ".docx", ".ppt", ".pptx", ".xls", ".xlsx" };
+            var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+            if (!allowedExtensions.Contains(extension))
+            {
+                return BadRequest("Tipo de archivo no permitido. Solo se aceptan documentos con extensión PDF, Office (.doc, .docx, .ppt, .pptx, .xls y .xlsx) e imágenes (.jpg, .jpeg y .png).");
+            }
 
             if (!await _context.indicadores.AnyAsync(i => i.Id == indicadorId))
-                return BadRequest("El ID del indicador especificado no existe");
+                return BadRequest("El ID del indicador especificado no existe.");
 
             using var ms = new MemoryStream();
             await file.CopyToAsync(ms);
@@ -116,7 +122,7 @@ namespace KPIBackend.Presentation.Controllers
             _context.evidencias.Add(evidencia);
             await _context.SaveChangesAsync();
 
-            // 👇 recalcular otra vez
+            // 👇 Recalcular estándar otra vez
             await RecalcularIndicador(indicadorId);
 
             return Ok();
@@ -141,12 +147,12 @@ namespace KPIBackend.Presentation.Controllers
                 .FirstOrDefaultAsync(e => e.Id == evidenciaId && e.IndicadorId == indicadorId);
 
             if (evidencia == null)
-                return NotFound("La evidencia especificada no existe para este indicador");
+                return NotFound("La evidencia especificada no existe para este indicador.");
 
             _context.evidencias.Remove(evidencia);
             await _context.SaveChangesAsync();
 
-            // 👇 recalcular otra vez
+            // Recalcular estándar otra vez
             await RecalcularIndicador(indicadorId);
 
             return NoContent();
@@ -173,7 +179,7 @@ namespace KPIBackend.Presentation.Controllers
                     e.IndicadorId == indicadorId);
 
             if (evidencia == null)
-                return NotFound("La evidencia especificada no existe para este indicador");
+                return NotFound("La evidencia especificada no existe para este indicador.");
 
             return File(
                 evidencia.Contenido,

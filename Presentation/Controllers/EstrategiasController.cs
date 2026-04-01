@@ -104,7 +104,7 @@ namespace KPIBackend.Controllers
                 .FirstOrDefaultAsync();
 
             if (dto == null)
-                return NotFound("La estrategia no existe");
+                return NotFound("La estrategia no existe.");
 
             return Ok(dto);
         }
@@ -123,25 +123,25 @@ namespace KPIBackend.Controllers
         {
             // Validaciones explícitas (muy importante)
             if (dto == null)
-                return BadRequest("Los datos de la estrategia no pueden estar vacíos");
+                return BadRequest("Los datos de la estrategia no pueden estar vacíos.");
 
-            if (dto.DescripcionEstrategia.Length <= 3 || dto.DescripcionEstrategia.Length > 50)
-                return BadRequest("La descripción de la estrategia debe tener al menos un carácter y no puede exceder los 50 caracteres");
+            if (dto.DescripcionEstrategia.Length <= 3 || dto.DescripcionEstrategia.Length > 100)
+                return BadRequest("La descripción de la estrategia debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
 
             if (!await _context.indicadores.AnyAsync(f => f.Id == dto.IndicadorId))
-                return BadRequest("El ID del indicador especificado no existe");
+                return BadRequest("El ID del indicador especificado no existe.");
 
             if (!await _context.usuarios.AnyAsync(u => u.Id == dto.CreadorId))
-                return BadRequest("El ID del creador especificado no existe");
+                return BadRequest("El ID del creador especificado no existe.");
 
             if (!await _context.periodos_escolares.AnyAsync(p => p.Id == dto.PeriodoId))
-                return BadRequest("El ID del periodo especificado no existe");
+                return BadRequest("El ID del periodo especificado no existe.");
 
             if (!await _context.carreras.AnyAsync(p => p.Id == dto.CarreraId))
-                return BadRequest("El ID de la carrera especificada no existe");
+                return BadRequest("El ID de la carrera especificada no existe.");
 
             if (await _context.estrategias.AnyAsync(e => e.DescripcionEstrategia.ToLower() == dto.DescripcionEstrategia.ToLower()))
-                return Conflict("Ya existe otra estrategia con esa descripción");
+                return Conflict("Ya existe otra estrategia con esa descripción.");
 
             var estrategia = new Estrategia
             {
@@ -177,7 +177,7 @@ namespace KPIBackend.Controllers
 
             // Validaciones explícitas (muy importante)
             if (estrategia == null)
-                return NotFound("La estrategia no existe");
+                return NotFound("La estrategia no existe.");
 
             var userIdFromStrategy = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var roleFromStrategy = User.FindFirst(ClaimTypes.Role)?.Value;
@@ -186,25 +186,25 @@ namespace KPIBackend.Controllers
                 return Forbid();
 
             if (dto == null)
-                return BadRequest("Los datos de la estrategia no pueden estar vacíos");
+                return BadRequest("Los datos de la estrategia no pueden estar vacíos.");
 
-            if (dto.DescripcionEstrategia.Length <= 3 || dto.DescripcionEstrategia.Length > 50)
-                return BadRequest("La descripción de la estrategia debe tener al menos un carácter y no puede exceder los 50 caracteres");
+            if (dto.DescripcionEstrategia.Length <= 3 || dto.DescripcionEstrategia.Length > 100)
+                return BadRequest("La descripción de la estrategia debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
 
             if (!await _context.indicadores.AnyAsync(f => f.Id == dto.IndicadorId))
-                return BadRequest("El ID del indicador especificado no existe");
+                return BadRequest("El ID del indicador especificado no existe.");
 
             if (!await _context.usuarios.AnyAsync(u => u.Id == dto.CreadorId))
-                return BadRequest("El ID del creador especificado no existe");
+                return BadRequest("El ID del creador especificado no existe.");
 
             if (!await _context.periodos_escolares.AnyAsync(p => p.Id == dto.PeriodoId))
-                return BadRequest("El ID del periodo especificado no existe");
+                return BadRequest("El ID del periodo especificado no existe.");
 
             if (!await _context.carreras.AnyAsync(p => p.Id == dto.CarreraId))
-                return BadRequest("El ID de la carrera especificada no existe");
+                return BadRequest("El ID de la carrera especificada no existe.");
 
             if (await _context.estrategias.AnyAsync(e => e.DescripcionEstrategia.ToLower() == dto.DescripcionEstrategia.ToLower() && e.Id != id))
-                return Conflict("Ya existe otra estrategia con esa descripción");
+                return Conflict("Ya existe otra estrategia con esa descripción.");
 
             estrategia.DescripcionEstrategia = dto.DescripcionEstrategia;
             estrategia.IndicadorId = dto.IndicadorId;

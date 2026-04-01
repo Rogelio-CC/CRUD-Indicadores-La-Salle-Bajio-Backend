@@ -57,7 +57,7 @@ namespace KPIBackend.Presentation.Controllers
                 }).ToListAsync();
 
             if (!await _context.facultades.AnyAsync(i => i.Id == facultadId))
-                return BadRequest("El ID de la facultad especificada no existe");
+                return BadRequest("El ID de la facultad especificada no existe.");
 
             return Ok(data);
         }
@@ -84,10 +84,10 @@ namespace KPIBackend.Presentation.Controllers
             var file = request?.File;
             // Validaciones explícitas para estados de error HTTP.
             if (file == null || file.Length == 0)
-                return BadRequest("Archivo inválido");
+                return BadRequest("Archivo inválido.");
 
             if (!await _context.facultades.AnyAsync(i => i.Id == facultadId))
-                return BadRequest("El ID de la facultad especificada no existe");
+                return BadRequest("El ID de la facultad especificada no existe.");
 
             // Validación de extensión PDF.
             var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
@@ -138,7 +138,7 @@ namespace KPIBackend.Presentation.Controllers
                 .FirstOrDefaultAsync(e => e.Id == archivoPoliticasId && e.FacultadId == facultadId);
 
             if (archivoPoliticas == null)
-                return NotFound("El archivo de las políticas especificado no existe para esta facultad");
+                return NotFound("El archivo de las políticas especificado no existe para esta facultad.");
 
             _context.archivoPoliticas.Remove(archivoPoliticas);
             await _context.SaveChangesAsync();
@@ -167,7 +167,7 @@ namespace KPIBackend.Presentation.Controllers
                     e.FacultadId == facultadId);
 
             if (archivoPoliticas == null)
-                return NotFound("El archivo de políticas especificado no existe para esta facultad");
+                return NotFound("El archivo de políticas especificado no existe para esta facultad.");
 
             return File(
                 archivoPoliticas.Contenido,

@@ -75,7 +75,7 @@ namespace KPIBackend.Controllers
             .FirstOrDefaultAsync();
 
             if (dto == null)
-                return NotFound("La carrera no existe");
+                return NotFound("La carrera no existe.");
 
             return Ok(dto);
         }
@@ -90,16 +90,16 @@ namespace KPIBackend.Controllers
         {
             // Validaciones explícitas para errores de estado HTTP.
             if (dto == null)
-                return BadRequest("Los datos de la carrera no pueden estar vacíos");
+                return BadRequest("Los datos de la carrera no pueden estar vacíos.");
 
-            if (dto.NombreCarrera.Length <= 3 || dto.NombreCarrera.Length > 50)
-                return BadRequest("El nombre de la carrera debe tener al menos un carácter y no puede exceder los 50 caracteres");
+            if (dto.NombreCarrera.Length <= 3 || dto.NombreCarrera.Length > 100)
+                return BadRequest("El nombre de la carrera debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
 
             if (!await _context.facultades.AnyAsync(f => f.Id == dto.FacultadId))
-                return BadRequest("El ID de la facultad especificada no existe");
+                return BadRequest("El ID de la facultad especificada no existe.");
 
             if (await _context.carreras.AnyAsync(c => c.NombreCarrera.ToLower() == dto.NombreCarrera.ToLower()))
-                return Conflict("Ya existe una carrera con ese nombre");
+                return Conflict("Ya existe una carrera con ese nombre.");
 
             var carrera = new Carrera
             {
@@ -126,19 +126,19 @@ namespace KPIBackend.Controllers
 
             // Validaciones explícitas para errores de estado HTTP.
             if (carrera == null)
-                return NotFound("La carrera no existe");
+                return NotFound("La carrera no existe.");
 
             if (dto == null)
-                return BadRequest("Los datos de la carrera no pueden estar vacíos");
+                return BadRequest("Los datos de la carrera no pueden estar vacíos.");
 
-            if (dto.NombreCarrera.Length <= 3 || dto.NombreCarrera.Length > 50)
-                return BadRequest("El nombre de la carrera debe tener al menos un carácter y no puede exceder los 50 caracteres");
+            if (dto.NombreCarrera.Length <= 3 || dto.NombreCarrera.Length > 100)
+                return BadRequest("El nombre de la carrera debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
 
             if (!await _context.facultades.AnyAsync(f => f.Id == dto.FacultadId))
-                return BadRequest("El ID de la facultad especificada no existe");
+                return BadRequest("El ID de la facultad especificada no existe.");
 
             if (await _context.carreras.AnyAsync(c => c.NombreCarrera.ToLower() == dto.NombreCarrera.ToLower() && c.Id != id))
-                return Conflict("Ya existe otra carrera con ese nombre");
+                return Conflict("Ya existe otra carrera con ese nombre.");
 
             carrera.NombreCarrera = dto.NombreCarrera;
             carrera.FacultadId = dto.FacultadId;

@@ -14,5 +14,10 @@
         /// Nombre del indicador.
         /// </summary>
         public string Nombre { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Nombre de la carrera del indicador.
+        /// </summary>
+        public string NombreCarrera { get; set; } = string.Empty;
     }
 }

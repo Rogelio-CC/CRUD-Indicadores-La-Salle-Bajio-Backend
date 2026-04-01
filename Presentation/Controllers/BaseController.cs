@@ -20,6 +20,11 @@ namespace KPIBackend.Controllers
         protected readonly IBaseRepository<TEntity> _repository;
 
         /// <summary>
+        ///Variable que ayuda a vincular los nombres de rol, facultad y período escolar para mostrar mensajes.
+        /// </summary>
+        protected virtual string EntityDisplayName => "registro";
+
+        /// <summary>
         /// Constructor del controlador base.
         /// </summary>
         /// <param name="repository">Repositorio de la entidad.</param>
@@ -47,7 +52,8 @@ namespace KPIBackend.Controllers
         public async Task<IActionResult> GetById(Guid id)
         {
             var entity = await _repository.GetByIdAsync(id);
-            return entity == null ? NotFound($"No se encontró la entidad con ID {id}.") : Ok(entity);
+
+            return entity == null ? NotFound($"{EntityDisplayName} no existe.") : Ok(entity);
         }
 
         /// <summary>
@@ -60,11 +66,20 @@ namespace KPIBackend.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
+            // Se determina el nombre amigable según el tipo de la clase
+            string entityName = entity switch
+            {
+                Facultad => "facultad",
+                Rol => "rol",
+                PeriodoEscolar => "período escolar",
+                _ => ""
+            };
+
             if (entity is IUniqueName named)
             {
                 var exists = await _repository.ExistsByNameAsync(named.Nombre);
                 if (exists)
-                    return Conflict("Ya existe un registro con ese nombre de facultad, período escolar o rol.");
+                    return Conflict($"Ya existe un registro con ese nombre de {entityName}.");
             }
 
             if (entity is IUniqueNumber groupNumber)
@@ -89,15 +104,23 @@ namespace KPIBackend.Controllers
         {
             if (!IsSameEntity(id, entity)) return BadRequest("El ID no coincide.");
 
-            if (await _repository.GetByIdAsync(id) == null) return NotFound($"No se encontró la entidad con ID {id}.");
+            if (await _repository.GetByIdAsync(id) == null) return NotFound($"{EntityDisplayName} no existe.");
 
             if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            string entityName = entity switch
+            {
+                Facultad => "facultad",
+                Rol => "rol",
+                PeriodoEscolar => "período escolar",
+                _ => ""
+            };
 
             if (entity is IUniqueName named)
             {
                 var exists = await _repository.ExistsByNameAsyncExceptId(named.Nombre, id);
                 if (exists)
-                    return Conflict("Ya existe otro registro con ese nombre de facultad, período escolar o rol.");
+                    return Conflict($"Ya existe otro registro con ese nombre de {entityName}.");
             }
 
             if (entity is IUniqueNumber groupNumber)
@@ -120,7 +143,7 @@ namespace KPIBackend.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             var entity = await _repository.GetByIdAsync(id);
-            if (entity == null) return NotFound("No se encontró la entidad.");
+            if (entity == null) return NotFound($"{EntityDisplayName} no se encontró.");
 
             if (entity is IOwnedEntity owned)
             {

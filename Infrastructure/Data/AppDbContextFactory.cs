@@ -30,7 +30,7 @@ namespace KPIBackend.Data
             // para que el valor no sea expuesto en el código. Si se hacen migraciones y se desea subir cambios al repositorio,
             // se debe quitar el valor primero por lo antes mencionado.
             var connectionUrl = Environment.GetEnvironmentVariable("DATABASE_URL")
-                ?? "postgresql://neondb_owner:npg_lTp7da1BgyHP@ep-rough-cherry-a8cxocab-pooler.eastus2.azure.neon.tech/kpi_db_indicadores_salle?sslmode=require&channel_binding=require";
+                ?? "<poner la cadena de valor de Neon aquí>";
 
             // Para que la cadena de Neon se reconozca correctamente en este proyecto, se necesita convertir la cadena de tal manera que la configuración
             // local de PostreSQL permite ese valor y poder hacer migraciones en Neon.

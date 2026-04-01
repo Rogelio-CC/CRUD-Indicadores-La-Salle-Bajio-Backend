@@ -23,6 +23,11 @@ namespace KPIBackend.Controllers
         private readonly AppDbContext _context;
 
         /// <summary>
+        /// La variable EntityDisplayName de BaseController tomará el nombre colocado para los mensajes.
+        /// </summary>
+        protected override string EntityDisplayName => "El período escolar";
+
+        /// <summary>
         /// Constructor del controlador de actividad.
         /// </summary>
         /// <param name="repository">Repositorio del período escolar.</param>

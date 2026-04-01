@@ -106,7 +106,7 @@ namespace KPIBackend.Controllers
                 .FirstOrDefaultAsync();
 
             if (dto == null)
-                return NotFound("La actividad no existe");
+                return NotFound("La actividad no existe.");
 
             return Ok(dto);
         }
@@ -121,46 +121,46 @@ namespace KPIBackend.Controllers
         {
             // Validaciones explícitas para errores de estado HTTP.
             if (string.IsNullOrWhiteSpace(dto.DescripcionActividad))
-                return BadRequest("La descripción de la actividad es obligatoria");
+                return BadRequest("La descripción de la actividad es obligatoria.");
 
-            if(dto.DescripcionActividad.Length <= 3 || dto.DescripcionActividad.Length > 50)
-                return BadRequest("La descripción de la actividad debe tener al menos un carácter y no puede exceder los 50 caracteres");
+            if(dto.DescripcionActividad.Length <= 3 || dto.DescripcionActividad.Length > 100)
+                return BadRequest("La descripción de la actividad debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
             
             if (dto.CantidadLograda < 0)
-                return BadRequest("La cantidad lograda no puede ser negativa");
+                return BadRequest("La cantidad lograda no puede ser negativa.");
                 
             if (dto.FechaCumplimiento < DateTimeOffset.Now.Date)
-                return BadRequest("La fecha de cumplimiento no puede ser anterior a la fecha actual");
+                return BadRequest("La fecha de cumplimiento no puede ser anterior a la fecha actual.");
 
-            if (dto.FechaCumplimiento > DateTimeOffset.Now.Date.AddYears(1))
-                return BadRequest("La fecha de cumplimiento no puede ser tan lejana en el futuro");
+            if (dto.FechaCumplimiento >= DateTimeOffset.Now.Date.AddYears(1))
+                return BadRequest("La fecha de cumplimiento no puede ser tan lejana a 1 año o más en el futuro.");
 
             if (dto.EstrategiaId == Guid.Empty)
-                return BadRequest("El ID de la estrategia es obligatorio");
+                return BadRequest("El ID de la estrategia es obligatorio.");
             
             if (dto.CreadorId == Guid.Empty)
-                return BadRequest("El ID del creador es obligatorio");
+                return BadRequest("El ID del creador es obligatorio.");
 
             if (dto.PeriodoId == Guid.Empty)
-                return BadRequest("El ID del periodo es obligatorio");
+                return BadRequest("El ID del periodo es obligatorio.");
 
             if (dto.CarreraId == Guid.Empty)
-                return BadRequest("El ID de la carrera es obligatorio");
+                return BadRequest("El ID de la carrera es obligatorio.");
 
             if (!await _context.estrategias.AnyAsync(f => f.Id == dto.EstrategiaId))
-                return BadRequest("El ID de la estrategia especificada no existe");
+                return BadRequest("El ID de la estrategia especificada no existe.");
 
             if (!await _context.usuarios.AnyAsync(u => u.Id == dto.CreadorId))
-                return BadRequest("El ID del creador especificado no existe");
+                return BadRequest("El ID del creador especificado no existe.");
 
             if (!await _context.periodos_escolares.AnyAsync(p => p.Id == dto.PeriodoId))
-                return BadRequest("El ID del periodo especificado no existe");
+                return BadRequest("El ID del periodo especificado no existe.");
 
             if (!await _context.carreras.AnyAsync(p => p.Id == dto.CarreraId))
-                return BadRequest("El ID de la carrera especificada no existe");
+                return BadRequest("El ID de la carrera especificada no existe.");
 
             if (await _context.actividades.AnyAsync(e => e.DescripcionActividad.ToLower() == dto.DescripcionActividad.ToLower()))
-                return Conflict("Ya existe una actividad con esa descripción");
+                return Conflict("Ya existe una actividad con esa descripción.");
 
 
             var actividad = new Actividad
@@ -204,46 +204,46 @@ namespace KPIBackend.Controllers
                 return Forbid();
 
             if (string.IsNullOrWhiteSpace(dto.DescripcionActividad))
-                return BadRequest("La descripción de la actividad es obligatoria");
+                return BadRequest("La descripción de la actividad es obligatoria.");
 
-            if(dto.DescripcionActividad.Length <= 3 || dto.DescripcionActividad.Length > 50)
-                return BadRequest("La descripción de la actividad debe tener al menos un carácter y no puede exceder los 50 caracteres");
+            if(dto.DescripcionActividad.Length <= 3 || dto.DescripcionActividad.Length > 100)
+                return BadRequest("La descripción de la actividad debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
             
             if (dto.CantidadLograda < 0)
-                return BadRequest("La cantidad lograda no puede ser negativa");
+                return BadRequest("La cantidad lograda no puede ser negativa.");
 
             if (dto.FechaCumplimiento < DateTimeOffset.Now.Date)
-                return BadRequest("La fecha de cumplimiento no puede ser anterior a la fecha actual");
+                return BadRequest("La fecha de cumplimiento no puede ser anterior a la fecha actual.");
 
-            if (dto.FechaCumplimiento > DateTimeOffset.Now.Date.AddYears(1))
-                return BadRequest("La fecha de cumplimiento no puede ser tan lejana en el futuro");
+            if (dto.FechaCumplimiento >= DateTimeOffset.Now.Date.AddYears(1))
+                return BadRequest("La fecha de cumplimiento no puede  ser tan lejana a 1 año o más en el futuro.");
 
             if (dto.EstrategiaId == Guid.Empty)
-                return BadRequest("El ID de la estrategia es obligatorio");
+                return BadRequest("El ID de la estrategia es obligatorio.");
             
             if (dto.CreadorId == Guid.Empty)
-                return BadRequest("El ID del creador es obligatorio");
+                return BadRequest("El ID del creador es obligatorio.");
 
             if (dto.PeriodoId == Guid.Empty)
-                return BadRequest("El ID del periodo es obligatorio");
+                return BadRequest("El ID del periodo es obligatorio.");
 
             if (dto.CarreraId == Guid.Empty)
-                return BadRequest("El ID de la carrera es obligatorio");
+                return BadRequest("El ID de la carrera es obligatorio.");
 
             if (!await _context.estrategias.AnyAsync(f => f.Id == dto.EstrategiaId))
-                return BadRequest("El ID de la estrategia especificada no existe");
+                return BadRequest("El ID de la estrategia especificada no existe.");
 
             if (!await _context.usuarios.AnyAsync(u => u.Id == dto.CreadorId))
-                return BadRequest("El ID del creador especificado no existe");
+                return BadRequest("El ID del creador especificado no existe.");
 
             if (!await _context.periodos_escolares.AnyAsync(p => p.Id == dto.PeriodoId))
-                return BadRequest("El ID del periodo especificado no existe");
+                return BadRequest("El ID del periodo especificado no existe.");
 
             if (!await _context.carreras.AnyAsync(p => p.Id == dto.CarreraId))
-                return BadRequest("El ID de la carrera especificada no existe");
+                return BadRequest("El ID de la carrera especificada no existe.");
             
             if (await _context.actividades.AnyAsync(e => e.DescripcionActividad.ToLower() == dto.DescripcionActividad.ToLower() && e.Id != id))
-                return Conflict("Ya existe otra actividad con esa descripción");
+                return Conflict("Ya existe otra actividad con esa descripción.");
 
             actividad.DescripcionActividad = dto.DescripcionActividad;
             actividad.CantidadLograda = dto.CantidadLograda;

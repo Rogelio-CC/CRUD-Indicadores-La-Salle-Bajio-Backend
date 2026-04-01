@@ -81,7 +81,7 @@ namespace KPIBackend.Controllers
             .FirstOrDefaultAsync();
 
             if (dto == null)
-                return NotFound("El comentario no existe");
+                return NotFound("El comentario no existe.");
 
             return Ok(dto);
         }
@@ -96,19 +96,19 @@ namespace KPIBackend.Controllers
         {
             // Validaciones explícitas para errores de estado HTTP.
             if (dto == null)
-                return BadRequest("Los datos del comentario no pueden estar vacíos");
+                return BadRequest("Los datos del comentario no pueden estar vacíos.");
 
             if (dto.Contenido.Length <= 3 || dto.Contenido.Length > 200)
-                return BadRequest("El contenido del comentario debe tener al menos un carácter y no puede exceder los 200 caracteres");
+                return BadRequest("El contenido del comentario debe tener al menos 3 caracteres y no puede exceder los 200 caracteres.");
 
             if (dto.TipoObjetivo != "Directriz" && dto.TipoObjetivo != "Actividad" && dto.TipoObjetivo != "Estrategia")
-                return BadRequest("El tipo de objetivo debe ser 'Directriz', 'Actividad' o 'Estrategia'");
+                return BadRequest("El tipo de objetivo debe ser 'Directriz', 'Actividad' o 'Estrategia'.");
 
             if (!await _context.usuarios.AnyAsync(f => f.Id == dto.CreadorId))
-                return BadRequest("El ID del usuario especificado no existe");
+                return BadRequest("El ID del usuario especificado no existe.");
 
             if (await _context.comentarios.AnyAsync(d => d.Contenido.ToLower() == dto.Contenido.ToLower()))
-                return Conflict("Ya existe un comentario con ese contenido");
+                return Conflict("Ya existe un comentario con ese contenido.");
 
             var comentario = new Comentario
             {
@@ -138,7 +138,7 @@ namespace KPIBackend.Controllers
 
             // Validaciones explícitas para errores de estado HTTP.
             if (comentario == null)
-                return NotFound("El comentario no existe");
+                return NotFound("El comentario no existe.");
 
             var userIdFromComment = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var roleFromComment = User.FindFirst(ClaimTypes.Role)?.Value;
@@ -147,19 +147,19 @@ namespace KPIBackend.Controllers
                 return Forbid();
 
             if (dto == null)
-                return BadRequest("Los datos del comentario no pueden estar vacíos");
+                return BadRequest("Los datos del comentario no pueden estar vacíos.");
 
             if (dto.Contenido.Length <= 3 || dto.Contenido.Length > 200)
-                return BadRequest("El contenido del comentario debe tener al menos un carácter y no puede exceder los 200 caracteres");
+                return BadRequest("El contenido del comentario debe tener al menos 3 caracteres y no puede exceder los 200 caracteres.");
 
             if (dto.TipoObjetivo != "Directriz" && dto.TipoObjetivo != "Actividad" && dto.TipoObjetivo != "Estrategia")
-                return BadRequest("El tipo de objetivo debe ser 'Directriz', 'Actividad' o 'Estrategia'");
+                return BadRequest("El tipo de objetivo debe ser 'Directriz', 'Actividad' o 'Estrategia'.");
 
             if (!await _context.usuarios.AnyAsync(f => f.Id == dto.CreadorId))
-                return BadRequest("El ID del usuario especificado no existe");
+                return BadRequest("El ID del usuario especificado no existe.");
 
             if (await _context.comentarios.AnyAsync(d => d.Contenido.ToLower() == dto.Contenido.ToLower() && d.Id != id))
-                return Conflict("Ya existe un comentario con ese contenido");
+                return Conflict("Ya existe un comentario con ese contenido.");
 
             comentario.Contenido = dto.Contenido;
             comentario.TipoObjetivo = dto.TipoObjetivo;

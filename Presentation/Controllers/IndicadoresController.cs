@@ -129,7 +129,7 @@ namespace KPIBackend.Controllers
             .FirstOrDefaultAsync();
 
             if (dto == null)
-                return NotFound("El indicador no existe");
+                return NotFound("El indicador no existe.");
 
             return Ok(dto);
         }
@@ -152,58 +152,58 @@ namespace KPIBackend.Controllers
         {
             // Validaciones explícitas para errores de estado HTTP.
             if (string.IsNullOrWhiteSpace(dto.DescripcionIndicador))
-                return BadRequest("La descripción del indicador es obligatoria");
+                return BadRequest("La descripción del indicador es obligatoria.");
 
-            if (dto.DescripcionIndicador.Length <= 3 || dto.DescripcionIndicador.Length > 50)
-                return BadRequest("La descripción del indicador debe tener al menos un carácter y no puede exceder los 50 caracteres");
+            if (dto.DescripcionIndicador.Length <= 3 || dto.DescripcionIndicador.Length > 100)
+                return BadRequest("La descripción del indicador debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
 
             if (string.IsNullOrWhiteSpace(dto.FrecuenciaControl))
-                return BadRequest("La frecuencia de control del indicador es obligatoria");
+                return BadRequest("La frecuencia de control del indicador es obligatoria.");
 
             if (dto.FrecuenciaControl != "Anual" && dto.FrecuenciaControl != "Mensual" && dto.FrecuenciaControl != "Semanal" && dto.FrecuenciaControl != "Diario")
-                return BadRequest("El tipo de frecuencia debe ser 'Anual', 'Mensual', 'Semanal' o 'Diario'");
+                return BadRequest("El tipo de frecuencia debe ser 'Anual', 'Mensual', 'Semanal' o 'Diario'.");
 
             if (dto.CantidadEvidencias <= 0)
-                return BadRequest("La cantidad de evidencias no puede ser negativa o cero");
+                return BadRequest("La cantidad de evidencias no puede ser negativa o cero.");
 
             if (dto.FechaCumplimiento < DateTimeOffset.Now.Date)
-                return BadRequest("La fecha de cumplimiento no puede ser anterior a la fecha actual");
+                return BadRequest("La fecha de cumplimiento no puede ser anterior a la fecha actual.");
 
-            if (dto.FechaCumplimiento > DateTimeOffset.Now.Date.AddYears(1))
-                return BadRequest("La fecha de cumplimiento no puede ser tan lejana en el futuro");
+            if (dto.FechaCumplimiento >= DateTimeOffset.Now.Date.AddYears(1))
+                return BadRequest("La fecha de cumplimiento no puede ser tan lejana a 1 año o más en el futuro.");
 
             if (dto.DirectrizId == Guid.Empty)
-                return BadRequest("El ID de la directriz es obligatorio");
+                return BadRequest("El ID de la directriz es obligatorio.");
 
             if (dto.GrupoId == Guid.Empty)
-                return BadRequest("El ID del grupo de indicadores es obligatorio");
+                return BadRequest("El ID del grupo de indicadores es obligatorio.");
 
             if (dto.CreadorId == Guid.Empty)
-                return BadRequest("El ID del creador es obligatorio");
+                return BadRequest("El ID del creador es obligatorio.");
 
             if (dto.PeriodoId == Guid.Empty)
-                return BadRequest("El ID del periodo es obligatorio");
+                return BadRequest("El ID del periodo es obligatorio.");
 
             if (dto.CarreraId == Guid.Empty)
-                return BadRequest("El ID de la carrera es obligatorio");
+                return BadRequest("El ID de la carrera es obligatorio.");
 
             if (!await _context.carreras.AnyAsync(f => f.Id == dto.CarreraId))
-                return BadRequest("El ID de la carrera especificada no existe");
+                return BadRequest("El ID de la carrera especificada no existe.");
 
             if (!await _context.usuarios.AnyAsync(u => u.Id == dto.CreadorId))
-                return BadRequest("El ID del creador especificado no existe");
+                return BadRequest("El ID del creador especificado no existe.");
 
             if (!await _context.periodos_escolares.AnyAsync(p => p.Id == dto.PeriodoId))
-                return BadRequest("El ID del periodo especificado no existe");
+                return BadRequest("El ID del periodo especificado no existe.");
 
             if (!await _context.grupo_indicadores.AnyAsync(p => p.Id == dto.GrupoId))
-                return BadRequest("El ID del grupo de indicadores especificado no existe");
+                return BadRequest("El ID del grupo de indicadores especificado no existe.");
 
             if (!await _context.directrices.AnyAsync(p => p.Id == dto.DirectrizId))
-                return BadRequest("El ID de la directriz especificada no existe");
+                return BadRequest("El ID de la directriz especificada no existe.");
 
             if (await _context.indicadores.AnyAsync(e => e.CarreraId == dto.CarreraId && e.DescripcionIndicador == dto.DescripcionIndicador))
-                return Conflict("Esta carrera ya cuenta con este indicador");
+                return Conflict("Esta carrera ya cuenta con este indicador.");
 
 
             var indicador = new Indicador
@@ -268,7 +268,7 @@ namespace KPIBackend.Controllers
 
             // Validaciones explícitas para errores de estado HTTP.
             if (indicador == null)
-                return NotFound("El indicador no existe");
+                return NotFound("El indicador no existe.");
 
             var userIdFromIndicator = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var roleFromIndicator = User.FindFirst(ClaimTypes.Role)?.Value;
@@ -277,58 +277,58 @@ namespace KPIBackend.Controllers
                 return Forbid();
 
             if (string.IsNullOrWhiteSpace(dto.DescripcionIndicador))
-                return BadRequest("La descripción del indicador es obligatoria");
+                return BadRequest("La descripción del indicador es obligatoria.");
 
-            if (dto.DescripcionIndicador.Length <= 3 || dto.DescripcionIndicador.Length > 50)
-                return BadRequest("La descripción del indicador debe tener al menos un carácter y no puede exceder los 50 caracteres");
+            if (dto.DescripcionIndicador.Length <= 3 || dto.DescripcionIndicador.Length > 100)
+                return BadRequest("La descripción del indicador debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
 
             if (string.IsNullOrWhiteSpace(dto.FrecuenciaControl))
-                return BadRequest("La frecuencia de control del indicador es obligatoria");
+                return BadRequest("La frecuencia de control del indicador es obligatoria.");
 
             if (dto.FrecuenciaControl != "Anual" && dto.FrecuenciaControl != "Mensual" && dto.FrecuenciaControl != "Semanal" && dto.FrecuenciaControl != "Diario")
-                return BadRequest("El tipo de frecuencia debe ser 'Anual', 'Mensual', 'Semanal' o 'Diario'");
+                return BadRequest("El tipo de frecuencia debe ser 'Anual', 'Mensual', 'Semanal' o 'Diario'.");
 
             if (dto.CantidadEvidencias <= 0)
-                return BadRequest("La cantidad de evidencias no puede ser negativa o cero");
+                return BadRequest("La cantidad de evidencias no puede ser negativa o cero.");
 
             if (dto.FechaCumplimiento < DateTimeOffset.Now.Date)
-                return BadRequest("La fecha de cumplimiento no puede ser anterior a la fecha actual");
+                return BadRequest("La fecha de cumplimiento no puede ser anterior a la fecha actual.");
 
-            if (dto.FechaCumplimiento > DateTimeOffset.Now.Date.AddYears(1))
-                return BadRequest("La fecha de cumplimiento no puede ser tan lejana en el futuro");
+            if (dto.FechaCumplimiento >= DateTimeOffset.Now.Date.AddYears(1))
+                return BadRequest("La fecha de cumplimiento no puede ser tan lejana a 1 año o más en el futuro.");
 
             if (dto.DirectrizId == Guid.Empty)
-                return BadRequest("El ID de la directriz es obligatorio");
+                return BadRequest("El ID de la directriz es obligatorio.");
 
             if (dto.GrupoId == Guid.Empty)
-                return BadRequest("El ID del grupo de indicadores es obligatorio");
+                return BadRequest("El ID del grupo de indicadores es obligatorio.");
 
             if (dto.CreadorId == Guid.Empty)
-                return BadRequest("El ID del creador es obligatorio");
+                return BadRequest("El ID del creador es obligatorio.");
 
             if (dto.PeriodoId == Guid.Empty)
-                return BadRequest("El ID del periodo es obligatorio");
+                return BadRequest("El ID del periodo es obligatorio.");
 
             if (dto.CarreraId == Guid.Empty)
-                return BadRequest("El ID de la carrera es obligatorio");
+                return BadRequest("El ID de la carrera es obligatorio.");
 
             if (!await _context.carreras.AnyAsync(f => f.Id == dto.CarreraId))
-                return BadRequest("El ID de la carrera especificada no existe");
+                return BadRequest("El ID de la carrera especificada no existe.");
 
             if (!await _context.usuarios.AnyAsync(u => u.Id == dto.CreadorId))
-                return BadRequest("El ID del creador especificado no existe");
+                return BadRequest("El ID del creador especificado no existe.");
 
             if (!await _context.periodos_escolares.AnyAsync(p => p.Id == dto.PeriodoId))
-                return BadRequest("El ID del periodo especificado no existe");
+                return BadRequest("El ID del periodo especificado no existe.");
 
             if (!await _context.grupo_indicadores.AnyAsync(p => p.Id == dto.GrupoId))
-                return BadRequest("El ID del grupo de indicadores especificado no existe");
+                return BadRequest("El ID del grupo de indicadores especificado no existe.");
 
             if (!await _context.directrices.AnyAsync(p => p.Id == dto.DirectrizId))
-                return BadRequest("El ID de la directriz especificada no existe");
+                return BadRequest("El ID de la directriz especificada no existe.");
 
             if (await _context.indicadores.AnyAsync(e => e.CarreraId == dto.CarreraId && e.DescripcionIndicador == dto.DescripcionIndicador && e.Id != id))
-                return Conflict("Esta carrera ya cuenta con este indicador");
+                return Conflict("Esta carrera ya cuenta con este indicador.");
 
             indicador.DescripcionIndicador = dto.DescripcionIndicador;
             indicador.Estandar = dto.Estandar;
@@ -361,7 +361,8 @@ namespace KPIBackend.Controllers
                 .Select(u => new IndicadorComboDTO
                 {
                     Id = u.Id,
-                    Nombre = u.DescripcionIndicador
+                    Nombre = u.DescripcionIndicador,
+                    NombreCarrera = u.Carrera.NombreCarrera
                 })
                 .ToListAsync();
 

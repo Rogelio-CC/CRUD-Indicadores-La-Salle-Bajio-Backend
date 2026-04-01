@@ -95,7 +95,7 @@ namespace KPIBackend.Controllers
             .FirstOrDefaultAsync();
 
             if (dto == null)
-                return NotFound("La directriz no existe");
+                return NotFound("La directriz no existe.");
 
             return Ok(dto);
         }
@@ -114,22 +114,22 @@ namespace KPIBackend.Controllers
         {
             // Validaciones explícitas para errores de estado HTTP.
             if (dto == null)
-                return BadRequest("Los datos de la directriz no pueden estar vacíos");
+                return BadRequest("Los datos de la directriz no pueden estar vacíos.");
 
-             if(dto.Descripcion.Length <= 3 || dto.Descripcion.Length > 50)
-                return BadRequest("La descripción de la directriz debe tener al menos un carácter y no puede exceder los 50 caracteres");
+             if(dto.Descripcion.Length <= 3 || dto.Descripcion.Length > 100)
+                return BadRequest("La descripción de la directriz debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
                 
             if (!await _context.facultades.AnyAsync(f => f.Id == dto.FacultadId))
-                return BadRequest("El ID de la facultad especificada no existe");
+                return BadRequest("El ID de la facultad especificada no existe.");
 
             if (!await _context.usuarios.AnyAsync(u => u.Id == dto.CreadorId))
-                return BadRequest("El ID del creador especificado no existe");
+                return BadRequest("El ID del creador especificado no existe.");
 
             if (!await _context.periodos_escolares.AnyAsync(p => p.Id == dto.PeriodoId))
-                return BadRequest("El ID del periodo especificado no existe");
+                return BadRequest("El ID del periodo especificado no existe.");
             
             if (await _context.directrices.AnyAsync(d => d.Descripcion.ToLower() == dto.Descripcion.ToLower()))
-                return Conflict("Ya existe una directriz con esa descripción");
+                return Conflict("Ya existe una directriz con esa descripción.");
 
             var directriz = new Directriz
             {
@@ -164,7 +164,7 @@ namespace KPIBackend.Controllers
 
             // Validaciones explícitas para errores de estado HTTP.
             if (directriz == null)
-                return NotFound("La directriz no existe");
+                return NotFound("La directriz no existe.");
 
             var userIdFromGuideline = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var roleFromGuideline = User.FindFirst(ClaimTypes.Role)?.Value;
@@ -173,22 +173,22 @@ namespace KPIBackend.Controllers
                 return Forbid();
 
             if (dto == null)
-                return BadRequest("Los datos de la directriz no pueden estar vacíos");
+                return BadRequest("Los datos de la directriz no pueden estar vacíos.");
 
-            if(dto.Descripcion.Length <= 3 || dto.Descripcion.Length > 50)
-                return BadRequest("La descripción de la directriz debe tener al menos un carácter y no puede exceder los 50 caracteres");
+            if(dto.Descripcion.Length <= 3 || dto.Descripcion.Length > 100)
+                return BadRequest("La descripción de la directriz debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
 
             if (!await _context.facultades.AnyAsync(f => f.Id == dto.FacultadId))
-                return BadRequest("El ID de la facultad especificada no existe");
+                return BadRequest("El ID de la facultad especificada no existe.");
 
             if (!await _context.usuarios.AnyAsync(u => u.Id == dto.CreadorId))
-                return BadRequest("El ID del creador especificado no existe");
+                return BadRequest("El ID del creador especificado no existe.");
 
             if (!await _context.periodos_escolares.AnyAsync(p => p.Id == dto.PeriodoId))
-                return BadRequest("El ID del periodo especificado no existe");
+                return BadRequest("El ID del periodo especificado no existe.");
 
             if (await _context.directrices.AnyAsync(d => d.Descripcion.ToLower() == dto.Descripcion.ToLower() && d.Id != id))
-                return Conflict("Ya existe otra directriz con esa descripción");
+                return Conflict("Ya existe otra directriz con esa descripción.");
 
             directriz.Descripcion = dto.Descripcion;
             directriz.FacultadId = dto.FacultadId;

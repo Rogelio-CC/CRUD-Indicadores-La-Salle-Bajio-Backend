@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace KPIBackend.Models
 {
     /// <summary>
-    /// Representa un rol dentro del sistema que define los permisos
+    /// Representa un rol dentro del sistema.
     /// asignados a un usuario.
     /// </summary>
     public class Rol : IEntity, IUniqueName

@@ -99,7 +99,7 @@ namespace KPIBackend.Controllers
             .FirstOrDefaultAsync();
 
             if (dto == null)
-                return NotFound("El usuario no existe");
+                return NotFound("El usuario no existe.");
 
             return Ok(dto);
         }
@@ -125,34 +125,34 @@ namespace KPIBackend.Controllers
         {
             // Validaciones explícitas para errores de estado HTTP.
             if (dto == null)
-                return BadRequest("Los datos del usuario no pueden estar vacíos");
+                return BadRequest("Los datos del usuario no pueden estar vacíos.");
 
             if (dto.NombreUsuario.Length <= 3 || dto.NombreUsuario.Length > 100)
-                return BadRequest("El nombre de usuario debe tener al menos un carácter y no puede exceder los 100 caracteres");
+                return BadRequest("El nombre de usuario debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
 
             if (dto.CorreoInstitucional.Length <= 3 || dto.CorreoInstitucional.Length > 100)
-                return BadRequest("El correo institucional debe tener al menos un carácter y no puede exceder los 100 caracteres");
+                return BadRequest("El correo institucional debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
 
             if (!dto.CorreoInstitucional.Contains("@"))
-                return BadRequest("El correo institucional debe ser una dirección de correo electrónico válida");
+                return BadRequest("El correo institucional debe ser una dirección de correo electrónico válida.");
 
             if (dto.TipoUsuario != "Administrador" && dto.TipoUsuario != "Jefe_de_Pregrado" && dto.TipoUsuario != "Director" && dto.TipoUsuario != "Investigador" && dto.TipoUsuario != "Maestro")
-                return BadRequest("El tipo de usuario debe ser 'Administrador', 'Jefe_de_Pregrado', 'Director', 'Investigador' o 'Maestro'");
+                return BadRequest("El tipo de usuario debe ser 'Administrador', 'Jefe_de_Pregrado', 'Director', 'Investigador' o 'Maestro'.");
 
             if (!await _context.roles.AnyAsync(f => f.Id == dto.RolId))
-                return BadRequest("El ID del rol especificado no existe");
+                return BadRequest("El ID del rol especificado no existe.");
 
             if (!await _context.facultades.AnyAsync(u => u.Id == dto.FacultadId))
-                return BadRequest("El ID de la facultad especificada no existe");
+                return BadRequest("El ID de la facultad especificada no existe.");
 
             if (!await _context.carreras.AnyAsync(p => p.Id == dto.CarreraId))
-                return BadRequest("El ID de la carrera especificada no existe");
+                return BadRequest("El ID de la carrera especificada no existe.");
 
             if (await _context.usuarios.AnyAsync(e => e.NombreUsuario.ToLower() == dto.NombreUsuario.ToLower()))
-                return Conflict("Ya existe otro usuario con ese nombre de usuario");
+                return Conflict("Ya existe otro usuario con ese nombre de usuario.");
 
             if (await _context.usuarios.AnyAsync(e => e.CorreoInstitucional.ToLower() == dto.CorreoInstitucional.ToLower()))
-                return Conflict("Ya existe otro usuario con ese correo institucional");
+                return Conflict("Ya existe otro usuario con ese correo institucional.");
 
             var usuario = new Usuario
             {
@@ -189,37 +189,37 @@ namespace KPIBackend.Controllers
 
             // Validaciones explícitas para errores de estado HTTP.
             if (usuario == null)
-                return NotFound("El usuario no existe");
+                return NotFound("El usuario no existe.");
 
             if (dto == null)
-                return BadRequest("Los datos del usuario no pueden estar vacíos");
+                return BadRequest("Los datos del usuario no pueden estar vacíos.");
 
             if (dto.NombreUsuario.Length <= 3 || dto.NombreUsuario.Length > 100)
-                return BadRequest("El nombre de usuario debe tener al menos un carácter y no puede exceder los 100 caracteres");
+                return BadRequest("El nombre de usuario debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
 
             if (dto.CorreoInstitucional.Length <= 3 || dto.CorreoInstitucional.Length > 100)
-                return BadRequest("El correo institucional debe tener al menos un carácter y no puede exceder los 100 caracteres");
+                return BadRequest("El correo institucional debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
 
             if (!dto.CorreoInstitucional.Contains("@"))
-                return BadRequest("El correo institucional debe ser una dirección de correo electrónico válida");
+                return BadRequest("El correo institucional debe ser una dirección de correo electrónico válida.");
 
             if (dto.TipoUsuario != "Administrador" && dto.TipoUsuario != "Jefe_de_Pregrado" && dto.TipoUsuario != "Director" && dto.TipoUsuario != "Investigador" && dto.TipoUsuario != "Maestro")
-                return BadRequest("El tipo de usuario debe ser 'Administrador', 'Jefe_de_Pregrado', 'Director', 'Investigador' o 'Maestro'");
+                return BadRequest("El tipo de usuario debe ser 'Administrador', 'Jefe_de_Pregrado', 'Director', 'Investigador' o 'Maestro'.");
 
             if (!await _context.roles.AnyAsync(f => f.Id == dto.RolId))
-                return BadRequest("El ID del rol especificado no existe");
+                return BadRequest("El ID del rol especificado no existe.");
 
             if (!await _context.facultades.AnyAsync(u => u.Id == dto.FacultadId))
-                return BadRequest("El ID de la facultad especificada no existe");
+                return BadRequest("El ID de la facultad especificada no existe.");
 
             if (!await _context.carreras.AnyAsync(p => p.Id == dto.CarreraId))
-                return BadRequest("El ID de la carrera especificada no existe");
+                return BadRequest("El ID de la carrera especificada no existe.");
 
             if (await _context.usuarios.AnyAsync(e => e.CorreoInstitucional.ToLower() == dto.CorreoInstitucional.ToLower() && e.Id != id))
-                return Conflict("Ya existe otro usuario con ese correo institucional");
+                return Conflict("Ya existe otro usuario con ese correo institucional.");
 
             if (await _context.usuarios.AnyAsync(e => e.NombreUsuario.ToLower() == dto.NombreUsuario.ToLower() && e.Id != id))
-                return Conflict("Ya existe otro usuario con ese nombre de usuario");
+                return Conflict("Ya existe otro usuario con ese nombre de usuario.");
 
             usuario.NombreUsuario = dto.NombreUsuario;
             usuario.CorreoInstitucional = dto.CorreoInstitucional;
@@ -271,7 +271,7 @@ namespace KPIBackend.Controllers
                 .FirstOrDefaultAsync(u => u.CorreoInstitucional == email);
 
             if (user == null)
-                return NotFound("El usuario no existe");
+                return NotFound("El usuario no existe.");
 
             return Ok(new UsuarioDto
             {
