@@ -2,6 +2,7 @@ using KPIBackend.Models;
 using KPIBackend.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 
 namespace KPIBackend.Controllers
 {
@@ -77,6 +78,8 @@ namespace KPIBackend.Controllers
 
             if (entity is IUniqueName named)
             {
+                // Se limpia el nombre antes de validar y guardar
+                named.Nombre = limpiaEspacios(named.Nombre);
                 var exists = await _repository.ExistsByNameAsync(named.Nombre);
                 if (exists)
                     return Conflict($"Ya existe un registro con ese nombre de {entityName}.");
@@ -84,6 +87,8 @@ namespace KPIBackend.Controllers
 
             if (entity is IUniqueNumber groupNumber)
             {
+                // Se limpia la descripción antes de validar y guardar
+                groupNumber.DescripcionGrupo = limpiaEspacios(groupNumber.DescripcionGrupo);
                 var exists = await _repository.ExistsByGroupNumberAsync(groupNumber.NumeroGrupo, groupNumber.DescripcionGrupo);
                 if (exists)
                     return Conflict("Ya existe un registro con ese número de grupo de indicadores o con esa descripción del grupo.");
@@ -118,6 +123,7 @@ namespace KPIBackend.Controllers
 
             if (entity is IUniqueName named)
             {
+                named.Nombre = limpiaEspacios(named.Nombre);
                 var exists = await _repository.ExistsByNameAsyncExceptId(named.Nombre, id);
                 if (exists)
                     return Conflict($"Ya existe otro registro con ese nombre de {entityName}.");
@@ -125,6 +131,7 @@ namespace KPIBackend.Controllers
 
             if (entity is IUniqueNumber groupNumber)
             {
+                groupNumber.DescripcionGrupo = limpiaEspacios(groupNumber.DescripcionGrupo);
                 var exists = await _repository.ExistsByGroupNumberAsyncExceptId(groupNumber.NumeroGrupo, id, groupNumber.DescripcionGrupo);
                 if (exists)
                     return Conflict("Ya existe otro registro con ese número de grupo de indicadores con esa descripción del grupo.");
@@ -178,6 +185,12 @@ namespace KPIBackend.Controllers
             var entityId = (Guid)(prop.GetValue(entity) ?? Guid.Empty);
             return entityId == id;
         }
+
+        /// <summary>
+        /// Limpia los espacios en blanco para válidar correctamente el nombre duplicado.
+        /// </summary>
+        /// <returns>Nombre sin espacios en blanco innecesarios.</returns>
+        private string limpiaEspacios(string texto) => Regex.Replace(texto.Trim(), @"\s+", " ");
     }
 }
 

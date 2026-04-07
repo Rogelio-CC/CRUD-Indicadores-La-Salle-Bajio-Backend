@@ -1,3 +1,4 @@
+using KPIBackend.Application.DTOs.ListaCombos;
 using KPIBackend.Application.DTOs.Usuarios;
 using KPIBackend.Data;
 using KPIBackend.Models;
@@ -5,7 +6,7 @@ using KPIBackend.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using KPIBackend.Application.DTOs.ListaCombos;
+using System.Text.RegularExpressions;
 
 namespace KPIBackend.Controllers
 {
@@ -148,7 +149,13 @@ namespace KPIBackend.Controllers
             if (!await _context.carreras.AnyAsync(p => p.Id == dto.CarreraId))
                 return BadRequest("El ID de la carrera especificada no existe.");
 
-            if (await _context.usuarios.AnyAsync(e => e.NombreUsuario.ToLower() == dto.NombreUsuario.ToLower()))
+            // Limpieza de espacios en blanco para validar correctamente el nombre duplicado.
+            var creacionNombreUsuario = limpiaEspacios(dto.NombreUsuario);
+
+            // Validación de nombre del usuario duplicado sin importar mayúsculas, minúsculas o espacios adicionales.
+            var creacionNombreUsuarioParaValidar = creacionNombreUsuario.ToLower();
+
+            if (await _context.usuarios.AnyAsync(e => e.NombreUsuario.ToLower() == creacionNombreUsuarioParaValidar))
                 return Conflict("Ya existe otro usuario con ese nombre de usuario.");
 
             if (await _context.usuarios.AnyAsync(e => e.CorreoInstitucional.ToLower() == dto.CorreoInstitucional.ToLower()))
@@ -156,7 +163,7 @@ namespace KPIBackend.Controllers
 
             var usuario = new Usuario
             {
-                NombreUsuario = dto.NombreUsuario,
+                NombreUsuario = creacionNombreUsuario, // Se asigna el nombre limpio sin espacios adicionales.
                 CorreoInstitucional = dto.CorreoInstitucional,
                 TipoUsuario = dto.TipoUsuario,
                 RolId = dto.RolId,
@@ -215,13 +222,17 @@ namespace KPIBackend.Controllers
             if (!await _context.carreras.AnyAsync(p => p.Id == dto.CarreraId))
                 return BadRequest("El ID de la carrera especificada no existe.");
 
+            var actualizacionNombreUsuario = limpiaEspacios(dto.NombreUsuario);
+
+            var actualizacionNombreUsuarioParaValidar = actualizacionNombreUsuario.ToLower();
+
+            if (await _context.usuarios.AnyAsync(e => e.NombreUsuario.ToLower() == actualizacionNombreUsuarioParaValidar && e.Id != id))
+                return Conflict("Ya existe otro usuario con ese nombre de usuario.");
+
             if (await _context.usuarios.AnyAsync(e => e.CorreoInstitucional.ToLower() == dto.CorreoInstitucional.ToLower() && e.Id != id))
                 return Conflict("Ya existe otro usuario con ese correo institucional.");
 
-            if (await _context.usuarios.AnyAsync(e => e.NombreUsuario.ToLower() == dto.NombreUsuario.ToLower() && e.Id != id))
-                return Conflict("Ya existe otro usuario con ese nombre de usuario.");
-
-            usuario.NombreUsuario = dto.NombreUsuario;
+            usuario.NombreUsuario = actualizacionNombreUsuario;
             usuario.CorreoInstitucional = dto.CorreoInstitucional;
             usuario.TipoUsuario = dto.TipoUsuario;
             usuario.RolId = dto.RolId;
@@ -284,6 +295,12 @@ namespace KPIBackend.Controllers
                 Carrera = user.Carrera.NombreCarrera
             });
         }
+
+        /// <summary>
+        /// Limpia los espacios en blanco para válidar correctamente el nombre duplicado.
+        /// </summary>
+        /// <returns>Nombre/descripción sin espacios en blanco innecesarios.</returns>
+        private string limpiaEspacios(string texto) => Regex.Replace(texto.Trim(), @"\s+", " ");
 
     }
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 
 namespace KPIBackend.Controllers
 {
@@ -98,8 +99,8 @@ namespace KPIBackend.Controllers
             if (dto == null)
                 return BadRequest("Los datos del comentario no pueden estar vacíos.");
 
-            if (dto.Contenido.Length <= 3 || dto.Contenido.Length > 200)
-                return BadRequest("El contenido del comentario debe tener al menos 3 caracteres y no puede exceder los 200 caracteres.");
+            if (dto.Contenido.Length <= 3 || dto.Contenido.Length > 1000)
+                return BadRequest("El contenido del comentario debe tener al menos 3 caracteres y no puede exceder los 1000 caracteres.");
 
             if (dto.TipoObjetivo != "Directriz" && dto.TipoObjetivo != "Actividad" && dto.TipoObjetivo != "Estrategia")
                 return BadRequest("El tipo de objetivo debe ser 'Directriz', 'Actividad' o 'Estrategia'.");
@@ -107,12 +108,18 @@ namespace KPIBackend.Controllers
             if (!await _context.usuarios.AnyAsync(f => f.Id == dto.CreadorId))
                 return BadRequest("El ID del usuario especificado no existe.");
 
-            if (await _context.comentarios.AnyAsync(d => d.Contenido.ToLower() == dto.Contenido.ToLower()))
+            // Limpieza de espacios en blanco para validar correctamente el contenido duplicado.
+            var creacionContenidoComentario = limpiaEspacios(dto.Contenido);
+
+            // Validación del contenido del comentario duplicado sin importar mayúsculas, minúsculas o espacios adicionales.
+            var creacionContenidoComentarioParaValidar = limpiaEspacios(dto.Contenido).ToLower();
+
+            if (await _context.comentarios.AnyAsync(d => d.Contenido.ToLower() == creacionContenidoComentarioParaValidar))
                 return Conflict("Ya existe un comentario con ese contenido.");
 
             var comentario = new Comentario
             {
-                Contenido = dto.Contenido,
+                Contenido = creacionContenidoComentario, // Se asigna el contenido limpio sin espacios adicionales.
                 TipoObjetivo = dto.TipoObjetivo,
                 CreadorId = dto.CreadorId,
 
@@ -149,8 +156,8 @@ namespace KPIBackend.Controllers
             if (dto == null)
                 return BadRequest("Los datos del comentario no pueden estar vacíos.");
 
-            if (dto.Contenido.Length <= 3 || dto.Contenido.Length > 200)
-                return BadRequest("El contenido del comentario debe tener al menos 3 caracteres y no puede exceder los 200 caracteres.");
+            if (dto.Contenido.Length <= 3 || dto.Contenido.Length > 1000)
+                return BadRequest("El contenido del comentario debe tener al menos 3 caracteres y no puede exceder los 1000 caracteres.");
 
             if (dto.TipoObjetivo != "Directriz" && dto.TipoObjetivo != "Actividad" && dto.TipoObjetivo != "Estrategia")
                 return BadRequest("El tipo de objetivo debe ser 'Directriz', 'Actividad' o 'Estrategia'.");
@@ -158,10 +165,14 @@ namespace KPIBackend.Controllers
             if (!await _context.usuarios.AnyAsync(f => f.Id == dto.CreadorId))
                 return BadRequest("El ID del usuario especificado no existe.");
 
-            if (await _context.comentarios.AnyAsync(d => d.Contenido.ToLower() == dto.Contenido.ToLower() && d.Id != id))
+            var actualizacionContenidoComentario = limpiaEspacios(dto.Contenido);
+
+            var actualizacionContenidoComentarioParaValidar = actualizacionContenidoComentario.ToLower();
+
+            if (await _context.comentarios.AnyAsync(d => d.Contenido.ToLower() == actualizacionContenidoComentarioParaValidar && d.Id != id))
                 return Conflict("Ya existe un comentario con ese contenido.");
 
-            comentario.Contenido = dto.Contenido;
+            comentario.Contenido = actualizacionContenidoComentario;
             comentario.TipoObjetivo = dto.TipoObjetivo;
             comentario.CreadorId = dto.CreadorId;
 
@@ -186,5 +197,11 @@ namespace KPIBackend.Controllers
 
             return Ok(objetivosComentarios);
         }
+
+        /// <summary>
+        /// Limpia los espacios en blanco para válidar correctamente el nombre duplicado.
+        /// </summary>
+        /// <returns>Contenido sin espacios en blanco innecesarios.</returns>
+        private string limpiaEspacios(string texto) => Regex.Replace(texto.Trim(), @"\s+", " ");
     }
 }

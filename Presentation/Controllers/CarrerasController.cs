@@ -6,6 +6,7 @@ using KPIBackend.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 namespace KPIBackend.Controllers
 {
@@ -92,18 +93,24 @@ namespace KPIBackend.Controllers
             if (dto == null)
                 return BadRequest("Los datos de la carrera no pueden estar vacíos.");
 
-            if (dto.NombreCarrera.Length <= 3 || dto.NombreCarrera.Length > 100)
-                return BadRequest("El nombre de la carrera debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
+            if (dto.NombreCarrera.Length <= 3 || dto.NombreCarrera.Length > 500)
+                return BadRequest("El nombre de la carrera debe tener al menos 3 caracteres y no puede exceder los 500 caracteres.");
 
             if (!await _context.facultades.AnyAsync(f => f.Id == dto.FacultadId))
                 return BadRequest("El ID de la facultad especificada no existe.");
 
-            if (await _context.carreras.AnyAsync(c => c.NombreCarrera.ToLower() == dto.NombreCarrera.ToLower()))
+            // Limpieza de espacios en blanco para validar correctamente el nombre duplicado.
+            var creacionNombreCarrera = limpiaEspacios(dto.NombreCarrera);
+
+            // Validación de nombre de carrera duplicado sin importar mayúsculas, minúsculas o espacios adicionales.
+            var creacionNombreCarreraParaValidar = creacionNombreCarrera.ToLower();
+
+            if (await _context.carreras.AnyAsync(c => c.NombreCarrera.ToLower() == creacionNombreCarreraParaValidar))
                 return Conflict("Ya existe una carrera con ese nombre.");
 
             var carrera = new Carrera
             {
-                NombreCarrera = dto.NombreCarrera,
+                NombreCarrera = creacionNombreCarrera, // Se asigna el nombre limpio sin espacios adicionales.
                 FacultadId = dto.FacultadId,
             };
 
@@ -131,16 +138,20 @@ namespace KPIBackend.Controllers
             if (dto == null)
                 return BadRequest("Los datos de la carrera no pueden estar vacíos.");
 
-            if (dto.NombreCarrera.Length <= 3 || dto.NombreCarrera.Length > 100)
-                return BadRequest("El nombre de la carrera debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
+            if (dto.NombreCarrera.Length <= 3 || dto.NombreCarrera.Length > 500)
+                return BadRequest("El nombre de la carrera debe tener al menos 3 caracteres y no puede exceder los 500 caracteres.");
 
             if (!await _context.facultades.AnyAsync(f => f.Id == dto.FacultadId))
                 return BadRequest("El ID de la facultad especificada no existe.");
 
-            if (await _context.carreras.AnyAsync(c => c.NombreCarrera.ToLower() == dto.NombreCarrera.ToLower() && c.Id != id))
+            var actualizacionNombreCarrera = limpiaEspacios(dto.NombreCarrera);
+
+            var actualizacionNombreCarreraParaValidar = actualizacionNombreCarrera.ToLower();
+
+            if (await _context.carreras.AnyAsync(c => c.NombreCarrera.ToLower() == actualizacionNombreCarreraParaValidar && c.Id != id))
                 return Conflict("Ya existe otra carrera con ese nombre.");
 
-            carrera.NombreCarrera = dto.NombreCarrera;
+            carrera.NombreCarrera = actualizacionNombreCarrera;
             carrera.FacultadId = dto.FacultadId;
 
             await _context.SaveChangesAsync();
@@ -164,5 +175,11 @@ namespace KPIBackend.Controllers
 
             return Ok(carreras);
         }
+
+        /// <summary>
+        /// Limpia los espacios en blanco para válidar correctamente el nombre duplicado.
+        /// </summary>
+        /// <returns>Nombre/descripción sin espacios en blanco innecesarios.</returns>
+        private string limpiaEspacios(string texto) => Regex.Replace(texto.Trim(), @"\s+", " ");
     }
 }

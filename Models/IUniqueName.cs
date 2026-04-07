@@ -8,7 +8,7 @@
         /// <summary>
         /// Nombre único para la entidad (ejemplo: rol, facultad, período escolar).
         /// </summary>
-        string Nombre { get; }
+        string Nombre { get; set; }
     }
 
 }

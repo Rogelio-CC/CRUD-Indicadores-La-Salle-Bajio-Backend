@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 
 namespace KPIBackend.Controllers
 {
@@ -125,8 +126,8 @@ namespace KPIBackend.Controllers
             if (dto == null)
                 return BadRequest("Los datos de la estrategia no pueden estar vacíos.");
 
-            if (dto.DescripcionEstrategia.Length <= 3 || dto.DescripcionEstrategia.Length > 100)
-                return BadRequest("La descripción de la estrategia debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
+            if (dto.DescripcionEstrategia.Length <= 3 || dto.DescripcionEstrategia.Length > 500)
+                return BadRequest("La descripción de la estrategia debe tener al menos 3 caracteres y no puede exceder los 500 caracteres.");
 
             if (!await _context.indicadores.AnyAsync(f => f.Id == dto.IndicadorId))
                 return BadRequest("El ID del indicador especificado no existe.");
@@ -140,12 +141,18 @@ namespace KPIBackend.Controllers
             if (!await _context.carreras.AnyAsync(p => p.Id == dto.CarreraId))
                 return BadRequest("El ID de la carrera especificada no existe.");
 
-            if (await _context.estrategias.AnyAsync(e => e.DescripcionEstrategia.ToLower() == dto.DescripcionEstrategia.ToLower()))
+            // Limpieza de espacios en blanco para validar correctamente la descripción duplicada.
+            var creacionDescripcionEstrategia = limpiaEspacios(dto.DescripcionEstrategia);
+
+            // Validación de la descripción de la estrategia duplicada sin importar mayúsculas, minúsculas o espacios adicionales.
+            var creacionDescripcionEstrategiaParaValidar = creacionDescripcionEstrategia.ToLower();
+
+            if (await _context.estrategias.AnyAsync(e => e.DescripcionEstrategia.ToLower() == creacionDescripcionEstrategiaParaValidar))
                 return Conflict("Ya existe otra estrategia con esa descripción.");
 
             var estrategia = new Estrategia
             {
-                DescripcionEstrategia = dto.DescripcionEstrategia,
+                DescripcionEstrategia = creacionDescripcionEstrategia, // Se asigna la descripción limpia sin espacios adicionales.
                 IndicadorId = dto.IndicadorId,
                 CreadorId = dto.CreadorId,
                 PeriodoId = dto.PeriodoId,
@@ -188,8 +195,8 @@ namespace KPIBackend.Controllers
             if (dto == null)
                 return BadRequest("Los datos de la estrategia no pueden estar vacíos.");
 
-            if (dto.DescripcionEstrategia.Length <= 3 || dto.DescripcionEstrategia.Length > 100)
-                return BadRequest("La descripción de la estrategia debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
+            if (dto.DescripcionEstrategia.Length <= 3 || dto.DescripcionEstrategia.Length > 500)
+                return BadRequest("La descripción de la estrategia debe tener al menos 3 caracteres y no puede exceder los 500 caracteres.");
 
             if (!await _context.indicadores.AnyAsync(f => f.Id == dto.IndicadorId))
                 return BadRequest("El ID del indicador especificado no existe.");
@@ -203,10 +210,14 @@ namespace KPIBackend.Controllers
             if (!await _context.carreras.AnyAsync(p => p.Id == dto.CarreraId))
                 return BadRequest("El ID de la carrera especificada no existe.");
 
-            if (await _context.estrategias.AnyAsync(e => e.DescripcionEstrategia.ToLower() == dto.DescripcionEstrategia.ToLower() && e.Id != id))
+            var actualizacionDescripcionEstrategia = limpiaEspacios(dto.DescripcionEstrategia);
+
+            var actualizacionDescripcionEstrategiaParaValidar = actualizacionDescripcionEstrategia.ToLower();
+
+            if (await _context.estrategias.AnyAsync(e => e.DescripcionEstrategia.ToLower() == actualizacionDescripcionEstrategiaParaValidar && e.Id != id))
                 return Conflict("Ya existe otra estrategia con esa descripción.");
 
-            estrategia.DescripcionEstrategia = dto.DescripcionEstrategia;
+            estrategia.DescripcionEstrategia = actualizacionDescripcionEstrategia;
             estrategia.IndicadorId = dto.IndicadorId;
             estrategia.CreadorId = dto.CreadorId;
             estrategia.PeriodoId = dto.PeriodoId;
@@ -236,6 +247,12 @@ namespace KPIBackend.Controllers
 
             return Ok(estrategias);
         }
+
+        /// <summary>
+        /// Limpia los espacios en blanco para válidar correctamente el nombre duplicado.
+        /// </summary>
+        /// <returns>Nombre/descripción sin espacios en blanco innecesarios.</returns>
+        private string limpiaEspacios(string texto) => Regex.Replace(texto.Trim(), @"\s+", " ");
     }
 }
 

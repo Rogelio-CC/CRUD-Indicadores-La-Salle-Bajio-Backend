@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 
 namespace KPIBackend.Controllers
 {
@@ -154,8 +155,8 @@ namespace KPIBackend.Controllers
             if (string.IsNullOrWhiteSpace(dto.DescripcionIndicador))
                 return BadRequest("La descripción del indicador es obligatoria.");
 
-            if (dto.DescripcionIndicador.Length <= 3 || dto.DescripcionIndicador.Length > 100)
-                return BadRequest("La descripción del indicador debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
+            if (dto.DescripcionIndicador.Length <= 3 || dto.DescripcionIndicador.Length > 500)
+                return BadRequest("La descripción del indicador debe tener al menos 3 caracteres y no puede exceder los 500 caracteres.");
 
             if (string.IsNullOrWhiteSpace(dto.FrecuenciaControl))
                 return BadRequest("La frecuencia de control del indicador es obligatoria.");
@@ -202,13 +203,19 @@ namespace KPIBackend.Controllers
             if (!await _context.directrices.AnyAsync(p => p.Id == dto.DirectrizId))
                 return BadRequest("El ID de la directriz especificada no existe.");
 
-            if (await _context.indicadores.AnyAsync(e => e.CarreraId == dto.CarreraId && e.DescripcionIndicador == dto.DescripcionIndicador))
+            // Limpieza de espacios en blanco para validar correctamente la descripción duplicada.
+            var creacionDescripcionIndicador = limpiaEspacios(dto.DescripcionIndicador);
+
+            // Validación de la descripción del indicador duplicado sin importar mayúsculas, minúsculas o espacios adicionales.
+            var creacionDescripcionIndicadorParaValidar = creacionDescripcionIndicador.ToLower();
+
+            if (await _context.indicadores.AnyAsync(e => e.CarreraId == dto.CarreraId && e.DescripcionIndicador.ToLower() == creacionDescripcionIndicadorParaValidar))
                 return Conflict("Esta carrera ya cuenta con este indicador.");
 
 
             var indicador = new Indicador
             {
-                DescripcionIndicador = dto.DescripcionIndicador,
+                DescripcionIndicador = creacionDescripcionIndicador, // Se asigna la descripción limpia sin espacios adicionales.
                 Estandar = dto.Estandar,
                 FrecuenciaControl = dto.FrecuenciaControl,
                 CantidadEvidencias = dto.CantidadEvidencias,
@@ -279,8 +286,8 @@ namespace KPIBackend.Controllers
             if (string.IsNullOrWhiteSpace(dto.DescripcionIndicador))
                 return BadRequest("La descripción del indicador es obligatoria.");
 
-            if (dto.DescripcionIndicador.Length <= 3 || dto.DescripcionIndicador.Length > 100)
-                return BadRequest("La descripción del indicador debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
+            if (dto.DescripcionIndicador.Length <= 3 || dto.DescripcionIndicador.Length > 500)
+                return BadRequest("La descripción del indicador debe tener al menos 3 caracteres y no puede exceder los 500 caracteres.");
 
             if (string.IsNullOrWhiteSpace(dto.FrecuenciaControl))
                 return BadRequest("La frecuencia de control del indicador es obligatoria.");
@@ -327,10 +334,14 @@ namespace KPIBackend.Controllers
             if (!await _context.directrices.AnyAsync(p => p.Id == dto.DirectrizId))
                 return BadRequest("El ID de la directriz especificada no existe.");
 
-            if (await _context.indicadores.AnyAsync(e => e.CarreraId == dto.CarreraId && e.DescripcionIndicador == dto.DescripcionIndicador && e.Id != id))
+            var actualizacionDescripcionIndicador = limpiaEspacios(dto.DescripcionIndicador);
+
+            var actualizacionDescripcionIndicadorParaValidar = actualizacionDescripcionIndicador.ToLower();
+
+            if (await _context.indicadores.AnyAsync(e => e.CarreraId == dto.CarreraId && e.DescripcionIndicador.ToLower() == actualizacionDescripcionIndicadorParaValidar && e.Id != id))
                 return Conflict("Esta carrera ya cuenta con este indicador.");
 
-            indicador.DescripcionIndicador = dto.DescripcionIndicador;
+            indicador.DescripcionIndicador = actualizacionDescripcionIndicador;
             indicador.Estandar = dto.Estandar;
             indicador.FrecuenciaControl = dto.FrecuenciaControl;
             indicador.CantidadEvidencias = dto.CantidadEvidencias;
@@ -368,5 +379,11 @@ namespace KPIBackend.Controllers
 
             return Ok(indicadores);
         }
+
+        /// <summary>
+        /// Limpia los espacios en blanco para válidar correctamente el nombre duplicado.
+        /// </summary>
+        /// <returns>Nombre/descripción sin espacios en blanco innecesarios.</returns>
+        private string limpiaEspacios(string texto) => Regex.Replace(texto.Trim(), @"\s+", " ");
     }
 }

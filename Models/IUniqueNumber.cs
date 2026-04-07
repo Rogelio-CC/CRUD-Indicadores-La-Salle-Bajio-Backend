@@ -13,6 +13,6 @@
         /// <summary>
         /// Nombre único para la entidad (únicamente aplica al grupo de indicadores).
         /// </summary>
-        public string DescripcionGrupo { get; }
+        public string DescripcionGrupo { get; set; }
     }
 }

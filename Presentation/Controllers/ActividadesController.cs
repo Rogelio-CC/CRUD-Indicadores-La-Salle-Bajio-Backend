@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 
 namespace KPIBackend.Controllers
 {
@@ -123,8 +124,8 @@ namespace KPIBackend.Controllers
             if (string.IsNullOrWhiteSpace(dto.DescripcionActividad))
                 return BadRequest("La descripción de la actividad es obligatoria.");
 
-            if(dto.DescripcionActividad.Length <= 3 || dto.DescripcionActividad.Length > 100)
-                return BadRequest("La descripción de la actividad debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
+            if(dto.DescripcionActividad.Length <= 3 || dto.DescripcionActividad.Length > 500)
+                return BadRequest("La descripción de la actividad debe tener al menos 3 caracteres y no puede exceder los 500 caracteres.");
             
             if (dto.CantidadLograda < 0)
                 return BadRequest("La cantidad lograda no puede ser negativa.");
@@ -159,13 +160,19 @@ namespace KPIBackend.Controllers
             if (!await _context.carreras.AnyAsync(p => p.Id == dto.CarreraId))
                 return BadRequest("El ID de la carrera especificada no existe.");
 
-            if (await _context.actividades.AnyAsync(e => e.DescripcionActividad.ToLower() == dto.DescripcionActividad.ToLower()))
+            // Limpieza de espacios en blanco para validar correctamente la descripción duplicada.
+            var creacionDescripcionActividad = limpiaEspacios(dto.DescripcionActividad);
+
+            // Validación de la descripción de la actividad duplicada sin importar mayúsculas, minúsculas o espacios adicionales.
+            var creacionDescripcionActividadParaValidar = creacionDescripcionActividad.ToLower();
+
+            if (await _context.actividades.AnyAsync(e => e.DescripcionActividad.ToLower() == creacionDescripcionActividadParaValidar))
                 return Conflict("Ya existe una actividad con esa descripción.");
 
 
             var actividad = new Actividad
             {
-                DescripcionActividad = dto.DescripcionActividad,
+                DescripcionActividad = creacionDescripcionActividad, // Se asigna la descripción limpia sin espacios adicionales.
                 CantidadLograda = dto.CantidadLograda,
                 FechaCumplimiento = dto.FechaCumplimiento?.ToUniversalTime(),
                 ActividadCumplida = dto.ActividadCumplida,
@@ -206,8 +213,8 @@ namespace KPIBackend.Controllers
             if (string.IsNullOrWhiteSpace(dto.DescripcionActividad))
                 return BadRequest("La descripción de la actividad es obligatoria.");
 
-            if(dto.DescripcionActividad.Length <= 3 || dto.DescripcionActividad.Length > 100)
-                return BadRequest("La descripción de la actividad debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
+            if(dto.DescripcionActividad.Length <= 3 || dto.DescripcionActividad.Length > 500)
+                return BadRequest("La descripción de la actividad debe tener al menos 3 caracteres y no puede exceder los 500 caracteres.");
             
             if (dto.CantidadLograda < 0)
                 return BadRequest("La cantidad lograda no puede ser negativa.");
@@ -241,11 +248,15 @@ namespace KPIBackend.Controllers
 
             if (!await _context.carreras.AnyAsync(p => p.Id == dto.CarreraId))
                 return BadRequest("El ID de la carrera especificada no existe.");
-            
-            if (await _context.actividades.AnyAsync(e => e.DescripcionActividad.ToLower() == dto.DescripcionActividad.ToLower() && e.Id != id))
+
+            var actualizacionDescripcionActividad = limpiaEspacios(dto.DescripcionActividad);
+
+            var actualizacionDescripcionActividadParaValidar = actualizacionDescripcionActividad.ToLower();
+
+            if (await _context.actividades.AnyAsync(e => e.DescripcionActividad.ToLower() == actualizacionDescripcionActividadParaValidar && e.Id != id))
                 return Conflict("Ya existe otra actividad con esa descripción.");
 
-            actividad.DescripcionActividad = dto.DescripcionActividad;
+            actividad.DescripcionActividad = actualizacionDescripcionActividad;
             actividad.CantidadLograda = dto.CantidadLograda;
             actividad.FechaCumplimiento = dto.FechaCumplimiento?.ToUniversalTime();
             actividad.ActividadCumplida = dto.ActividadCumplida;
@@ -258,6 +269,12 @@ namespace KPIBackend.Controllers
             await _context.SaveChangesAsync();
             return NoContent();
         }
+
+        /// <summary>
+        /// Limpia los espacios en blanco para válidar correctamente el nombre duplicado.
+        /// </summary>
+        /// <returns>Nombre/descripción sin espacios en blanco innecesarios.</returns>
+        private string limpiaEspacios(string texto) => Regex.Replace(texto.Trim(), @"\s+", " ");
     }
 }
 

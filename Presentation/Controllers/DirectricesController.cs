@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 
 namespace KPIBackend.Controllers
 {
@@ -116,8 +117,8 @@ namespace KPIBackend.Controllers
             if (dto == null)
                 return BadRequest("Los datos de la directriz no pueden estar vacíos.");
 
-             if(dto.Descripcion.Length <= 3 || dto.Descripcion.Length > 100)
-                return BadRequest("La descripción de la directriz debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
+             if(dto.Descripcion.Length <= 3 || dto.Descripcion.Length > 500)
+                return BadRequest("La descripción de la directriz debe tener al menos 3 caracteres y no puede exceder los 500 caracteres.");
                 
             if (!await _context.facultades.AnyAsync(f => f.Id == dto.FacultadId))
                 return BadRequest("El ID de la facultad especificada no existe.");
@@ -127,13 +128,19 @@ namespace KPIBackend.Controllers
 
             if (!await _context.periodos_escolares.AnyAsync(p => p.Id == dto.PeriodoId))
                 return BadRequest("El ID del periodo especificado no existe.");
-            
-            if (await _context.directrices.AnyAsync(d => d.Descripcion.ToLower() == dto.Descripcion.ToLower()))
+
+            // Limpieza de espacios en blanco para validar correctamente la descripción duplicada.
+            var creacionDescripcionDirectriz = limpiaEspacios(dto.Descripcion);
+
+            // Validación de la descripción de la directriz duplicada sin importar mayúsculas, minúsculas o espacios adicionales.
+            var creacionDescripcionDirectrizParaValidar = creacionDescripcionDirectriz.ToLower();
+
+            if (await _context.directrices.AnyAsync(d => d.Descripcion.ToLower() == creacionDescripcionDirectrizParaValidar))
                 return Conflict("Ya existe una directriz con esa descripción.");
 
             var directriz = new Directriz
             {
-                Descripcion = dto.Descripcion,
+                Descripcion = creacionDescripcionDirectriz, // Se asigna la descripción limpia sin espacios adicionales.
                 FacultadId = dto.FacultadId,
                 CreadorId = dto.CreadorId,
                 PeriodoId = dto.PeriodoId,
@@ -175,8 +182,8 @@ namespace KPIBackend.Controllers
             if (dto == null)
                 return BadRequest("Los datos de la directriz no pueden estar vacíos.");
 
-            if(dto.Descripcion.Length <= 3 || dto.Descripcion.Length > 100)
-                return BadRequest("La descripción de la directriz debe tener al menos 3 caracteres y no puede exceder los 100 caracteres.");
+            if(dto.Descripcion.Length <= 3 || dto.Descripcion.Length > 500)
+                return BadRequest("La descripción de la directriz debe tener al menos 3 caracteres y no puede exceder los 500 caracteres.");
 
             if (!await _context.facultades.AnyAsync(f => f.Id == dto.FacultadId))
                 return BadRequest("El ID de la facultad especificada no existe.");
@@ -187,10 +194,14 @@ namespace KPIBackend.Controllers
             if (!await _context.periodos_escolares.AnyAsync(p => p.Id == dto.PeriodoId))
                 return BadRequest("El ID del periodo especificado no existe.");
 
-            if (await _context.directrices.AnyAsync(d => d.Descripcion.ToLower() == dto.Descripcion.ToLower() && d.Id != id))
+            var actualizacionDescripcionDirectriz = limpiaEspacios(dto.Descripcion);
+
+            var actualizacionDescripcionDirectrizParaValidar = actualizacionDescripcionDirectriz.ToLower();
+
+            if (await _context.directrices.AnyAsync(d => d.Descripcion.ToLower() == actualizacionDescripcionDirectrizParaValidar && d.Id != id))
                 return Conflict("Ya existe otra directriz con esa descripción.");
 
-            directriz.Descripcion = dto.Descripcion;
+            directriz.Descripcion = actualizacionDescripcionDirectriz;
             directriz.FacultadId = dto.FacultadId;
             directriz.CreadorId = dto.CreadorId;
             directriz.PeriodoId = dto.PeriodoId;
@@ -220,10 +231,10 @@ namespace KPIBackend.Controllers
             return Ok(directrices);
         }
 
-
-
-
+        /// <summary>
+        /// Limpia los espacios en blanco para válidar correctamente el nombre duplicado.
+        /// </summary>
+        /// <returns>Nombre/descripción sin espacios en blanco innecesarios.</returns>
+        private string limpiaEspacios(string texto) => Regex.Replace(texto.Trim(), @"\s+", " ");
     }
-
-
 }
