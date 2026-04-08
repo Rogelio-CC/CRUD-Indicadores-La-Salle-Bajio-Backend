@@ -16,14 +16,6 @@ namespace KPIBackend.Repositories
         /// <param name="usuarioId">ID del usuario creador.</param>
         /// <returns>Comentarios asociados al usuario.</returns>
         Task<IEnumerable<Comentario>> GetByUsuarioAsync(Guid usuarioId);
-
-        /// <summary>
-        /// Obtiene los comentarios asociados a un objetivo específico.
-        /// </summary>
-        /// <param name="objetivoId">ID del objetivo.</param>
-        /// <param name="tipoObjetivo">Tipo del objetivo (por ejemplo: "directriz", "estrategia").</param>
-        /// <returns>Comentarios relacionados con el objetivo indicado.</returns>
-        Task<IEnumerable<Comentario>> GetByObjetivoAsync(Guid objetivoId, string tipoObjetivo);
     }
 
     /// <summary>
@@ -42,11 +34,5 @@ namespace KPIBackend.Repositories
         /// </summary>
         public async Task<IEnumerable<Comentario>> GetByUsuarioAsync(Guid usuarioId) =>
             await _dbSet.Where(c => c.CreadorId == usuarioId).ToListAsync();
-
-        /// <summary>
-        /// Obtiene comentarios para un objetivo y tipo de objetivo dados.
-        /// </summary>
-        public async Task<IEnumerable<Comentario>> GetByObjetivoAsync(Guid objetivoId, string tipoObjetivo) =>
-            await _dbSet.Where(c => c.IdObjetivo == objetivoId && c.TipoObjetivo == tipoObjetivo).ToListAsync();
     }
 }

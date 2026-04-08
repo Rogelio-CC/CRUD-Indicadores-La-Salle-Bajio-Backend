@@ -26,11 +26,6 @@
         public string TipoObjetivo { get; set; } = null!;
 
         /// <summary>
-        /// Identificador de la entidad a la que pertenece el comentario.
-        /// </summary>
-        public Guid IdObjetivo { get; set; }
-
-        /// <summary>
         /// Identificador del usuario que creó el comentario.
         /// </summary>
         public Guid CreadorId { get; set; }

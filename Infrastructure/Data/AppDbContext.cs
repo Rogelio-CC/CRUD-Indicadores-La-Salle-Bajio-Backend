@@ -93,59 +93,55 @@ namespace KPIBackend.Data
             // Configura valores predeterminados para IDs de entidades usando UUIDs aleatorios.
             modelBuilder.Entity<Actividad>()
             .Property(r => r.Id)
-            .HasDefaultValueSql("gen_random_uuid()");
+            .HasDefaultValueSql("NEWID()");
 
             modelBuilder.Entity<Carrera>()
             .Property(r => r.Id)
-            .HasDefaultValueSql("gen_random_uuid()");
+            .HasDefaultValueSql("NEWID()");
 
             modelBuilder.Entity<Comentario>()
             .Property(r => r.Id)
-            .HasDefaultValueSql("gen_random_uuid()");
-
-            modelBuilder.Entity<Comentario>()
-           .Property(r => r.IdObjetivo)
-           .HasDefaultValueSql("gen_random_uuid()");
+            .HasDefaultValueSql("NEWID()");
 
             modelBuilder.Entity<Directriz>()
             .Property(r => r.Id)
-            .HasDefaultValueSql("gen_random_uuid()");
+            .HasDefaultValueSql("NEWID()");
 
             modelBuilder.Entity<Estrategia>()
             .Property(r => r.Id)
-            .HasDefaultValueSql("gen_random_uuid()");
+            .HasDefaultValueSql("NEWID()");
 
             modelBuilder.Entity<Evidencia>()
             .Property(r => r.Id)
-            .HasDefaultValueSql("gen_random_uuid()");
-
+            .HasDefaultValueSql("NEWID()");
+                
             modelBuilder.Entity<Facultad>()
             .Property(r => r.Id)
-            .HasDefaultValueSql("gen_random_uuid()");
+            .HasDefaultValueSql("NEWID()");
 
             modelBuilder.Entity<GrupoIndicadores>()
             .Property(r => r.Id)
-            .HasDefaultValueSql("gen_random_uuid()");
+            .HasDefaultValueSql("NEWID()");
 
             modelBuilder.Entity<Indicador>()
             .Property(r => r.Id)
-            .HasDefaultValueSql("gen_random_uuid()");
+            .HasDefaultValueSql("NEWID()");
 
             modelBuilder.Entity<PeriodoEscolar>()
             .Property(r => r.Id)
-            .HasDefaultValueSql("gen_random_uuid()");
+            .HasDefaultValueSql("NEWID()");
 
             modelBuilder.Entity<Rol>()
             .Property(r => r.Id)
-            .HasDefaultValueSql("gen_random_uuid()");
+            .HasDefaultValueSql("NEWID()");
 
             modelBuilder.Entity<Usuario>()
             .Property(r => r.Id)
-            .HasDefaultValueSql("gen_random_uuid()");
+            .HasDefaultValueSql("NEWID()");
 
             modelBuilder.Entity<ArchivoPoliticas>()
            .Property(r => r.Id)
-           .HasDefaultValueSql("gen_random_uuid()");
+           .HasDefaultValueSql("NEWID()");
 
             // Configura la relación entre Evidencia e Indicador con eliminación en cascada.
             modelBuilder.Entity<Evidencia>()
@@ -164,11 +160,11 @@ namespace KPIBackend.Data
             // Establece comportamiento de eliminación restrictiva para todas las claves foráneas.
             foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
 {
-                // ❗ NO tocar la relación Evidencia → Indicador
+                // NO tocar la relación Evidencia → Indicador para poder hacer eliminación cascada de las evidencias.
                 if (foreignKey.DeclaringEntityType.ClrType == typeof(Evidencia))
                     continue;
 
-                // ❗ NO tocar la relación ArchivoPoliticas → Facultad
+                // NO tocar la relación ArchivoPoliticas → Facultad para poder hacer eliminación cascada del archivo de políticas.
                 if (foreignKey.DeclaringEntityType.ClrType == typeof(ArchivoPoliticas))
                     continue;
 
@@ -178,6 +174,8 @@ namespace KPIBackend.Data
             // Se añaden datos iniciales para la tablas como Rol, Facultad, Carrera, Usuario y EventoCalendario.
             // Esta misma estructura de código se puede usar para añadir cualquier dato inicial
             // requerido sin necesidad de insertarlo manualmente en la base de datos.
+            // Nota: es relevante mencionar que en SQL Server no es estrictamente necesario .ToUniversalTime() 
+            // al sembrar datos (HasData) con fechas, pero se recomienda para mantener consistencia de manejo de fechas.
             modelBuilder.Entity<Rol>().HasData(
                 new Rol
                 {
@@ -219,6 +217,17 @@ namespace KPIBackend.Data
                     Id = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d490"),
                     NombreUsuario = "Rogelio Ceballos Castillo",
                     CorreoInstitucional = "rcc74823@lasallebajio.edu.mx",
+                    TipoUsuario = "Administrador",
+                    RolId = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d473"),
+                    FacultadId = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d476"),
+                    CarreraId = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d488")
+                },
+
+                new Usuario
+                {
+                    Id = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d485"),
+                    NombreUsuario = "María Cecilia Peña Bravo",
+                    CorreoInstitucional = "mpb74513@lasallebajio.edu.mx",
                     TipoUsuario = "Administrador",
                     RolId = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d473"),
                     FacultadId = Guid.Parse("f47ac10b-58cc-4372-a567-0e02b2c3d476"),

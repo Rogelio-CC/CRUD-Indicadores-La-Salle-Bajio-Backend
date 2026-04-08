@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Npgsql;
 using System.Reflection;
 using System.Text;
 
@@ -62,19 +61,12 @@ builder.Services.AddSwaggerGen(c =>
     c.IncludeXmlComments(xmlPath);
 });
 
-// Obtiene la cadena de valor de la base de datos de Neon desde una variable
+// Obtiene la cadena de valor de la base de datos de SQL server desde una variable
 // de entorno para evitar almacenar credenciales sensibles
 // directamente en el código fuente. Nota: es importante poner correctamente
-// DATABASE_URL en archivo .env o en cualquier otro archivo de configuración
-// para que se pueda identificar la cadena, hacer el proceso de extracción de valores
-// desde esa cadena y que postreSQL reconozca esos valores para hacer migraciones o 
-// configuraciones a la base de datos de Neon.
-string connectionString;
-var connectionUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
-
-// Para que la cadena de Neon se reconozca correctamente en este proyecto, se necesita convertir la cadena de tal manera que la configuración
-// local de PostreSQL permite ese valor y poder hacer migraciones en Neon.
-connectionString = ConvertPostgresUrlToConnectionStringInProgram(connectionUrl!);
+// DATABASE_CONNECTION_STRING en archivo .env o
+// para que se pueda identificar la cadena.
+var connectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
 
 // Se obtiene el valor del Key del token JWT desde las variables de entorno.
 var jwtKey = builder.Configuration["Jwt:Key"]
@@ -105,9 +97,9 @@ builder.Services.AddAuthentication(options =>
 
 
 // Registra el contexto de base de datos utilizando Entity Framework Core
-// y el proveedor PostgreSQL.
+// y el proveedor SQL server.
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(connectionString));
+    options.UseSqlServer(connectionString));
 
 
 // Registro de repositorios y servicios de la aplicación. 
@@ -174,59 +166,3 @@ app.UseAuthorization();
 app.MapControllers();
 Console.WriteLine("✅ API corriendo en: " + app.Urls.FirstOrDefault());
 app.Run();
-
-// Método para convertir la cadena de Neon en un valor Key de PostreSQL.
-static string ConvertPostgresUrlToConnectionStringInProgram(string url)
-{
-    // Esta parte de código ayuda a separar los valores juntados en la cadena de Neon en valores separados para implementarlos
-    // en la construcción de la conexión de PostreSQL más adelante.
-    var uri = new Uri(url);
-    var userInfo = uri.UserInfo.Split(':', 2);
-    var user = Uri.UnescapeDataString(userInfo[0]);
-    var pass = userInfo.Length > 1 ? Uri.UnescapeDataString(userInfo[1]) : string.Empty;
-    var host = uri.Host;
-    var port = uri.IsDefaultPort ? 5432 : uri.Port;
-    var database = uri.AbsolutePath?.TrimStart('/') ?? string.Empty;
-
-    var queryDict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-    var rawQuery = uri.Query?.TrimStart('?') ?? string.Empty;
-    if (!string.IsNullOrEmpty(rawQuery))
-    {
-        foreach (var part in rawQuery.Split('&', StringSplitOptions.RemoveEmptyEntries))
-        {
-            var kv = part.Split('=', 2);
-            var k = Uri.UnescapeDataString(kv[0]);
-            var v = kv.Length > 1 ? Uri.UnescapeDataString(kv[1]) : string.Empty;
-            queryDict[k] = v;
-        }
-    }
-
-    // Toma los valores separados de la cadena de Neon que lee la configuración de PostgreSQL para que funcione
-    // el vinculo entre Neon y las migraciones.
-    var builder = new NpgsqlConnectionStringBuilder
-    {
-        Host = host,
-        Port = port,
-        Username = user,
-        Password = pass,
-        Database = database,
-    };
-
-    // Mapeo mínimo de opciones SSL/sslmode.
-    if (queryDict.TryGetValue("sslmode", out var sslMode))
-    {
-        if (sslMode.Equals("disable", StringComparison.OrdinalIgnoreCase))
-            builder.SslMode = SslMode.Disable;
-        else if (sslMode.Equals("require", StringComparison.OrdinalIgnoreCase) || sslMode.Equals("prefer", StringComparison.OrdinalIgnoreCase))
-            builder.SslMode = SslMode.Require;
-        else if (sslMode.Equals("verify-ca", StringComparison.OrdinalIgnoreCase) || sslMode.Equals("verify-full", StringComparison.OrdinalIgnoreCase))
-            builder.SslMode = SslMode.VerifyFull;
-    }
-    else
-    {
-        // por defecto activar SSL en entornos cloud, como el entorno de Neon.
-        builder.SslMode = SslMode.Require;
-    }
-
-    return builder.ToString();
-}

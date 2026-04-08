@@ -47,7 +47,6 @@ namespace KPIBackend.Controllers
                     Contenido = d.Contenido,
                     FechaComentario = d.FechaComentario,
                     TipoObjetivo = d.TipoObjetivo,
-                    IdObjetivo = d.IdObjetivo,
                     CreadorId = d.CreadorId,
                     Creador = d.Creador.NombreUsuario,
                 })
@@ -74,7 +73,6 @@ namespace KPIBackend.Controllers
                 Contenido = d.Contenido,
                 FechaComentario = d.FechaComentario,
                 TipoObjetivo = d.TipoObjetivo,
-                IdObjetivo = d.IdObjetivo,
                 CreadorId = d.CreadorId,
                 Creador = d.Creador.NombreUsuario,
 

@@ -5,44 +5,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-// Esta migración sirvió para crear todas las tablas, relaciones entre entidades y creación de datos iniciales y referentes a Rol, Facultad, Carrera, Usuario y EventoCalendario.
+// Esta migración inicial crea la estructura de la base de datos para la aplicación, incluyendo tablas, relaciones y datos en sql server.
 
 namespace KPIBackend.Migrations
 {
     /// <inheritdoc />
-    public partial class MigraciónBaseDeDatosANeon : Migration
+    public partial class MigracionInicialASQLServer : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "eventosCalendario",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    Titulo = table.Column<string>(type: "text", nullable: false),
-                    FechaInicio = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    FechaFin = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    TipoEvento = table.Column<string>(type: "text", nullable: false),
-                    Color = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_eventosCalendario", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "facultades",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    Nombre = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Mision = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Vision = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Slogan = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    PoliticaAsociada = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    FechaEmision = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    FechaEdicion = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+                    Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Mision = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    Vision = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    Slogan = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FechaEmision = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,9 +35,9 @@ namespace KPIBackend.Migrations
                 name: "grupo_indicadores",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    numeroGrupo = table.Column<int>(type: "integer", nullable: false),
-                    DescripcionGrupo = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+                    NumeroGrupo = table.Column<int>(type: "int", nullable: false),
+                    DescripcionGrupo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -66,10 +48,10 @@ namespace KPIBackend.Migrations
                 name: "periodos_escolares",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    Nombre = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    FechaInicio = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    FechaFin = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+                    Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    FechaInicio = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    FechaFin = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,9 +62,8 @@ namespace KPIBackend.Migrations
                 name: "roles",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    Nombre = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Permisos = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+                    Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -90,12 +71,33 @@ namespace KPIBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "archivoPoliticas",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+                    NombreArchivo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Contenido = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    FacultadId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_archivoPoliticas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_archivoPoliticas_facultades_FacultadId",
+                        column: x => x.FacultadId,
+                        principalTable: "facultades",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "carreras",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    NombreCarrera = table.Column<string>(type: "text", nullable: false),
-                    FacultadId = table.Column<Guid>(type: "uuid", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+                    NombreCarrera = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FacultadId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -112,13 +114,13 @@ namespace KPIBackend.Migrations
                 name: "usuarios",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    NombreUsuario = table.Column<string>(type: "text", nullable: false),
-                    CorreoInstitucional = table.Column<string>(type: "text", nullable: false),
-                    TipoUsuario = table.Column<string>(type: "text", nullable: false),
-                    RolId = table.Column<Guid>(type: "uuid", nullable: false),
-                    FacultadId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CarreraId = table.Column<Guid>(type: "uuid", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+                    NombreUsuario = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CorreoInstitucional = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TipoUsuario = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RolId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FacultadId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CarreraId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -144,18 +146,47 @@ namespace KPIBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "comentarios",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+                    Contenido = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FechaComentario = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TipoObjetivo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdObjetivo = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+                    CreadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_comentarios", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_comentarios_usuarios_CreadorId",
+                        column: x => x.CreadorId,
+                        principalTable: "usuarios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "directrices",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    Descripcion = table.Column<string>(type: "text", nullable: false),
-                    FacultadId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CreadorId = table.Column<Guid>(type: "uuid", nullable: false),
-                    PeriodoId = table.Column<Guid>(type: "uuid", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FacultadId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PeriodoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ComentarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_directrices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_directrices_comentarios_ComentarioId",
+                        column: x => x.ComentarioId,
+                        principalTable: "comentarios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_directrices_facultades_FacultadId",
                         column: x => x.FacultadId,
@@ -180,21 +211,21 @@ namespace KPIBackend.Migrations
                 name: "indicadores",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    DescripcionIndicador = table.Column<string>(type: "text", nullable: false),
-                    Estandar = table.Column<decimal>(type: "numeric", nullable: false),
-                    FrecuenciaControl = table.Column<string>(type: "text", nullable: false),
-                    CantidadEvidencias = table.Column<int>(type: "integer", nullable: false),
-                    IndicadorCompletado = table.Column<bool>(type: "boolean", nullable: false),
-                    AccionCorrectiva = table.Column<string>(type: "text", nullable: true),
-                    FechaEmision = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    FechaCumplimiento = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    DirectrizId = table.Column<Guid>(type: "uuid", nullable: false),
-                    GrupoId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CreadorId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ResponsableAccionCorrectivaId = table.Column<Guid>(type: "uuid", nullable: true),
-                    PeriodoId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CarreraId = table.Column<Guid>(type: "uuid", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+                    DescripcionIndicador = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Estandar = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    FrecuenciaControl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CantidadEvidencias = table.Column<int>(type: "int", nullable: false),
+                    IndicadorCompletado = table.Column<bool>(type: "bit", nullable: false),
+                    AccionCorrectiva = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FechaEmision = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FechaCumplimiento = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    DirectrizId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    GrupoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ResponsableAccionCorrectivaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    PeriodoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CarreraId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -241,13 +272,14 @@ namespace KPIBackend.Migrations
                 name: "estrategias",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    DescripcionEstrategia = table.Column<string>(type: "text", nullable: false),
-                    FechaEmision = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    IndicadorId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CreadorId = table.Column<Guid>(type: "uuid", nullable: false),
-                    PeriodoId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CarreraId = table.Column<Guid>(type: "uuid", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+                    DescripcionEstrategia = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FechaEmision = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IndicadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PeriodoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CarreraId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ComentarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -256,6 +288,12 @@ namespace KPIBackend.Migrations
                         name: "FK_estrategias_carreras_CarreraId",
                         column: x => x.CarreraId,
                         principalTable: "carreras",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_estrategias_comentarios_ComentarioId",
+                        column: x => x.ComentarioId,
+                        principalTable: "comentarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -282,11 +320,11 @@ namespace KPIBackend.Migrations
                 name: "evidencias",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    NombreArchivo = table.Column<string>(type: "text", nullable: false),
-                    Tipo = table.Column<string>(type: "text", nullable: false),
-                    Contenido = table.Column<byte[]>(type: "bytea", nullable: false),
-                    IndicadorId = table.Column<Guid>(type: "uuid", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+                    NombreArchivo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Contenido = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    IndicadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -296,23 +334,24 @@ namespace KPIBackend.Migrations
                         column: x => x.IndicadorId,
                         principalTable: "indicadores",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "actividades",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    DescripcionActividad = table.Column<string>(type: "text", nullable: false),
-                    CantidadLograda = table.Column<decimal>(type: "numeric", nullable: false),
-                    FechaEmision = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    FechaCumplimiento = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    ActividadCumplida = table.Column<bool>(type: "boolean", nullable: false),
-                    EstrategiaId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CreadorId = table.Column<Guid>(type: "uuid", nullable: false),
-                    PeriodoId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CarreraId = table.Column<Guid>(type: "uuid", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+                    DescripcionActividad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CantidadLograda = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    FechaEmision = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FechaCumplimiento = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ActividadCumplida = table.Column<bool>(type: "bit", nullable: false),
+                    EstrategiaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PeriodoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CarreraId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ComentarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -321,6 +360,12 @@ namespace KPIBackend.Migrations
                         name: "FK_actividades_carreras_CarreraId",
                         column: x => x.CarreraId,
                         principalTable: "carreras",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_actividades_comentarios_ComentarioId",
+                        column: x => x.ComentarioId,
+                        principalTable: "comentarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -343,77 +388,18 @@ namespace KPIBackend.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "comentarios",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    Contenido = table.Column<string>(type: "text", nullable: false),
-                    FechaComentario = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    TipoObjetivo = table.Column<string>(type: "text", nullable: false),
-                    IdObjetivo = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    CreadorId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ActividadId = table.Column<Guid>(type: "uuid", nullable: true),
-                    DirectrizId = table.Column<Guid>(type: "uuid", nullable: true),
-                    EstrategiaId = table.Column<Guid>(type: "uuid", nullable: true),
-                    IndicadorId = table.Column<Guid>(type: "uuid", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_comentarios", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_comentarios_actividades_ActividadId",
-                        column: x => x.ActividadId,
-                        principalTable: "actividades",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_comentarios_directrices_DirectrizId",
-                        column: x => x.DirectrizId,
-                        principalTable: "directrices",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_comentarios_estrategias_EstrategiaId",
-                        column: x => x.EstrategiaId,
-                        principalTable: "estrategias",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_comentarios_indicadores_IndicadorId",
-                        column: x => x.IndicadorId,
-                        principalTable: "indicadores",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_comentarios_usuarios_CreadorId",
-                        column: x => x.CreadorId,
-                        principalTable: "usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.InsertData(
-                table: "eventosCalendario",
-                columns: new[] { "Id", "Color", "FechaFin", "FechaInicio", "TipoEvento", "Titulo" },
-                values: new object[,]
-                {
-                    { new Guid("f47ac10b-58cc-4372-a567-0e02b2c3d475"), "#BFBFBF", new DateTime(2026, 6, 27, 6, 0, 0, 0, DateTimeKind.Utc), new DateTime(2026, 2, 9, 6, 0, 0, 0, DateTimeKind.Utc), "Académico", "Inicio del semestre escolar" },
-                    { new Guid("f47ac10b-58cc-4372-a567-0e02b2c3d480"), null, new DateTime(2026, 3, 27, 6, 0, 0, 0, DateTimeKind.Utc), new DateTime(2026, 3, 20, 6, 0, 0, 0, DateTimeKind.Utc), "Académico", "Semana sin actividad" }
-                });
-
             migrationBuilder.InsertData(
                 table: "facultades",
-                columns: new[] { "Id", "FechaEdicion", "FechaEmision", "Mision", "Nombre", "PoliticaAsociada", "Slogan", "Vision" },
-                values: new object[] { new Guid("f47ac10b-58cc-4372-a567-0e02b2c3d476"), null, new DateTime(2026, 3, 17, 6, 0, 0, 0, DateTimeKind.Utc), "Buscar la mejora tecnológica.", "Facultad de Tecnología", "Política 1: uso ético de la tecnología.", "Un mundo mejor con tecnología.", "En 2030, ser una facultad lider en avances tecnológicos." });
+                columns: new[] { "Id", "FechaEmision", "Mision", "Nombre", "Slogan", "Vision" },
+                values: new object[] { new Guid("f47ac10b-58cc-4372-a567-0e02b2c3d476"), new DateTime(2026, 3, 17, 6, 0, 0, 0, DateTimeKind.Utc), "Buscar la mejora tecnológica.", "Facultad de Tecnología", "Un mundo mejor con tecnología.", "En 2030, ser una facultad lider en avances tecnológicos." });
 
             migrationBuilder.InsertData(
                 table: "roles",
-                columns: new[] { "Id", "Nombre", "Permisos" },
+                columns: new[] { "Id", "Nombre" },
                 values: new object[,]
                 {
-                    { new Guid("f47ac10b-58cc-4372-a567-0e02b2c3d473"), "Administrador", "Puede modificar todas las tablas." },
-                    { new Guid("f47ac10b-58cc-4372-a567-0e02b2c3d481"), "Maestro", "Puede crear actividades." }
+                    { new Guid("f47ac10b-58cc-4372-a567-0e02b2c3d473"), "Administrador" },
+                    { new Guid("f47ac10b-58cc-4372-a567-0e02b2c3d481"), "Maestro" }
                 });
 
             migrationBuilder.InsertData(
@@ -432,6 +418,11 @@ namespace KPIBackend.Migrations
                 column: "CarreraId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_actividades_ComentarioId",
+                table: "actividades",
+                column: "ComentarioId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_actividades_CreadorId",
                 table: "actividades",
                 column: "CreadorId");
@@ -447,14 +438,14 @@ namespace KPIBackend.Migrations
                 column: "PeriodoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_carreras_FacultadId",
-                table: "carreras",
+                name: "IX_archivoPoliticas_FacultadId",
+                table: "archivoPoliticas",
                 column: "FacultadId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_comentarios_ActividadId",
-                table: "comentarios",
-                column: "ActividadId");
+                name: "IX_carreras_FacultadId",
+                table: "carreras",
+                column: "FacultadId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_comentarios_CreadorId",
@@ -462,19 +453,9 @@ namespace KPIBackend.Migrations
                 column: "CreadorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_comentarios_DirectrizId",
-                table: "comentarios",
-                column: "DirectrizId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_comentarios_EstrategiaId",
-                table: "comentarios",
-                column: "EstrategiaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_comentarios_IndicadorId",
-                table: "comentarios",
-                column: "IndicadorId");
+                name: "IX_directrices_ComentarioId",
+                table: "directrices",
+                column: "ComentarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_directrices_CreadorId",
@@ -495,6 +476,11 @@ namespace KPIBackend.Migrations
                 name: "IX_estrategias_CarreraId",
                 table: "estrategias",
                 column: "CarreraId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_estrategias_ComentarioId",
+                table: "estrategias",
+                column: "ComentarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_estrategias_CreadorId",
@@ -566,16 +552,13 @@ namespace KPIBackend.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "comentarios");
+                name: "actividades");
 
             migrationBuilder.DropTable(
-                name: "eventosCalendario");
+                name: "archivoPoliticas");
 
             migrationBuilder.DropTable(
                 name: "evidencias");
-
-            migrationBuilder.DropTable(
-                name: "actividades");
 
             migrationBuilder.DropTable(
                 name: "estrategias");
@@ -588,6 +571,9 @@ namespace KPIBackend.Migrations
 
             migrationBuilder.DropTable(
                 name: "grupo_indicadores");
+
+            migrationBuilder.DropTable(
+                name: "comentarios");
 
             migrationBuilder.DropTable(
                 name: "periodos_escolares");
