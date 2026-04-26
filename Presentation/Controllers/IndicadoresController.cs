@@ -161,8 +161,8 @@ namespace KPIBackend.Controllers
             if (string.IsNullOrWhiteSpace(dto.FrecuenciaControl))
                 return BadRequest("La frecuencia de control del indicador es obligatoria.");
 
-            if (dto.FrecuenciaControl != "Anual" && dto.FrecuenciaControl != "Mensual" && dto.FrecuenciaControl != "Semanal" && dto.FrecuenciaControl != "Diario")
-                return BadRequest("El tipo de frecuencia debe ser 'Anual', 'Mensual', 'Semanal' o 'Diario'.");
+            if (dto.FrecuenciaControl != "Anual" && dto.FrecuenciaControl != "Semestral" && dto.FrecuenciaControl != "Mensual" && dto.FrecuenciaControl != "Semanal" && dto.FrecuenciaControl != "Diario")
+                return BadRequest("El tipo de frecuencia debe ser 'Anual', 'Semestral', 'Mensual', 'Semanal' o 'Diario'.");
 
             if (dto.CantidadEvidencias <= 0)
                 return BadRequest("La cantidad de evidencias no puede ser negativa o cero.");
@@ -292,8 +292,8 @@ namespace KPIBackend.Controllers
             if (string.IsNullOrWhiteSpace(dto.FrecuenciaControl))
                 return BadRequest("La frecuencia de control del indicador es obligatoria.");
 
-            if (dto.FrecuenciaControl != "Anual" && dto.FrecuenciaControl != "Mensual" && dto.FrecuenciaControl != "Semanal" && dto.FrecuenciaControl != "Diario")
-                return BadRequest("El tipo de frecuencia debe ser 'Anual', 'Mensual', 'Semanal' o 'Diario'.");
+            if (dto.FrecuenciaControl != "Anual" && dto.FrecuenciaControl != "Semestral" && dto.FrecuenciaControl != "Mensual" && dto.FrecuenciaControl != "Semanal" && dto.FrecuenciaControl != "Diario")
+                return BadRequest("El tipo de frecuencia debe ser 'Anual', 'Semestral', 'Mensual', 'Semanal' o 'Diario'.");
 
             if (dto.CantidadEvidencias <= 0)
                 return BadRequest("La cantidad de evidencias no puede ser negativa o cero.");
